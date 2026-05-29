@@ -6,7 +6,7 @@ body { background-color: #1a1a1a; color: #ffffff; font-family: sans-serif; margi
 .menu { background: #333; padding: 15px; position: sticky; top: 0; z-index: 1000; text-align: center; }
 .menu a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; }
 
-/* Cabecera profesional alineada a la izquierda */
+/* Cabecera */
 .encabezamiento { 
     padding: 60px 20px; 
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('foto-fondo-cabecera.png');
@@ -17,13 +17,23 @@ body { background-color: #1a1a1a; color: #ffffff; font-family: sans-serif; margi
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start; /* Esto empuja todo a la izquierda */
+    align-items: flex-start;
     text-align: left;
 }
 
-/* Elementos */
+/* Diseño de Servicios en Zigzag */
+.servicio-container { 
+    display: flex; 
+    align-items: center; 
+    padding: 20px; 
+    gap: 20px; 
+    text-align: left; 
+}
+.servicio-container.invertido { flex-direction: row-reverse; }
+.servicio-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.servicio-texto { flex: 1; }
+
+/* Botones y Pie */
 .btn { background-color: #8b0000; color: white; padding: 15px 30px; text-decoration: none; display: inline-block; border-radius: 5px; margin-top: 20px; font-weight: bold; }
-.circulo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 10px; }
-.servicio { text-align: center; margin: 20px 0; }
-.pie-pagina { background: #000; padding: 20px; margin-top: 40px; color: #ccc; text-align: center; }
+.pie-pagina { background: #000; padding: 30px; margin-top: 40px; color: #ccc; text-align: center; }
 .pie-pagina a { color: #8b0000; font-weight: bold; }
