@@ -31,9 +31,14 @@ body { background-color: #1a1a1a; color: #ffffff; font-family: sans-serif; margi
 .galeria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; }
 .galeria-grid a { display: block; }
 .galeria-grid img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; cursor: pointer; }
-.video-container { margin-top: 20px; width: 100%; }
-.video-container a { display: block; text-decoration: none; color: #fff; text-align: center; font-size: 0.8em; }
-.video-container video { width: 100%; border-radius: 10px; border: 2px solid #8b0000; cursor: pointer; pointer-events: none; }
+
+/* Sección de Video y Acción */
+.video-container { margin-top: 20px; width: 100%; text-align: center; }
+.btn-tiktok { 
+    background-color: #8b0000; color: white; padding: 15px; text-decoration: none; 
+    display: block; border-radius: 10px; font-weight: bold; margin-bottom: 10px; 
+}
+.texto-interaccion { font-size: 0.9em; color: #ccc; margin-top: 10px; line-height: 1.4; }
 
 /* Ajuste móvil */
 @media (min-width: 320px) and (max-width: 480px) { body { zoom: 95%; } }
