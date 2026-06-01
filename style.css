@@ -6,12 +6,11 @@ body { background-color: #1a1a1a; color: #ffffff; font-family: sans-serif; margi
 .menu { background: #333; padding: 10px; position: sticky; top: 0; z-index: 1000; text-align: center; font-size: 0.9em; }
 .menu a { color: white; margin: 0 5px; text-decoration: none; font-weight: bold; }
 
-/* Cabecera - Esta es la parte que define tu fondo */
+/* Cabecera */
 .encabezamiento { 
     padding: 60px 20px; 
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('foto-fondo-cabecera.png');
-    background-size: cover; 
-    background-position: center;
+    background-size: cover; background-position: center;
     text-align: center;
 }
 
@@ -27,7 +26,8 @@ body { background-color: #1a1a1a; color: #ffffff; font-family: sans-serif; margi
 .galeria-grid img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; cursor: pointer; }
 .btn-tiktok { background-color: #8b0000; color: white; padding: 15px; text-decoration: none; display: block; border-radius: 10px; font-weight: bold; text-align: center; }
 
-/* Contacto */
+/* Sección Reseñas y Contacto */
+.reseñas-section { padding: 40px 20px; background: #1a1a1a; }
 .contacto-section { padding: 40px 20px; background: #222; }
 .contacto-grid { display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto; }
 .contacto-item { background: #333; padding: 15px; border-radius: 8px; text-decoration: none; color: white; font-weight: bold; display: flex; align-items: center; gap: 15px; border: 1px solid #8b0000; }
@@ -38,4 +38,4 @@ body { background-color: #1a1a1a; color: #ffffff; font-family: sans-serif; margi
 @media (min-width: 320px) and (max-width: 480px) { 
     body { zoom: 95%; } 
     .servicio-container, .servicio-container.invertido { flex-direction: column; text-align: center; }
-}
+                  }
