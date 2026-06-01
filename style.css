@@ -6,7 +6,7 @@ body { background-color: #1a1a1a !important; color: #ffffff !important; font-fam
 .menu { background: #333 !important; padding: 10px; position: sticky; top: 0; z-index: 1000; text-align: center; font-size: 0.9em; }
 .menu a { color: white; margin: 0 5px; text-decoration: none; font-weight: bold; }
 
-/* Cabecera - Fondo restaurado */
+/* Cabecera */
 .encabezamiento { 
     padding: 60px 20px; 
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('foto-fondo-cabecera.png');
@@ -16,7 +16,6 @@ body { background-color: #1a1a1a !important; color: #ffffff !important; font-fam
     color: white;
 }
 
-/* Ajuste del Logo */
 .encabezamiento img {
     width: 150px;
     margin-bottom: 15px;
@@ -33,10 +32,16 @@ body { background-color: #1a1a1a !important; color: #ffffff !important; font-fam
 .seccion-galeria { padding: 40px 20px; background: #1a1a1a; }
 .galeria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; }
 .galeria-grid img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; cursor: pointer; }
-.btn-tiktok { background-color: #8b0000; color: white; padding: 15px; text-decoration: none; display: block; border-radius: 10px; font-weight: bold; text-align: center; }
+.btn-tiktok { background-color: #8b0000; color: white; padding: 15px; text-decoration: none; display: block; border-radius: 10px; font-weight: bold; text-align: center; margin: 0 auto; max-width: 200px; }
 
 /* Contacto */
 .contacto-section { padding: 40px 20px; background: #222; }
 .contacto-grid { display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto; }
 .contacto-item { background: #333; padding: 15px; border-radius: 8px; text-decoration: none; color: white; font-weight: bold; display: flex; align-items: center; gap: 15px; border: 1px solid #8b0000; }
+.contacto-item i { font-size: 1.5em; width: 30px; text-align: center; }
 .contacto-item:hover { background: #8b0000; }
+
+/* Ajuste móvil */
+@media (max-width: 480px) { 
+    .servicio-container, .servicio-container.invertido { flex-direction: column; text-align: center; }
+}
