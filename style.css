@@ -27,6 +27,12 @@ body { background-color: #1a1a1a; color: #ffffff; font-family: sans-serif; margi
 .servicio-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 3px solid #8b0000; }
 .servicio-texto { flex: 1; }
 
+/* Sección Aula Virtual (NUEVA) */
+.seccion-inscripcion { padding: 40px 20px; background-color: #222; text-align: center; }
+.contenedor-formulario { max-width: 500px; margin: 20px auto; background: #333; padding: 25px; border-radius: 10px; border: 1px solid #8b0000; }
+.seccion-inscripcion input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; background: #444; color: white; }
+.seccion-inscripcion button { width: 100%; padding: 15px; background-color: #8b0000; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+
 /* Galería y Videos */
 .seccion-galeria { padding: 40px 20px; }
 .galeria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
@@ -39,7 +45,7 @@ body { background-color: #1a1a1a; color: #ffffff; font-family: sans-serif; margi
 .contacto-item { background: #333; padding: 15px; border-radius: 8px; text-decoration: none; color: white; font-weight: bold; display: flex; align-items: center; gap: 15px; border: 1px solid #8b0000; }
 .contacto-item:hover { background: #8b0000; }
 
-/* Botón Gedeón (Ajustado a tamaño compacto para el Footer) */
+/* Botón Gedeón */
 .btn-gedeon {
     display: inline-block;
     padding: 5px 12px;
