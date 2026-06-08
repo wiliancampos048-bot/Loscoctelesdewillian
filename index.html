@@ -23,6 +23,11 @@
             font-size: 0.8em;
             color: #888;
         }
+        /* Estilo Aula Virtual */
+        .seccion-inscripcion { padding: 40px 20px; background-color: #222; text-align: center; }
+        .contenedor-formulario { max-width: 500px; margin: 20px auto; background: #333; padding: 25px; border-radius: 10px; border: 1px solid #8b0000; }
+        .seccion-inscripcion input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
+        .seccion-inscripcion button { width: 100%; padding: 15px; background-color: #8b0000; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
     </style>
     <title>LOS CÓCTELES DE WILLIAN | Gastronomía Profesional</title>
 </head>
@@ -33,6 +38,7 @@
         <a href="#parrilla">Parrilla</a>
         <a href="#barra">Barra</a>
         <a href="#formacion-visual">Formación</a>
+        <a href="#inscripcion">Aula Virtual</a>
         <a href="#contacto"><i class="fa-solid fa-envelope"></i> Contacto</a>
     </nav>
 
@@ -82,6 +88,20 @@
                     <li>Profesionalización en el servicio de mesa y barra.</li>
                 </ul>
             </div>
+        </div>
+    </section>
+
+    <!-- Nueva Sección: Aula Virtual -->
+    <section id="inscripcion" class="seccion-inscripcion">
+        <h2 style="color: #FFD700;">Aula Virtual: Formación Profesional</h2>
+        <p style="color: #fff;">Complete el registro para asegurar su cupo. Tras validar su pago, recibirá su acceso.</p>
+        <div class="contenedor-formulario">
+            <form action="https://formsubmit.co/los.cocteles.de.willian@gmail.com" method="POST">
+                <input type="text" name="nombre" placeholder="Nombre completo" required>
+                <input type="text" name="contacto" placeholder="Teléfono o E-mail" required>
+                <input type="text" name="pago" placeholder="Referencia de pago" required>
+                <button type="submit">SOLICITAR ACCESO AL AULA</button>
+            </form>
         </div>
     </section>
 
@@ -135,14 +155,8 @@
         <p>&copy; 2026 LOS CÓCTELES DE WILLIAN</p>
         <p>RIF: J-5083687-9</p>
         <p>El Tigre, Anzoátegui y Santa Cruz, Estado Aragua</p>
-        
-        <div class="contador-visitas">
-            Contador de visitas
-        </div>
-
-        <a href="https://agent.jotform.com/019e8a951ec175129d47dee3d5c3ede4e13b/voice" target="_blank" class="btn-gedeon">
-            🎤 Asistente Virtual
-        </a>
+        <div class="contador-visitas">Contador de visitas</div>
+        <a href="https://agent.jotform.com/019e8a951ec175129d47dee3d5c3ede4e13b/voice" target="_blank" class="btn-gedeon">🎤 Asistente Virtual</a>
     </footer>
 </body>
-</html>
+    </html>
