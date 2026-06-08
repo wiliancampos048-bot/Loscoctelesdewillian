@@ -7,26 +7,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Estilo para el botón de Gedeón reducido */
-        .btn-gedeon {
-            display: inline-block;
-            padding: 5px 12px;
-            font-size: 0.8em;
-            background-color: #25D366;
-            color: white;
-            text-decoration: none;
-            border-radius: 15px;
-            margin-top: 10px;
-        }
-        .contador-visitas {
-            margin-top: 10px;
-            font-size: 0.8em;
-            color: #888;
-        }
-        /* Estilo Aula Virtual */
+        .btn-gedeon { display: inline-block; padding: 5px 12px; font-size: 0.8em; background-color: #25D366; color: white; text-decoration: none; border-radius: 15px; margin-top: 10px; border: 1px solid white; }
+        .contador-visitas { margin: 15px 0; font-size: 0.8em; color: #888; text-align: center; }
         .seccion-inscripcion { padding: 40px 20px; background-color: #222; text-align: center; }
         .contenedor-formulario { max-width: 500px; margin: 20px auto; background: #333; padding: 25px; border-radius: 10px; border: 1px solid #8b0000; }
-        .seccion-inscripcion input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
+        .seccion-inscripcion input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; background: #444; color: white; }
         .seccion-inscripcion button { width: 100%; padding: 15px; background-color: #8b0000; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
     </style>
     <title>LOS CÓCTELES DE WILLIAN | Gastronomía Profesional</title>
@@ -91,15 +76,16 @@
         </div>
     </section>
 
-    <!-- Nueva Sección: Aula Virtual -->
     <section id="inscripcion" class="seccion-inscripcion">
         <h2 style="color: #FFD700;">Aula Virtual: Formación Profesional</h2>
         <p style="color: #fff;">Complete el registro para asegurar su cupo. Tras validar su pago, recibirá su acceso.</p>
         <div class="contenedor-formulario">
             <form action="https://formsubmit.co/los.cocteles.de.willian@gmail.com" method="POST">
+                <input type="hidden" name="_next" value="https://wiliancampos048-bot.github.io/Loscoctelesdewillian/">
+                <input type="hidden" name="_captcha" value="false">
                 <input type="text" name="nombre" placeholder="Nombre completo" required>
                 <input type="text" name="contacto" placeholder="Teléfono o E-mail" required>
-                <input type="text" name="pago" placeholder="Referencia de pago" required>
+                <input type="text" name="referencia_pago" placeholder="Referencia de pago" required>
                 <button type="submit">SOLICITAR ACCESO AL AULA</button>
             </form>
         </div>
@@ -107,35 +93,32 @@
 
     <section id="parrilla" style="text-align: center; padding: 40px 20px; background-color: #222;">
         <h2 style="color: #ffffff;">Maestría en Parrilla</h2>
-        <p style="color: #ccc;">Calidad, técnica y sabor en cada corte.</p>
         <div style="margin-top: 20px;">
             <a href="https://www.facebook.com/share/r/17rXGQdFGM/" target="_blank">
-                <img src="foto-punta-trasera-willian.jpg" alt="Parrilla Profesional" style="max-width: 100%; border-radius: 10px; border: 3px solid #8b0000; cursor: pointer;">
+                <img src="foto-punta-trasera-willian.jpg" alt="Parrilla" style="max-width: 100%; border-radius: 10px; border: 3px solid #8b0000; cursor: pointer;">
             </a>
         </div>
     </section>
 
     <section id="barra" style="text-align: center; padding: 40px 20px; background-color: #333;">
-        <h2 style="color: #ffffff;">Experiencia en Barra y Flair Bartending</h2>
-        <p style="color: #FFD700; font-weight: bold;">¡Un éxito con más de 7,500 visitas en solo 2 días!</p>
+        <h2 style="color: #ffffff;">Experiencia en Barra</h2>
         <div style="margin-top: 20px;">
             <a href="https://vt.tiktok.com/ZSQePrAwV/" target="_blank">
-                <img src="foto-barra-destacada.jpg" alt="Flair Bartending Profesional" style="max-width: 100%; border-radius: 10px; border: 3px solid #FFD700; cursor: pointer;">
+                <img src="foto-barra-destacada.jpg" alt="Barra" style="max-width: 100%; border-radius: 10px; border: 3px solid #FFD700; cursor: pointer;">
             </a>
         </div>
     </section>
 
     <section id="formacion-visual" style="text-align: center; padding: 40px 20px;">
         <h2 style="color: #ffffff;">Aula de Formación (INCES)</h2>
-        <p>Compartiendo mis años de experiencia en la industria para formar a la nueva generación.</p>
         <div class="galeria-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; max-width: 1000px; margin-left: auto; margin-right: auto;">
-            <a href="foto-clase1.png" target="_blank"><img src="foto-clase1.png" alt="Clase 1" style="width: 100%; border-radius: 10px;"></a>
-            <a href="foto-clase2.png" target="_blank"><img src="foto-clase2.png" alt="Clase 2" style="width: 100%; border-radius: 10px;"></a>
-            <a href="foto-clase3.png" target="_blank"><img src="foto-clase3.png" alt="Clase 3" style="width: 100%; border-radius: 10px;"></a>
-            <a href="foto-clase4.png" target="_blank"><img src="foto-clase4.png" alt="Clase 4" style="width: 100%; border-radius: 10px;"></a>
-            <a href="foto-clase5.jpg" target="_blank"><img src="foto-clase5.jpg" alt="Clase 5" style="width: 100%; border-radius: 10px;"></a>
-            <a href="foto-clase6.jpg" target="_blank"><img src="foto-clase6.jpg" alt="Clase 6" style="width: 100%; border-radius: 10px;"></a>
-            <a href="foto-clase7.jpg" target="_blank"><img src="foto-clase7.jpg" alt="Clase 7" style="width: 100%; border-radius: 10px;"></a>
+            <a href="foto-clase1.png" target="_blank"><img src="foto-clase1.png" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
+            <a href="foto-clase2.png" target="_blank"><img src="foto-clase2.png" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
+            <a href="foto-clase3.png" target="_blank"><img src="foto-clase3.png" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
+            <a href="foto-clase4.png" target="_blank"><img src="foto-clase4.png" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
+            <a href="foto-clase5.jpg" target="_blank"><img src="foto-clase5.jpg" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
+            <a href="foto-clase6.jpg" target="_blank"><img src="foto-clase6.jpg" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
+            <a href="foto-clase7.jpg" target="_blank"><img src="foto-clase7.jpg" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
         </div>
     </section>
 
@@ -145,18 +128,14 @@
             <a href="https://wa.me/message/4RODY5METG37C1" class="contacto-item"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
             <a href="https://t.me/loscoctelesdewillianfpoficial" class="contacto-item"><i class="fa-brands fa-telegram"></i> Telegram</a>
             <a href="https://www.instagram.com/loscoctelesdewillianfp" class="contacto-item"><i class="fa-brands fa-instagram"></i> Instagram</a>
-            <a href="https://www.tiktok.com/@coctelesdewillian" class="contacto-item"><i class="fa-brands fa-tiktok"></i> TikTok</a>
-            <a href="https://www.facebook.com/share/1Fq86i14eZ/" class="contacto-item"><i class="fa-brands fa-facebook"></i> Facebook</a>
             <a href="mailto:los.cocteles.de.willian@gmail.com" class="contacto-item"><i class="fa-solid fa-envelope"></i> E-mail</a>
         </div>
     </section>
 
     <footer style="background: #000; padding: 20px; text-align: center; color: #fff;">
-        <p>&copy; 2026 LOS CÓCTELES DE WILLIAN</p>
-        <p>RIF: J-5083687-9</p>
-        <p>El Tigre, Anzoátegui y Santa Cruz, Estado Aragua</p>
+        <p>&copy; 2026 LOS CÓCTELES DE WILLIAN | RIF: J-5083687-9</p>
         <div class="contador-visitas">Contador de visitas</div>
         <a href="https://agent.jotform.com/019e8a951ec175129d47dee3d5c3ede4e13b/voice" target="_blank" class="btn-gedeon">🎤 Asistente Virtual</a>
     </footer>
 </body>
-    </html>
+</html>
