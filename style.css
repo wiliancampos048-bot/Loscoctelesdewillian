@@ -27,7 +27,13 @@ body { background-color: #1a1a1a; color: #ffffff; font-family: sans-serif; margi
 .servicio-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 3px solid #8b0000; }
 .servicio-texto { flex: 1; }
 
-/* Sección Aula Virtual (NUEVA) */
+/* Sección Calculadora (NUEVA) */
+#calculadora input { 
+    width: 60px; padding: 5px; background: #444; border: 1px solid #8b0000; 
+    color: white; border-radius: 5px; text-align: center; 
+}
+
+/* Sección Aula Virtual */
 .seccion-inscripcion { padding: 40px 20px; background-color: #222; text-align: center; }
 .contenedor-formulario { max-width: 500px; margin: 20px auto; background: #333; padding: 25px; border-radius: 10px; border: 1px solid #8b0000; }
 .seccion-inscripcion input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; background: #444; color: white; }
@@ -59,7 +65,7 @@ body { background-color: #1a1a1a; color: #ffffff; font-family: sans-serif; margi
     border: 1px solid white;
 }
 
-/* Estilo para el contenedor del contador */
+/* Estilo para el contador de visitas */
 .contador-visitas {
     margin: 15px 0;
     font-size: 0.8em;
