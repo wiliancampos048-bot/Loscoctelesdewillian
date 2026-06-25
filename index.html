@@ -16,6 +16,9 @@
         .tabla-cotizador { width: 100%; color: white; border-collapse: collapse; margin-bottom: 20px; }
         .tabla-cotizador td, .tabla-cotizador th { padding: 10px; border-bottom: 1px solid #444; text-align: left; }
         .tabla-cotizador input { width: 60px; padding: 5px; background: #444; border: 1px solid #8b0000; color: white; border-radius: 5px; text-align: center; }
+        .galeria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; max-width: 1000px; margin-left: auto; margin-right: auto; }
+        .contacto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .contacto-item { padding: 15px; background: #333; color: white; text-decoration: none; border-radius: 5px; border: 1px solid #8b0000; }
     </style>
     <title>LOS CÓCTELES DE WILLIAN | Gastronomía Profesional</title>
 </head>
@@ -104,6 +107,29 @@
         }
     </script>
 
+    <section id="parrilla" style="text-align: center; padding: 40px 20px; background-color: #222;">
+        <h2 style="color: #ffffff;">Maestría en Parrilla</h2>
+        <div style="margin-top: 20px;">
+            <a href="https://www.facebook.com/share/r/17rXGQdFGM/" target="_blank"><img src="foto-punta-trasera-willian.jpg" alt="Parrilla" style="max-width: 100%; border-radius: 10px; border: 3px solid #8b0000; cursor: pointer;"></a>
+        </div>
+    </section>
+
+    <section id="barra" style="text-align: center; padding: 40px 20px; background-color: #333;">
+        <h2 style="color: #ffffff;">Experiencia en Barra</h2>
+        <div style="margin-top: 20px;">
+            <a href="https://vt.tiktok.com/ZSQePrAwV/" target="_blank"><img src="foto-barra-destacada.jpg" alt="Barra" style="max-width: 100%; border-radius: 10px; border: 3px solid #FFD700; cursor: pointer;"></a>
+        </div>
+    </section>
+
+    <section id="formacion-visual" style="text-align: center; padding: 40px 20px;">
+        <h2 style="color: #ffffff;">Aula de Formación (INCES)</h2>
+        <div class="galeria-grid">
+            <a href="foto-clase1.png" target="_blank"><img src="foto-clase1.png" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
+            <a href="foto-clase2.png" target="_blank"><img src="foto-clase2.png" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
+            <a href="foto-clase3.png" target="_blank"><img src="foto-clase3.png" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
+        </div>
+    </section>
+
     <section id="inscripcion" class="seccion-inscripcion">
         <h2 style="color: #FFD700;">Aula Virtual</h2>
         <div class="contenedor-formulario">
@@ -113,6 +139,16 @@
                 <input type="text" name="contacto" placeholder="Teléfono" required>
                 <button type="submit">SOLICITAR ACCESO</button>
             </form>
+        </div>
+    </section>
+
+    <section id="contacto" class="contacto-section" style="padding: 40px 20px; text-align: center;">
+        <h2 style="color: #ffffff;">Redes Sociales</h2>
+        <div class="contacto-grid">
+            <a href="https://wa.me/message/4RODY5METG37C1" class="contacto-item"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://t.me/loscoctelesdewillianfpoficial" class="contacto-item"><i class="fa-brands fa-telegram"></i> Telegram</a>
+            <a href="https://www.instagram.com/loscoctelesdewillianfp" class="contacto-item"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="mailto:los.cocteles.de.willian@gmail.com" class="contacto-item"><i class="fa-solid fa-envelope"></i> E-mail</a>
         </div>
     </section>
 
