@@ -6,24 +6,16 @@
     <meta name="description" content="Los Cócteles de Willian - Consultoría, Catering y Formación Profesional en Gastronomía, Barra y Parrilla bajo estándares técnicos de alto desempeño.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .btn-gedeon { display: inline-block; padding: 5px 12px; font-size: 0.8em; background-color: #25D366; color: white; text-decoration: none; border-radius: 15px; margin-top: 10px; border: 1px solid white; }
-        .contador-visitas { margin: 15px 0; font-size: 0.8em; color: #888; text-align: center; }
-        .seccion-inscripcion { padding: 40px 20px; background-color: #222; text-align: center; }
-        .contenedor-formulario { max-width: 500px; margin: 20px auto; background: #333; padding: 25px; border-radius: 10px; border: 1px solid #8b0000; }
-        .seccion-inscripcion input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; background: #444; color: white; }
-        .seccion-inscripcion button { width: 100%; padding: 15px; background-color: #8b0000; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-    </style>
     <title>LOS CÓCTELES DE WILLIAN | Gastronomía Profesional</title>
 </head>
 <body>
     <nav class="menu">
         <a href="#inicio">Inicio</a>
         <a href="#servicios">Servicios</a>
+        <a href="#calculadora">Cotizador</a>
         <a href="#parrilla">Parrilla</a>
         <a href="#barra">Barra</a>
         <a href="#formacion-visual">Formación</a>
-        <a href="#inscripcion">Aula Virtual</a>
         <a href="#contacto"><i class="fa-solid fa-envelope"></i> Contacto</a>
     </nav>
 
@@ -75,6 +67,43 @@
             </div>
         </div>
     </section>
+
+    <!-- CALCULADORA INTELIGENTE INTEGRADA -->
+    <section id="calculadora" style="padding: 40px 20px; background-color: #222;">
+        <h2 style="text-align: center; color: #FFD700; margin-bottom: 20px;">Cotizador Inteligente</h2>
+        <div class="contenedor-formulario" style="max-width: 600px; margin: 0 auto; background: #333; padding: 25px; border-radius: 10px; border: 1px solid #8b0000;">
+            <table style="width: 100%; color: white; border-collapse: collapse; margin-bottom: 20px;">
+                <tr><th style="text-align: left; padding: 10px;">Cóctel</th><th style="padding: 10px;">Precio</th><th style="padding: 10px;">Cant. (Mín 10)</th></tr>
+                <tr><td style="padding: 10px;">Piña Colada</td><td style="padding: 10px;">$5</td><td style="padding: 10px;"><input type="number" class="cantidad" data-precio="5" min="10" value="0"></td></tr>
+                <tr><td style="padding: 10px;">Mojito Cubano</td><td style="padding: 10px;">$4</td><td style="padding: 10px;"><input type="number" class="cantidad" data-precio="4" min="10" value="0"></td></tr>
+                <tr><td style="padding: 10px;">Daiquiri Fresa</td><td style="padding: 10px;">$4</td><td style="padding: 10px;"><input type="number" class="cantidad" data-precio="4" min="10" value="0"></td></tr>
+            </table>
+            <h3 style="text-align: right; color: #FFD700;">Total: $<span id="total">0</span></h3>
+            <button onclick="enviarPedido()" style="width: 100%; padding: 15px; background-color: #25D366; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; margin-top: 10px;">SOLICITAR PEDIDO POR WHATSAPP</button>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('.cantidad').forEach(input => {
+            input.addEventListener('input', () => {
+                let total = 0;
+                document.querySelectorAll('.cantidad').forEach(i => {
+                    if (i.value >= 10) total += i.value * i.dataset.precio;
+                });
+                document.getElementById('total').innerText = total;
+            });
+        });
+
+        function enviarPedido() {
+            let msg = "Hola Willian, quiero solicitar este presupuesto:%0A";
+            document.querySelectorAll('.cantidad').forEach(i => {
+                if (i.value >= 10) msg += i.parentElement.parentElement.cells[0].innerText + ": " + i.value + "%0A";
+            });
+            msg += "Total: $" + document.getElementById('total').innerText;
+            window.open("https://wa.me/584248237912?text=" + msg);
+        }
+    </script>
+    <!-- FIN CALCULADORA -->
 
     <section id="inscripcion" class="seccion-inscripcion">
         <h2 style="color: #FFD700;">Aula Virtual: Formación Profesional</h2>
