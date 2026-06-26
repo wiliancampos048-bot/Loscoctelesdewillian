@@ -3,95 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Los Cócteles de Willian - Consultoría, Catering y Formación Profesional en Gastronomía, Barra y Parrilla bajo estándares técnicos de alto desempeño.">
+    <title>LOS CÓCTELES DE WILLIAN | Gastronomía Profesional</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .btn-gedeon { display: inline-block; padding: 5px 12px; font-size: 0.8em; background-color: #25D366; color: white; text-decoration: none; border-radius: 15px; margin-top: 10px; border: 1px solid white; }
-        .contador-visitas { margin: 15px 0; font-size: 0.8em; color: #888; text-align: center; }
-        .seccion-inscripcion { padding: 40px 20px; background-color: #222; text-align: center; }
-        .contenedor-formulario { max-width: 700px; margin: 20px auto; background: #333; padding: 25px; border-radius: 10px; border: 1px solid #8b0000; }
-        .seccion-inscripcion input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; background: #444; color: white; }
-        .seccion-inscripcion button { width: 100%; padding: 15px; background-color: #8b0000; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .tabla-cotizador { width: 100%; color: white; border-collapse: collapse; margin-bottom: 20px; }
-        .tabla-cotizador td, .tabla-cotizador th { padding: 10px; border-bottom: 1px solid #444; text-align: left; }
-        .tabla-cotizador input { width: 60px; padding: 5px; background: #444; border: 1px solid #8b0000; color: white; border-radius: 5px; text-align: center; }
-        .galeria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; max-width: 1000px; margin-left: auto; margin-right: auto; }
-        .contacto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .contacto-item { padding: 15px; background: #333; color: white; text-decoration: none; border-radius: 5px; border: 1px solid #8b0000; }
-        .contacto-item:hover { background: #8b0000; }
-    </style>
-    <title>LOS CÓCTELES DE WILLIAN | Gastronomía Profesional</title>
 </head>
 <body>
+
+    <!-- Menú -->
     <nav class="menu">
         <a href="#inicio">Inicio</a>
         <a href="#servicios">Servicios</a>
         <a href="#calculadora">Cotizador</a>
         <a href="#parrilla">Parrilla</a>
         <a href="#barra">Barra</a>
-        <a href="#formacion-visual">Formación</a>
-        <a href="#inscripcion">Aula Virtual</a>
-        <a href="#contacto"><i class="fa-solid fa-envelope"></i> Contacto</a>
+        <a href="#formacion">Formación</a>
+        <a href="#contacto">Contacto</a>
     </nav>
 
+    <!-- Inicio -->
     <header id="inicio" class="encabezamiento">
-        <img src="Mi-logo.png" alt="Logo" style="width: 150px; border-radius: 50%; margin-bottom: 15px; background-color: transparent !important;">
+        <img src="Mi-logo.png" alt="Logo" style="width: 150px; border-radius: 50%;">
         <h1>LOS CÓCTELES DE WILLIAN</h1>
-        <h3>32 años de excelencia en Gastronomía, Barra y Parrilla</h3>
-        <p style="font-size: 1.1em; font-weight: bold;">Emprendimiento: Willian Campos</p>
-        <p style="font-size: 0.9em; color: #ccc;">RIF: J-5083687-9</p>
-        <p>Maestro Técnico Productivo | Especialista en Catering y Consultoría Operativa.</p>
+        <p>Maestro Técnico Productivo | Catering, Parrilla y Barra Profesional</p>
+        <p>RIF: J-5083687-9</p>
     </header>
 
-    <section id="servicios">
-        <h2 style="text-align: center; margin-top: 30px;">Nuestros Servicios</h2>
+    <!-- Servicios -->
+    <section id="servicios" style="padding: 40px 20px;">
+        <h2 style="text-align: center;">Nuestros Servicios</h2>
         <div class="servicio-container">
-            <a href="foto-caterin.png" target="_blank"><img src="foto-caterin.png" class="servicio-img" alt="Catering"></a>
-            <div class="servicio-texto">
-                <h3>Catering Profesional</h3>
-                <p>Servicio integral de alto nivel con enfoque en:</p>
-                <ul><li>Coctelería clásica y de autor.</li><li>Menú de parrilla gourmet y cortes selectos.</li></ul>
-            </div>
-        </div>
-        <div class="servicio-container invertido">
-            <a href="foto-eventos.png" target="_blank"><img src="foto-eventos.png" class="servicio-img" alt="Eventos"></a>
-            <div class="servicio-texto">
-                <h3>Gestión de Eventos</h3>
-                <p>Planificación estratégica para garantizar calidad en cada detalle.</p>
-            </div>
+            <h3>Catering Profesional</h3>
+            <p>Servicio integral de alto nivel con coctelería de autor y menú de parrilla gourmet.</p>
         </div>
     </section>
 
-    <section id="calculadora" style="padding: 40px 20px; background-color: #222;">
-        <h2 style="text-align: center; color: #FFD700;">Cotizador Inteligente</h2>
+    <!-- Cotizador -->
+    <section id="calculadora" class="seccion-cotizador">
+        <h2 style="text-align: center; color: #FFD700;">Cotizador de Eventos</h2>
         <div class="contenedor-formulario">
+            <p><strong>Políticas:</strong> 50% anticipo para apartar fecha (congelación de precio). 50% restante antes del evento. Aceptamos BS (Tasa BCV), USDT y Euros.</p>
+            <input type="text" id="fecha" placeholder="Fecha del evento (DD/MM/AAAA)" class="input-form">
+            <input type="text" id="lugar" placeholder="Lugar o Dirección" class="input-form">
+            <input type="text" id="hora" placeholder="Hora de inicio" class="input-form">
+
             <table class="tabla-cotizador">
-                <tr><th>Imagen</th><th>Cóctel</th><th>Precio</th><th>Cant.</th></tr>
-                <tr><td><img src="fruit_punch.jpg" style="width:50px; border-radius:5px;"></td><td>Fruit Punch</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="1.8" value="0"></td></tr>
-                <tr><td><img src="pina_colada.jpg" style="width:50px; border-radius:5px;"></td><td>Piña Colada</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td><img src="daiquiri.jpg" style="width:50px; border-radius:5px;"></td><td>Daiquiri</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="1.8" value="0"></td></tr>
-                <tr><td><img src="ronponch.jpg" style="width:50px; border-radius:5px;"></td><td>Ronponch</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td><img src="cuba_libre.jpg" style="width:50px; border-radius:5px;"></td><td>Cuba Libre</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="1.8" value="0"></td></tr>
-                <tr><td><img src="mojito.jpg" style="width:50px; border-radius:5px;"></td><td>Mojito Cubano</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="1.8" value="0"></td></tr>
-                <tr><td><img src="caipirosca.jpg" style="width:50px; border-radius:5px;"></td><td>Caipirosca</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="1.8" value="0"></td></tr>
-                <tr><td><img src="sex_beach.jpg" style="width:50px; border-radius:5px;"></td><td>Sex on the Beach</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td><img src="destornillador.jpg" style="width:50px; border-radius:5px;"></td><td>Destornillador</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="1.8" value="0"></td></tr>
-                <tr><td><img src="arcoiris.jpg" style="width:50px; border-radius:5px;"></td><td>Arcoiris</td><td>$1.9</td><td><input type="number" class="cantidad" data-precio="1.9" value="0"></td></tr>
-                <tr><td><img src="magallanes.jpg" style="width:50px; border-radius:5px;"></td><td>Magallanes Campeón</td><td>$2.5</td><td><input type="number" class="cantidad" data-precio="2.5" value="0"></td></tr>
-                <tr><td><img src="frutos_secos.jpg" style="width:50px; border-radius:5px;"></td><td>Coctel Frutos Secos</td><td>$2.5</td><td><input type="number" class="cantidad" data-precio="2.5" value="0"></td></tr>
-                <tr><td><img src="sirena.jpg" style="width:50px; border-radius:5px;"></td><td>Canto de Sirena</td><td>$3</td><td><input type="number" class="cantidad" data-precio="3" value="0"></td></tr>
-                <tr><td><img src="coco_loco.jpg" style="width:50px; border-radius:5px;"></td><td>Coco Loco</td><td>$2.5</td><td><input type="number" class="cantidad" data-precio="2.5" value="0"></td></tr>
-                <tr><td><img src="orgasmo.jpg" style="width:50px; border-radius:5px;"></td><td>Orgasmo</td><td>$4.5</td><td><input type="number" class="cantidad" data-precio="4.5" value="0"></td></tr>
-                <tr><td><img src="orgasmo_mult.jpg" style="width:50px; border-radius:5px;"></td><td>Orgasmo Multiple</td><td>$5</td><td><input type="number" class="cantidad" data-precio="5" value="0"></td></tr>
-                <tr><td><img src="margarita.jpg" style="width:50px; border-radius:5px;"></td><td>Margarita</td><td>$2.5</td><td><input type="number" class="cantidad" data-precio="2.5" value="0"></td></tr>
-                <tr><td><img src="media_noche.jpg" style="width:50px; border-radius:5px;"></td><td>Polvo Media Noche</td><td>$3</td><td><input type="number" class="cantidad" data-precio="3" value="0"></td></tr>
+                <tr><th>Servicio</th><th>Precio</th><th>Cant.</th></tr>
+                <tr><td>Mesoneros</td><td>$60</td><td><input type="number" class="cantidad" data-precio="60" value="0"></td></tr>
+                <tr><td>Bartender</td><td>$70</td><td><input type="number" class="cantidad" data-precio="70" value="0"></td></tr>
+                <tr><td>Parrilleros (hasta 20kg)</td><td>$20</td><td><input type="number" class="cantidad" data-precio="20" value="0"></td></tr>
+                <tr><td>Kilo adicional</td><td>$5</td><td><input type="number" class="cantidad" data-precio="5" value="0"></td></tr>
             </table>
-            <h3 style="text-align: right; color: #FFD700;">Total: $<span id="total">0</span></h3>
-            <button onclick="enviarPedido()" style="width: 100%; padding: 15px; background-color: #25D366; border: none; border-radius: 5px; color: white; cursor: pointer;">SOLICITAR POR WHATSAPP</button>
+            <h3 style="text-align: right;">Total: $<span id="total">0</span></h3>
+            <button onclick="enviarPedido()" class="btn-whatsapp">SOLICITAR CONTRATO Y FECHA</button>
         </div>
     </section>
 
+    <!-- Parrilla y Barra -->
+    <section id="parrilla" style="padding: 40px 20px;">
+        <h2>Maestría en Parrilla</h2>
+        <p>Expertos en cortes selectos para tus eventos.</p>
+    </section>
+
+    <section id="barra" style="padding: 40px 20px;">
+        <h2>Experiencia en Barra</h2>
+        <p>Coctelería clásica y de autor bajo estándares técnicos.</p>
+    </section>
+
+    <!-- Formación -->
+    <section id="formacion" style="padding: 40px 20px;">
+        <h2>Aula de Formación (INCES)</h2>
+        <p>Certificaciones profesionales en servicio y mixología.</p>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" style="padding: 40px 20px; background: #000; text-align: center;">
+        <h2>Contacto</h2>
+        <div class="contacto-grid">
+            <a href="https://wa.me/584248237912">WhatsApp</a>
+            <a href="mailto:los.cocteles.de.willian@gmail.com">E-mail</a>
+        </div>
+    </section>
+
+    <!-- Script de cálculo -->
     <script>
         document.querySelectorAll('.cantidad').forEach(input => {
             input.addEventListener('input', () => {
@@ -101,64 +94,9 @@
             });
         });
         function enviarPedido() {
-            let msg = "Hola Willian, quiero este presupuesto:%0A";
-            document.querySelectorAll('.cantidad').forEach(i => { if (i.value > 0) msg += i.parentElement.parentElement.cells[1].innerText + ": " + i.value + "%0A"; });
-            msg += "Total: $" + document.getElementById('total').innerText;
+            let msg = "Hola Willian, quiero apartar mi fecha.%0AFecha: " + document.getElementById('fecha').value + "%0ALugar: " + document.getElementById('lugar').value + "%0AHora: " + document.getElementById('hora').value + "%0ATotal Estimado: $" + document.getElementById('total').innerText;
             window.open("https://wa.me/584248237912?text=" + msg);
         }
     </script>
-
-    <section id="parrilla" style="text-align: center; padding: 40px 20px; background-color: #222;">
-        <h2 style="color: #ffffff;">Maestría en Parrilla</h2>
-        <div style="margin-top: 20px;">
-            <a href="https://www.facebook.com/share/r/17rXGQdFGM/" target="_blank"><img src="foto-punta-trasera-willian.jpg" alt="Parrilla" style="max-width: 100%; border-radius: 10px; border: 3px solid #8b0000; cursor: pointer;"></a>
-        </div>
-    </section>
-
-    <section id="barra" style="text-align: center; padding: 40px 20px; background-color: #333;">
-        <h2 style="color: #ffffff;">Experiencia en Barra</h2>
-        <div style="margin-top: 20px;">
-            <a href="https://vt.tiktok.com/ZSQePrAwV/" target="_blank"><img src="foto-barra-destacada.jpg" alt="Barra" style="max-width: 100%; border-radius: 10px; border: 3px solid #FFD700; cursor: pointer;"></a>
-        </div>
-    </section>
-
-    <section id="formacion-visual" style="text-align: center; padding: 40px 20px;">
-        <h2 style="color: #ffffff;">Aula de Formación (INCES)</h2>
-        <div class="galeria-grid">
-            <a href="foto-clase1.png" target="_blank"><img src="foto-clase1.png" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
-            <a href="foto-clase2.png" target="_blank"><img src="foto-clase2.png" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
-            <a href="foto-clase3.png" target="_blank"><img src="foto-clase3.png" alt="Clase" style="width: 100%; border-radius: 10px;"></a>
-        </div>
-    </section>
-
-    <section id="inscripcion" class="seccion-inscripcion">
-        <h2 style="color: #FFD700;">Aula Virtual</h2>
-        <div class="contenedor-formulario">
-            <form action="https://formsubmit.co/los.cocteles.de.willian@gmail.com" method="POST">
-                <input type="hidden" name="_next" value="https://wiliancampos048-bot.github.io/Loscoctelesdewillian/">
-                <input type="text" name="nombre" placeholder="Nombre completo" required>
-                <input type="text" name="contacto" placeholder="Teléfono" required>
-                <button type="submit">SOLICITAR ACCESO</button>
-            </form>
-        </div>
-    </section>
-
-    <section id="contacto" class="contacto-section" style="padding: 40px 20px; text-align: center;">
-        <h2 style="color: #ffffff;">Redes Sociales</h2>
-        <div class="contacto-grid">
-            <a href="https://wa.me/message/4RODY5METG37C1" class="contacto-item"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-            <a href="https://t.me/loscoctelesdewillianfpoficial" class="contacto-item"><i class="fa-brands fa-telegram"></i> Telegram</a>
-            <a href="https://www.instagram.com/loscoctelesdewillianfp" class="contacto-item"><i class="fa-brands fa-instagram"></i> Instagram</a>
-            <a href="https://www.tiktok.com/@loscoctelesdewillian" class="contacto-item"><i class="fa-brands fa-tiktok"></i> TikTok</a>
-            <a href="mailto:los.cocteles.de.willian@gmail.com" class="contacto-item"><i class="fa-solid fa-envelope"></i> E-mail</a>
-        </div>
-    </section>
-
-    <footer style="background: #000; padding: 20px; text-align: center; color: #fff;">
-        <p>&copy; 2026 LOS CÓCTELES DE WILLIAN | RIF: J-50833687-9</p>
-        <!-- PEGA AQUÍ TU CÓDIGO DEL CONTADOR DE VISITAS -->
-        <div class="contador-visitas">Aquí aparecerá tu contador</div>
-        <a href="https://agent.jotform.com/019e8a951ec175129d47dee3d5c3ede4e13b/voice" target="_blank" class="btn-gedeon">🎤 Asistente Virtual</a>
-    </footer>
 </body>
 </html>
