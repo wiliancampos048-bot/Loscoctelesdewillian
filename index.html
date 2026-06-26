@@ -9,82 +9,74 @@
 </head>
 <body>
 
-    <!-- Menú -->
     <nav class="menu">
         <a href="#inicio">Inicio</a>
-        <a href="#servicios">Servicios</a>
         <a href="#calculadora">Cotizador</a>
         <a href="#parrilla">Parrilla</a>
         <a href="#barra">Barra</a>
-        <a href="#formacion">Formación</a>
+        <a href="#formacion">Aula Virtual</a>
         <a href="#contacto">Contacto</a>
     </nav>
 
-    <!-- Inicio -->
     <header id="inicio" class="encabezamiento">
         <img src="Mi-logo.png" alt="Logo" style="width: 150px; border-radius: 50%;">
         <h1>LOS CÓCTELES DE WILLIAN</h1>
-        <p>Maestro Técnico Productivo | Catering, Parrilla y Barra Profesional</p>
-        <p>RIF: J-5083687-9</p>
+        <p>Maestro Técnico Productivo | Catering, Parrilla y Barra</p>
     </header>
 
-    <!-- Servicios -->
-    <section id="servicios" style="padding: 40px 20px;">
-        <h2 style="text-align: center;">Nuestros Servicios</h2>
-        <div class="servicio-container">
-            <h3>Catering Profesional</h3>
-            <p>Servicio integral de alto nivel con coctelería de autor y menú de parrilla gourmet.</p>
-        </div>
-    </section>
-
-    <!-- Cotizador -->
     <section id="calculadora" class="seccion-cotizador">
-        <h2 style="text-align: center; color: #FFD700;">Cotizador de Eventos</h2>
+        <h2 style="color: #FFD700;">Cotizador y Reservas</h2>
         <div class="contenedor-formulario">
-            <p><strong>Políticas:</strong> 50% anticipo para apartar fecha (congelación de precio). 50% restante antes del evento. Aceptamos BS (Tasa BCV), USDT y Euros.</p>
-            <input type="text" id="fecha" placeholder="Fecha del evento (DD/MM/AAAA)" class="input-form">
+            <p style="font-size: 0.9em;">Políticas: 50% anticipo para apartar fecha (congelación de precio). 50% restante antes del evento. Aceptamos BS (Tasa BCV), USDT y Euros.</p>
+            <input type="text" id="fecha" placeholder="Fecha del evento" class="input-form">
             <input type="text" id="lugar" placeholder="Lugar o Dirección" class="input-form">
             <input type="text" id="hora" placeholder="Hora de inicio" class="input-form">
 
             <table class="tabla-cotizador">
-                <tr><th>Servicio</th><th>Precio</th><th>Cant.</th></tr>
+                <tr><th>Producto/Servicio</th><th>Precio</th><th>Cant.</th></tr>
+                <tr><td>Fruit Punch</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="1.8" value="0"></td></tr>
+                <tr><td>Piña Colada</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Mojito Cubano</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="1.8" value="0"></td></tr>
                 <tr><td>Mesoneros</td><td>$60</td><td><input type="number" class="cantidad" data-precio="60" value="0"></td></tr>
                 <tr><td>Bartender</td><td>$70</td><td><input type="number" class="cantidad" data-precio="70" value="0"></td></tr>
                 <tr><td>Parrilleros (hasta 20kg)</td><td>$20</td><td><input type="number" class="cantidad" data-precio="20" value="0"></td></tr>
                 <tr><td>Kilo adicional</td><td>$5</td><td><input type="number" class="cantidad" data-precio="5" value="0"></td></tr>
             </table>
-            <h3 style="text-align: right;">Total: $<span id="total">0</span></h3>
+            <h3>Total: $<span id="total">0</span></h3>
             <button onclick="enviarPedido()" class="btn-whatsapp">SOLICITAR CONTRATO Y FECHA</button>
         </div>
     </section>
 
-    <!-- Parrilla y Barra -->
-    <section id="parrilla" style="padding: 40px 20px;">
+    <section id="parrilla">
         <h2>Maestría en Parrilla</h2>
-        <p>Expertos en cortes selectos para tus eventos.</p>
+        <a href="https://www.facebook.com/share/r/17rXGQdFGM/"><img src="foto-punta-trasera-willian.jpg" alt="Parrilla" class="galeria-img"></a>
     </section>
 
-    <section id="barra" style="padding: 40px 20px;">
+    <section id="barra">
         <h2>Experiencia en Barra</h2>
-        <p>Coctelería clásica y de autor bajo estándares técnicos.</p>
+        <a href="https://vt.tiktok.com/ZSQePrAwV/"><img src="foto-barra-destacada.jpg" alt="Barra" class="galeria-img"></a>
     </section>
 
-    <!-- Formación -->
-    <section id="formacion" style="padding: 40px 20px;">
-        <h2>Aula de Formación (INCES)</h2>
-        <p>Certificaciones profesionales en servicio y mixología.</p>
-    </section>
-
-    <!-- Contacto -->
-    <section id="contacto" style="padding: 40px 20px; background: #000; text-align: center;">
-        <h2>Contacto</h2>
-        <div class="contacto-grid">
-            <a href="https://wa.me/584248237912">WhatsApp</a>
-            <a href="mailto:los.cocteles.de.willian@gmail.com">E-mail</a>
+    <section id="formacion">
+        <h2>Aula Virtual (INCES)</h2>
+        <div class="formulario-inscripcion">
+            <form action="https://formsubmit.co/los.cocteles.de.willian@gmail.com" method="POST">
+                <input type="text" name="nombre" placeholder="Nombre completo" required class="input-form">
+                <input type="text" name="contacto" placeholder="Teléfono" required class="input-form">
+                <button type="submit" class="btn-whatsapp">SOLICITAR ACCESO</button>
+            </form>
         </div>
     </section>
 
-    <!-- Script de cálculo -->
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <div class="contacto-grid">
+            <a href="https://wa.me/584248237912"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://t.me/loscoctelesdewillianfpoficial"><i class="fa-brands fa-telegram"></i> Telegram</a>
+            <a href="https://www.instagram.com/loscoctelesdewillianfp"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        </div>
+    </section>
+
     <script>
         document.querySelectorAll('.cantidad').forEach(input => {
             input.addEventListener('input', () => {
