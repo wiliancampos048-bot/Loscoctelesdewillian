@@ -4,7 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOS CÓCTELES DE WILLIAN</title>
-    <link rel="stylesheet" href="estilo.css">
+    <style>
+        body { background-color: #000000 !important; color: #ffffff !important; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .menu { background-color: #000000 !important; border-bottom: 2px solid #FFD700 !important; padding: 15px; text-align: center; }
+        .menu a { color: white; text-decoration: none; font-weight: bold; margin: 0 10px; }
+        h1, h2, h3 { color: #FFD700 !important; text-align: center; }
+        section { padding: 20px; border-bottom: 1px solid #333; }
+        .tabla-cotizador { color: #ffffff; width: 100%; max-width: 500px; margin: 20px auto; border-collapse: collapse; }
+        .tabla-cotizador td, .tabla-cotizador th { border-bottom: 1px solid #333; padding: 10px; }
+        .cantidad { width: 50px; background: #333; color: white; border: 1px solid #555; }
+        .btn-whatsapp { background-color: #25D366; color: white; padding: 15px; border: none; cursor: pointer; display: block; margin: 20px auto; }
+        img { display: block; margin: 0 auto; width: 150px; border-radius: 50%; }
+    </style>
 </head>
 <body>
 
@@ -16,14 +27,14 @@
     </nav>
 
     <header id="inicio">
-        <img src="mi-logo.png" alt="Logo" style="width: 150px; border-radius: 50%; display: block; margin: 0 auto;">
+        <img src="mi-logo.png" alt="Logo">
         <h1>LOS CÓCTELES DE WILLIAN</h1>
     </header>
 
     <section id="calculadora">
         <h2>Cotizador y Reservas</h2>
-        <input type="text" id="fecha" placeholder="Fecha">
-        <input type="text" id="lugar" placeholder="Lugar">
+        <input type="text" id="fecha" placeholder="Fecha" style="width: 90%; display: block; margin: 5px auto; padding: 10px; background: #333; color: white; border: 1px solid #555;">
+        <input type="text" id="lugar" placeholder="Lugar" style="width: 90%; display: block; margin: 5px auto; padding: 10px; background: #333; color: white; border: 1px solid #555;">
         
         <table class="tabla-cotizador">
             <tr><th>Producto</th><th>$</th><th>Cant.</th></tr>
