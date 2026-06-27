@@ -3,44 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOS CÓCTELES DE WILLIAN</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Los Cócteles de Willian</title>
+    <style>
+        /* Estilos generales */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding-top: 80px; background-color: #f4f4f4; }
+        
+        /* Menú flotante y moderno */
+        .menu-flotante {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .menu-flotante a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .menu-flotante a:hover { color: #fff; transform: scale(1.1); }
+
+        header { text-align: center; padding: 20px; background: #fff; }
+        section { padding: 40px 20px; }
+    </style>
 </head>
 <body>
 
-    <nav class="menu">
-        <a href="#inicio">Inicio</a>
-        <a href="cotizador.html" target="_blank">Cotizador Inteligente</a>
-        <a href="#servicios">Servicios</a>
+    <!-- Menú Flotante -->
+    <nav class="menu-flotante">
         <a href="#galeria">Galería</a>
+        <a href="#videos">Videos</a>
         <a href="#contacto">Contacto</a>
     </nav>
 
-    <header id="inicio" class="hero">
-        <img src="logo.png" alt="Logo" class="logo">
-        <h1>LOS CÓCTELES DE WILLIAN</h1>
-        <p>32 años de excelencia en Gastronomía, Barra y Parrilla</p>
-        <p><strong>Emprendimiento:</strong> Willian Campos</p>
-        <p>RIF: J-50833687-9</p>
-        <p>Maestro Técnico Productivo | Especialista en Catering y Consultoría Operativa.</p>
+    <header>
+        <img src="logo.png" alt="Logo" style="width: 150px;">
+        <h1>Los Cócteles de Willian</h1>
     </header>
 
-    <section id="servicios">
-        <h2>Nuestros Servicios</h2>
-        <div class="servicio-item">
-            <h3>Catering Profesional</h3>
-            <p>Servicio integral de alto nivel con enfoque en: Coctelería clásica y de autor. Menú de parrilla gourmet y cortes selectos.</p>
+    <!-- Galería -->
+    <section id="galeria">
+        <h2 style="color: #333; text-align: center;">Galería</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+            <img src="foto-barra-destacada.jpg" alt="Barra" style="width: 100%; border-radius: 5px;">
+            <img src="foto-caterin.png" alt="Catering" style="width: 100%; border-radius: 5px;">
+            <img src="foto-clase1.png" alt="Clase" style="width: 100%; border-radius: 5px;">
+            <img src="foto-eventos.png" alt="Eventos" style="width: 100%; border-radius: 5px;">
+            <img src="foto-parrilla-destacada.jpg" alt="Parrilla" style="width: 100%; border-radius: 5px;">
+            <img src="foto-punta-trasera-willian.jpg" alt="Punta Trasera" style="width: 100%; border-radius: 5px;">
         </div>
     </section>
 
-    <section id="galeria">
-        <h2>Galería</h2>
-        </section>
+    <!-- Videos -->
+    <section id="videos" style="text-align: center; background: #fff;">
+        <h2 style="color: #333;">Nuestra Experiencia</h2>
+        <video width="100%" controls style="margin-bottom:10px; max-width: 500px;"><source src="video-facebook.mp4" type="video/mp4"></video>
+        <video width="100%" controls style="margin-bottom:10px; max-width: 500px;"><source src="video-tiktok.mp4" type="video/mp4"></video>
+        <div style="margin-top: 15px; padding: 15px; background: #111; border-radius: 5px; max-width: 500px; margin-left: auto; margin-right: auto;">
+            <p style="color: #fff;">Mira nuestro video destacado:</p>
+            <a href="https://vt.tiktok.com/ZSCkuCc7f/" target="_blank" style="color: #FFD700; text-decoration: underline;">Ver video en TikTok</a>
+        </div>
+    </section>
 
-    <footer id="contacto">
-        <p>© 2026 LOS CÓCTELES DE WILLIAN | RIF: J-50833687-9</p>
-        <p>Contador de visitas: 0</p>
-    </footer>
+    <!-- Contacto -->
+    <section id="contacto" style="text-align: center;">
+        <h2 style="color: #333;">Síguenos y Contáctanos</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px;">
+            <a href="https://wa.me/584267746622" style="padding: 10px 20px; background: #25D366; color: white; text-decoration: none; border-radius: 5px;">WhatsApp</a>
+            <a href="https://www.facebook.com/share/1DsKaT1kPy/" style="padding: 10px 20px; background: #4267B2; color: white; text-decoration: none; border-radius: 5px;">Facebook</a>
+            <a href="https://www.tiktok.com/@loscoctelesdewillian?_r=1&_t=ZS-97Z38lA0NQg" style="padding: 10px 20px; background: #000; color: white; text-decoration: none; border-radius: 5px;">TikTok</a>
+            <a href="https://t.me/loscoctelesdewillianfpoficial" style="padding: 10px 20px; background: #0088cc; color: white; text-decoration: none; border-radius: 5px;">Telegram</a>
+            <a href="https://www.instagram.com/loscoctelesdewillianfp?igsh=MXhpbGt1bTE2NjFqZw==" style="padding: 10px 20px; background: #C13584; color: white; text-decoration: none; border-radius: 5px;">Instagram</a>
+        </div>
+    </section>
 
 </body>
 </html>
