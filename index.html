@@ -3,63 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOS CÓCTELES DE WILLIAN</title>
-    <link rel="stylesheet" href="estilo.css">
+    <title>Los Cócteles de Willian</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <nav class="menu">
         <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
         <a href="#cotizador">Cotizador</a>
         <a href="#galeria">Galería</a>
-        <a href="#formacion">Formación</a>
+        <a href="#contacto">Contacto</a>
     </nav>
 
     <header id="inicio" class="hero">
-        <img src="mi-logo.png" class="logo">
+        <img src="logo.png" alt="Logo" class="logo">
         <h1>LOS CÓCTELES DE WILLIAN</h1>
         <p>32 años de excelencia en Gastronomía, Barra y Parrilla</p>
+        <p><strong>Emprendimiento:</strong> Willian Campos</p>
+        <p>RIF: J-50833687-9</p>
+        <p>Maestro Técnico Productivo | Especialista en Catering y Consultoría Operativa.</p>
     </header>
+
+    <section id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <div class="servicio-item">
+            <h3>Catering Profesional</h3>
+            <p>Servicio integral de alto nivel con enfoque en: Coctelería clásica y de autor. Menú de parrilla gourmet y cortes selectos.</p>
+        </div>
+    </section>
 
     <section id="cotizador">
         <h2>Cotizador Inteligente</h2>
-        <table class="tabla-cotizador">
-            <tr><th>Imagen</th><th>Cóctel</th><th>$</th><th>Cant.</th></tr>
-            <tr><td><img src="foto-licores.png" width="30"></td><td>Fruit Punch</td><td>1.8</td><td><input type="number" class="cantidad" data-precio="1.8" value="0"></td></tr>
-            <tr><td><img src="foto-licores.png" width="30"></td><td>Piña Colada</td><td>2.0</td><td><input type="number" class="cantidad" data-precio="2.0" value="0"></td></tr>
-            <tr><td><img src="foto-licores.png" width="30"></td><td>Daiquiri</td><td>1.8</td><td><input type="number" class="cantidad" data-precio="1.8" value="0"></td></tr>
-        </table>
-        <h3>Total: $<span id="total">0</span></h3>
-        <button onclick="enviarPedido()" class="btn-whatsapp">SOLICITAR POR WHATSAPP</button>
+        <!-- Aquí irá tu tabla de productos -->
+        <button class="btn-whatsapp">SOLICITAR POR WHATSAPP</button>
     </section>
 
     <section id="galeria">
         <h2>Galería</h2>
-        <div class="galeria-grid">
-            <img src="foto-parrilla-destacada.jpg" class="galeria-img">
-            <img src="foto-barra-destacada.jpg" class="galeria-img">
-        </div>
+        <!-- Aquí irán tus videos y fotos -->
     </section>
 
-    <section id="formacion">
-        <h2>Aula de Formación</h2>
-        <div class="galeria-grid">
-            <img src="foto-clase1.png" class="galeria-img">
-            <img src="foto-clase2.png" class="galeria-img">
-        </div>
-    </section>
+    <footer id="contacto">
+        <p>© 2026 LOS CÓCTELES DE WILLIAN | RIF: J-50833687-9</p>
+        <p>Contador de visitas: <span id="contador">0</span></p>
+    </footer>
 
-    <script>
-        document.querySelectorAll('.cantidad').forEach(input => {
-            input.addEventListener('input', () => {
-                let total = 0;
-                document.querySelectorAll('.cantidad').forEach(i => { total += i.value * i.dataset.precio; });
-                document.getElementById('total').innerText = total.toFixed(2);
-            });
-        });
-        function enviarPedido() {
-            window.open("https://wa.me/584248237912?text=Total contrato: $" + document.getElementById('total').innerText);
-        }
-    </script>
 </body>
 </html>
