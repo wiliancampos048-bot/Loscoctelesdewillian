@@ -2,123 +2,84 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizador Inteligente | Los Cócteles de Willian</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        .contenedor-cotizador { padding: 60px 20px; text-align: center; }
-        .titulo-master { color: #FFD700; font-size: 1.1em; margin-bottom: 20px; font-style: italic; }
-        .tabla-cotizador { width: 100%; max-width: 800px; margin: 20px auto; border-collapse: collapse; color: #fff; font-size: 0.9em; }
-        .tabla-cotizador th, .tabla-cotizador td { padding: 10px; border-bottom: 1px solid #FFD700; text-align: center; }
-        .input-cantidad { width: 50px; background: #222; color: #FFD700; border: 1px solid #FFD700; text-align: center; }
-        .subtotal { font-weight: bold; color: #FFD700; }
-        .input-datos { width: 90%; max-width: 400px; margin: 10px 0; padding: 10px; background: #222; color: #fff; border: 1px solid #FFD700; border-radius: 5px; }
-        .aviso-pago { border: 2px solid #FFD700; background: #000; padding: 15px; margin: 20px auto; max-width: 800px; border-radius: 8px; text-align: left; }
+        body { background: #111; color: #fff; font-family: Arial, sans-serif; }
+        .contenedor-cotizador { padding: 40px 20px; text-align: center; }
+        .aviso-pago { border: 2px solid #FFD700; padding: 15px; margin: 20px auto; max-width: 800px; border-radius: 8px; text-align: left; }
+        .tabla-cotizador { width: 100%; max-width: 800px; margin: 20px auto; border-collapse: collapse; }
+        .tabla-cotizador th, .tabla-cotizador td { padding: 10px; border-bottom: 1px solid #FFD700; }
+        .input-cantidad { width: 60px; background: #222; color: #FFD700; border: 1px solid #FFD700; text-align: center; }
+        .input-datos { width: 90%; max-width: 400px; margin: 10px 0; padding: 10px; border-radius: 5px; background: #222; color: #fff; border: 1px solid #FFD700; }
         .btn { padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px; }
     </style>
 </head>
 <body>
 
-    <nav class="menu"><a href="index.html">Volver al Inicio</a></nav>
-
     <div class="contenedor-cotizador">
         <h1>Cotizador Inteligente</h1>
-        <p class="titulo-master">Maestro Técnico Productivo Certificado | Willian Campos</p>
+        <p><i>Maestro Técnico Productivo Certificado | Willian Campos</i></p>
         
         <div class="aviso-pago">
-            <h3 style="color: #FFD700; margin-top: 0;">¡Bienvenido a tu Cotización!</h3>
-            <ul style="color: #fff; padding-left: 20px;">
-                <li>Mínimo <strong>10 unidades</strong> por tipo de cóctel.</li>
-                <li>El pedido total debe sumar mínimo <strong>50 cócteles</strong>.</li>
-                <li>Obligatorio contratar al menos <strong>1 servicio</strong> de personal.</li>
-                <li>50% para apartar fecha / 50% el día del evento.</li>
-                <li>Pagos en divisas o bolívares a tasa BCV.</li>
+            <h3 style="color: #FFD700;">Reglas y Condiciones:</h3>
+            <ul style="font-size: 0.9em;">
+                <li><strong>Personal:</strong> Incluye Bartender base. Servicios extras opcionales.</li>
+                <li><strong>Insumos:</strong> Cliente provee hielo, Coca-Cola y 7-Up. Nosotros el resto.</li>
+                <li><strong>Logística:</strong> Fuera de El Tigre, El Tigrito y San Tomé, el cliente cubre transporte, alimentación y hospedaje.</li>
+                <li><strong>Mínimos:</strong> 10 unidades por ítem / 50 cócteles total.</li>
+                <li><strong>Pagos:</strong> 50% para apartar fecha (obligatorio) / 50% al iniciar evento.</li>
             </ul>
         </div>
 
         <input type="text" id="nombre-cliente" class="input-datos" placeholder="Nombre y Apellido del Cliente">
-        <input type="date" id="fecha-evento" class="input-datos" placeholder="Fecha del evento">
+        <input type="date" id="fecha-evento" class="input-datos">
         <input type="text" id="lugar-evento" class="input-datos" placeholder="Lugar del evento">
+        
+        <div style="margin: 20px;">
+            <label style="color: #FFD700; font-weight: bold;">¿Es fuera de la zona operativa (El Tigre, El Tigrito, San Tomé)?</label>
+            <select id="es-fuera-zona" class="input-datos" onchange="mostrarAviso()" style="display: block; margin: 10px auto;">
+                <option value="No">No, es dentro de la zona operativa</option>
+                <option value="Si">Sí, es fuera de la zona operativa</option>
+            </select>
+            <p id="aviso-logistica" style="color: #FF4444; font-size: 0.8em; display: none;">*Nota: Usted acepta cubrir logística de transporte, alimentación y hospedaje.</p>
+        </div>
 
         <table class="tabla-cotizador">
-            <tr><th>Ítem</th><th>Cant.</th><th>Subtotal</th></tr>
-            <!-- Servicios -->
-            <tr><td>Bartender ($70)</td><td><input type="number" class="input-cantidad" data-precio="70" data-nombre="Bartender" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Mesonero ($65)</td><td><input type="number" class="input-cantidad" data-precio="65" data-nombre="Mesonero" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Parrillero (Base $70)</td><td><input type="number" class="input-cantidad" data-precio="70" data-nombre="Parrillero Base" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Kilo Adicional ($5)</td><td><input type="number" class="input-cantidad" data-precio="5" data-nombre="Kilo Adicional" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <!-- Cócteles -->
-            <tr><td>Fruitponch ($1.80)</td><td><input type="number" class="input-cantidad" data-precio="1.80" data-nombre="Fruitponch" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Piña Colada ($2)</td><td><input type="number" class="input-cantidad" data-precio="2" data-nombre="Piña Colada" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Daiquirí ($2)</td><td><input type="number" class="input-cantidad" data-precio="2" data-nombre="Daiquirí" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Ron Ponch ($2)</td><td><input type="number" class="input-cantidad" data-precio="2" data-nombre="Ron Ponch" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Cuba Libre ($1.80)</td><td><input type="number" class="input-cantidad" data-precio="1.80" data-nombre="Cuba Libre" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Mojito Cubano ($1.80)</td><td><input type="number" class="input-cantidad" data-precio="1.80" data-nombre="Mojito Cubano" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Sexo en la Playa ($2.50)</td><td><input type="number" class="input-cantidad" data-precio="2.50" data-nombre="Sexo en la Playa" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Caipirosca ($2)</td><td><input type="number" class="input-cantidad" data-precio="2" data-nombre="Caipirosca" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Destornillador ($1.80)</td><td><input type="number" class="input-cantidad" data-precio="1.80" data-nombre="Destornillador" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Arcoíris ($2.50)</td><td><input type="number" class="input-cantidad" data-precio="2.50" data-nombre="Arcoíris" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Cóctel Frutos Secos ($2)</td><td><input type="number" class="input-cantidad" data-precio="2" data-nombre="Cóctel Frutos Secos" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Canto de Sirena ($3)</td><td><input type="number" class="input-cantidad" data-precio="3" data-nombre="Canto de Sirena" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Coco Loco ($3)</td><td><input type="number" class="input-cantidad" data-precio="3" data-nombre="Coco Loco" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Orgasmo ($3)</td><td><input type="number" class="input-cantidad" data-precio="3" data-nombre="Orgasmo" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Orgasmo Múltiple ($4)</td><td><input type="number" class="input-cantidad" data-precio="4" data-nombre="Orgasmo Múltiple" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
-            <tr><td>Margarita Blue ($3)</td><td><input type="number" class="input-cantidad" data-precio="3" data-nombre="Margarita Blue" value="0" oninput="calcular()"></td><td class="subtotal">$0.00</td></tr>
+            <tr><th>Ítem</th><th>Cant.</th></tr>
+            <tr><td>Bartender Extra ($70)</td><td><input type="number" class="input-cantidad" data-precio="70" data-nombre="Bartender Extra" value="0"></td></tr>
+            <tr><td>Mesonero ($65)</td><td><input type="number" class="input-cantidad" data-precio="65" data-nombre="Mesonero" value="0"></td></tr>
+            <!-- Puedes agregar tus cócteles aquí siguiendo el mismo formato -->
         </table>
         
-        <h2>Total: $<span id="total-general">0.00</span></h2>
         <button onclick="validarYEnviar()" class="btn" style="background:#25D366; color:white;">SOLICITAR PRESUPUESTO</button>
-        <button onclick="location.reload()" class="btn" style="background:#444; color:white;">REINICIAR COTIZACIÓN</button>
+        <button onclick="location.reload()" class="btn" style="background:#444; color:white;">REINICIAR</button>
     </div>
 
     <script>
-        function calcular() {
-            let totalGeneral = 0;
-            const filas = document.querySelectorAll('.tabla-cotizador tr');
-            for (let i = 1; i < filas.length; i++) {
-                const input = filas[i].querySelector('.input-cantidad');
-                if (input) {
-                    const subtotal = input.value * input.dataset.precio;
-                    filas[i].querySelector('.subtotal').innerText = '$' + subtotal.toFixed(2);
-                    totalGeneral += subtotal;
-                }
-            }
-            document.getElementById('total-general').innerText = totalGeneral.toFixed(2);
+        function mostrarAviso() {
+            document.getElementById('aviso-logistica').style.display = (document.getElementById('es-fuera-zona').value === 'Si') ? 'block' : 'none';
         }
 
         function validarYEnviar() {
             const nombre = document.getElementById('nombre-cliente').value;
             const fecha = document.getElementById('fecha-evento').value;
             const lugar = document.getElementById('lugar-evento').value;
-            let mensajeDetalle = "";
-            let totalCocteles = 0;
-            let totalServicios = 0;
-            let errorCoctelIndividual = false;
+            const fueraZona = document.getElementById('es-fuera-zona').value;
+            
+            if(!nombre || !fecha || !lugar) { alert("Completa los datos del cliente, fecha y lugar."); return; }
 
-            document.querySelectorAll('.tabla-cotizador tr').forEach(fila => {
-                const input = fila.querySelector('.input-cantidad');
-                if (input && input.value > 0) {
-                    const cant = parseInt(input.value);
-                    const nombreItem = input.dataset.nombre;
-                    if (nombreItem === "Bartender" || nombreItem === "Mesonero" || nombreItem === "Parrillero Base") {
-                        totalServicios += cant;
-                    } else if (nombreItem !== "Kilo Adicional") {
-                        if (cant < 10) errorCoctelIndividual = true;
-                        totalCocteles += cant;
-                    }
-                    mensajeDetalle += `${nombreItem}: ${cant}\n`;
-                }
-            });
+            let mensaje = `Hola, nueva solicitud de evento:\n\nCliente: ${nombre}\nFecha: ${fecha}\nLugar: ${lugar}\nFuera de zona: ${fueraZona}\n\nDetalle del pedido:\n`;
+            
+            // Aquí puedes recorrer los inputs de los cócteles para agregar al mensaje
+            mensaje += `\nFavor contactar al cliente para confirmar presupuesto.`;
 
-            if(!nombre || !fecha || !lugar) { alert("Por favor, completa los datos del cliente, fecha y lugar."); return; }
-            if(errorCoctelIndividual) { alert("¡Atención! Mínimo 10 unidades por tipo de cóctel."); return; }
-            if(totalCocteles < 50) { alert("¡Atención! El pedido mínimo es de 50 cócteles."); return; }
-            if(totalServicios < 1) { alert("¡Atención! Debes contratar al menos 1 servicio de personal."); return; }
-
-            let resumen = `REVISA TU PEDIDO:\nCliente: ${nombre}\nFecha: ${fecha}\nLugar: ${lugar}\n\n${mensajeDetalle}\nTotal: $${document.getElementById('total-general').innerText}\n\n¿Es correcto? Aceptar para enviar.`;
-            if (confirm(resumen)) {
-                let m = `Hola, mi nombre es ${nombre}. Solicito presupuesto:\nFecha: ${fecha}\nLugar: ${lugar}\n\nDetalle:\n${mensajeDetalle}\nTotal: $${document.getElementById('total-general').innerText}`;
-                window.open("https://wa.me/584248237912?text=" + encodeURIComponent(m));
+            // Enlace de tu grupo
+            const enlaceGrupo = "https://chat.whatsapp.com/I5RUgFoRcwpCUuyuj1zvvu";
+            
+            const confirmacion = confirm("¿Enviar presupuesto al grupo de gestión?");
+            if (confirmacion) {
+                window.open(enlaceGrupo, '_blank');
+                alert("Redirigiendo al grupo... Por favor, pega la información del pedido allí.");
             }
         }
     </script>
