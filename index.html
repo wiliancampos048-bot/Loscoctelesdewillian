@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOS CÓCTELES DE WILLIAN | Gastronomía Profesional</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
+    <title>LOS CÓCTELES DE WILLIAN</title>
     <link rel="stylesheet" href="estilo.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -16,18 +13,17 @@
         <a href="#calculadora">Cotizador</a>
         <a href="#parrilla">Parrilla</a>
         <a href="#barra">Barra</a>
-        <a href="#contacto">Contacto</a>
     </nav>
 
     <header id="inicio">
-        <img src="mi-logo.png" alt="Logo" style="width: 150px; border-radius: 50%;">
+        <img src="mi-logo.png" alt="Logo" style="width: 150px; border-radius: 50%; display: block; margin: 0 auto;">
         <h1>LOS CÓCTELES DE WILLIAN</h1>
     </header>
 
     <section id="calculadora">
-        <h2 style="color: #FFD700;">Cotizador y Reservas</h2>
-        <input type="text" id="fecha" placeholder="Fecha" style="width: 90%; padding: 10px; margin-bottom: 5px; background: #333; color: white; border: 1px solid #555;">
-        <input type="text" id="lugar" placeholder="Lugar" style="width: 90%; padding: 10px; margin-bottom: 5px; background: #333; color: white; border: 1px solid #555;">
+        <h2>Cotizador y Reservas</h2>
+        <input type="text" id="fecha" placeholder="Fecha">
+        <input type="text" id="lugar" placeholder="Lugar">
         
         <table class="tabla-cotizador">
             <tr><th>Producto</th><th>$</th><th>Cant.</th></tr>
@@ -35,24 +31,9 @@
             <tr><td>Piña Colada</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
             <tr><td>Daiquiri</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
             <tr><td>Ron Ponch</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-            <tr><td>Cuba Libre</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-            <tr><td>Mojito Cubano</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-            <tr><td>Sex on the Beach</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-            <tr><td>Mesoneros</td><td>60</td><td><input type="number" class="cantidad" data-precio="60" value="0"></td></tr>
-            <tr><td>Bartender</td><td>70</td><td><input type="number" class="cantidad" data-precio="70" value="0"></td></tr>
         </table>
         <h3>Total: $<span id="total">0</span></h3>
         <button onclick="enviarPedido()" class="btn-whatsapp">SOLICITAR CONTRATO</button>
-    </section>
-
-    <section id="parrilla">
-        <h2>Maestría en Parrilla</h2>
-        <img src="foto-parrilla-destacada.jpg" class="galeria-img">
-    </section>
-
-    <section id="barra">
-        <h2>Experiencia en Barra</h2>
-        <img src="foto-barra-destacada.jpg" class="galeria-img">
     </section>
 
     <script>
