@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOS CÓCTELES DE WILLIAN</title>
     <style>
-        body { background-color: #000000 !important; color: #ffffff !important; font-family: Arial, sans-serif; margin: 0; padding-top: 100px; }
+        body { background-color: #000000 !important; color: #ffffff !important; font-family: Arial, sans-serif; margin: 0; padding-top: 80px; }
         
-        /* Menú Flotante Elegante */
+        /* Menú Flotante */
         .menu { background-color: #000000 !important; border-bottom: 2px solid #FFD700 !important; padding: 15px; position: fixed; top: 0; width: 100%; z-index: 1000; text-align: center; }
-        .menu a { color: #FFD700; text-decoration: none; font-weight: bold; margin: 0 10px; }
+        .menu a { color: #FFD700; text-decoration: none; font-weight: bold; margin: 0 5px; font-size: 0.9em; }
 
-        /* Encabezado con imagen de fondo */
-        .hero { background: url('fondo-presentacion.jpg') center/cover; padding: 40px; text-align: center; border-bottom: 2px solid #FFD700; }
+        /* Encabezado */
+        header { text-align: center; padding: 20px; border-bottom: 2px solid #FFD700; }
         .logo { width: 150px; border-radius: 50%; border: 3px solid #FFD700; }
-        h1, h2 { color: #FFD700 !important; }
+        h1, h2 { color: #FFD700 !important; text-align: center; }
         
         section { padding: 20px; border-bottom: 1px solid #333; }
-        .tabla-cotizador { color: #ffffff; width: 100%; max-width: 500px; margin: 20px auto; border-collapse: collapse; }
-        .cantidad { width: 50px; background: #333; color: white; border: 1px solid #555; }
-        .btn-whatsapp { background-color: #25D366; color: white; padding: 15px; border: none; cursor: pointer; display: block; margin: 20px auto; }
-        .galeria-img { width: 100%; max-width: 300px; display: block; margin: 10px auto; border-radius: 10px; }
+        
+        /* Galería */
+        .grid-galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .galeria-img { width: 100%; border-radius: 10px; border: 1px solid #FFD700; }
+        
+        .btn-whatsapp { background-color: #25D366; color: white; padding: 15px; border: none; cursor: pointer; display: block; margin: 20px auto; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -28,51 +30,44 @@
     <nav class="menu">
         <a href="#inicio">Inicio</a>
         <a href="#cotizador">Cotizador</a>
-        <a href="#servicios">Servicios</a>
         <a href="#galeria">Galería</a>
+        <a href="#formacion">Formación</a>
     </nav>
 
-    <header class="hero" id="inicio">
+    <header id="inicio">
         <img src="mi-logo.png" class="logo">
         <h1>LOS CÓCTELES DE WILLIAN</h1>
     </header>
 
     <section id="cotizador">
-        <h2>Cotizador Inteligente</h2>
-        <table class="tabla-cotizador">
-            <tr><th>Cóctel</th><th>$</th><th>Cant.</th></tr>
-            <tr><td>Fruit Punch</td><td>1.8</td><td><input type="number" class="cantidad" data-precio="1.8"></td></tr>
-            <tr><td>Piña Colada</td><td>2</td><td><input type="number" class="cantidad" data-precio="2"></td></tr>
-            <tr><td>Daiquiri</td><td>2</td><td><input type="number" class="cantidad" data-precio="2"></td></tr>
-            <tr><td>Mojito Cubano</td><td>1.8</td><td><input type="number" class="cantidad" data-precio="1.8"></td></tr>
-        </table>
-        <h3>Total: $<span id="total">0</span></h3>
-        <button onclick="enviarPedido()" class="btn-whatsapp">SOLICITAR POR WHATSAPP</button>
-    </section>
-
-    <section id="servicios">
-        <h2>Nuestros Servicios</h2>
-        <p>• Catering Profesional</p>
-        <p>• Gestión de Eventos</p>
-        <p>• Parrilla Gourmet</p>
+        <h2>Cotizador y Reservas</h2>
+        <input type="text" id="fecha" placeholder="Fecha" style="width:90%; padding:10px; margin:5px auto; display:block; background:#333; color:white; border:1px solid #555;">
+        <input type="text" id="lugar" placeholder="Lugar" style="width:90%; padding:10px; margin:5px auto; display:block; background:#333; color:white; border:1px solid #555;">
+        <button onclick="enviarPedido()" class="btn-whatsapp">SOLICITAR CONTRATO</button>
     </section>
 
     <section id="galeria">
         <h2>Galería</h2>
-        <img src="foto-parrilla.jpg" class="galeria-img">
-        <img src="foto-barra.jpg" class="galeria-img">
+        <div class="grid-galeria">
+            <img src="foto-parrilla-destacada.jpg" class="galeria-img">
+            <img src="foto-barra-destacada.jpg" class="galeria-img">
+            <img src="foto-caterin.png" class="galeria-img">
+            <img src="foto-eventos.png" class="galeria-img">
+        </div>
+    </section>
+
+    <section id="formacion">
+        <h2>Aula de Formación</h2>
+        <div class="grid-galeria">
+            <img src="foto-clase1.png" class="galeria-img">
+            <img src="foto-clase2.png" class="galeria-img">
+        </div>
     </section>
 
     <script>
-        document.querySelectorAll('.cantidad').forEach(input => {
-            input.addEventListener('input', () => {
-                let total = 0;
-                document.querySelectorAll('.cantidad').forEach(i => { total += i.value * i.dataset.precio; });
-                document.getElementById('total').innerText = total.toFixed(2);
-            });
-        });
         function enviarPedido() {
-            window.open("https://wa.me/584248237912?text=Solicito mi contrato - Total: $" + document.getElementById('total').innerText);
+            let msg = "Fecha: " + document.getElementById('fecha').value + " Lugar: " + document.getElementById('lugar').value;
+            window.open("https://wa.me/584248237912?text=" + msg);
         }
     </script>
 </body>
