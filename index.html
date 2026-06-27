@@ -4,12 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOS CÓCTELES DE WILLIAN | Gastronomía Profesional</title>
-    <!-- PWA -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
-    
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Menú Moderno Flotante */
+        .menu { 
+            background: rgba(0, 0, 0, 0.95); 
+            padding: 15px; 
+            text-align: center; 
+            position: fixed; 
+            top: 0; 
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #8b0000;
+        }
+        .menu a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; }
+        body { padding-top: 70px; }
+    </style>
 </head>
 <body>
 
@@ -31,30 +45,30 @@
     <section id="calculadora" class="seccion-cotizador">
         <h2 style="color: #FFD700;">Cotizador y Reservas</h2>
         <div class="contenedor-formulario">
-            <p style="font-size: 0.9em;">Políticas: 50% anticipo para apartar fecha (congelación de precio). 50% restante antes del evento. Aceptamos BS (Tasa BCV), USDT y Euros.</p>
+            <p style="font-size: 0.9em;">Políticas: 50% anticipo para apartar fecha. Aceptamos BS (Tasa BCV), USDT y Euros.</p>
             <input type="text" id="fecha" placeholder="Fecha del evento" class="input-form">
             <input type="text" id="lugar" placeholder="Lugar o Dirección" class="input-form">
             <input type="text" id="hora" placeholder="Hora de inicio" class="input-form">
 
             <table class="tabla-cotizador">
                 <tr><th>Producto/Servicio</th><th>Precio</th><th>Cant.</th></tr>
-                <tr><td>Fruit Punch</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Fruitponch</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
                 <tr><td>Piña Colada</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Daiquiri (Floridita o Frozen)</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Ron Ponch</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Cuba Libre</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Daiquiri (Floridita o Frozen)</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Ron Ponch</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Cuba Libre</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
                 <tr><td>Mojito Cubano</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Sex on the Beach</td><td>$2.5</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Sex on the Beach</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
                 <tr><td>Caipirosca</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Destornillador</td><td>$1.8</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Magallanes Campeón</td><td>$3</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Arcoíris</td><td>$3</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Cóctel Frutos Secos</td><td>$3</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Canto de Sirena</td><td>$4</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Coco Loco</td><td>$3</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Orgasmo</td><td>$4</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Orgasmo Multiple</td><td>$4.5</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Margarita Blue</td><td>$2.5</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Destornillador</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Magallanes Campeón</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Arcoíris</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Cóctel Frutos Secos</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Canto de Sirena</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Coco Loco</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Orgasmo</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Orgasmo Multiple</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+                <tr><td>Margarita Blue</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
                 <tr><td>Mesoneros</td><td>$60</td><td><input type="number" class="cantidad" data-precio="60" value="0"></td></tr>
                 <tr><td>Bartender</td><td>$70</td><td><input type="number" class="cantidad" data-precio="70" value="0"></td></tr>
                 <tr><td>Parrilleros (hasta 20kg)</td><td>$70</td><td><input type="number" class="cantidad" data-precio="70" value="0"></td></tr>
@@ -67,12 +81,12 @@
 
     <section id="parrilla">
         <h2>Maestría en Parrilla</h2>
-        <a href="https://www.facebook.com/share/r/17rXGQdFGM/"><img src="foto-punta-trasera-willian.jpg" alt="Parrilla" class="galeria-img"></a>
+        <a href="https://www.facebook.com/share/r/17rXGQdFGM/"><img src="foto-parrilla-destacada.jpg" alt="Parrilla" class="galeria-img" style="width:100%; max-width:600px;"></a>
     </section>
 
     <section id="barra">
         <h2>Experiencia en Barra</h2>
-        <a href="https://vt.tiktok.com/ZSQePrAwV/"><img src="foto-barra-destacada.jpg" alt="Barra" class="galeria-img"></a>
+        <img src="foto-barra-destacada.jpg" alt="Barra" class="galeria-img" style="width:100%; max-width:600px;">
     </section>
 
     <section id="formacion">
@@ -96,12 +110,7 @@
     </section>
 
     <script>
-        // Registrar PWA
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-
-        // Lógica del cotizador
+        if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
         document.querySelectorAll('.cantidad').forEach(input => {
             input.addEventListener('input', () => {
                 let total = 0;
