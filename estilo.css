@@ -1,0 +1,39 @@
+/* 1. Fondo negro profesional para todo el sitio */
+body { 
+    font-family: 'Segoe UI', sans-serif; 
+    background-color: #000; 
+    color: #fff; 
+    margin: 0; 
+    padding-top: 100px; /* Importante para que el contenido no quede debajo del menú */
+}
+
+/* 2. Menú flotante estilo cápsula (Ovalado) */
+.menu-flotante {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #d32f2f; /* Rojo llamativo */
+    padding: 10px 25px;
+    border-radius: 50px; /* Esto le da la forma ovalada */
+    display: flex;
+    gap: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+/* 3. Estilo de los enlaces en el menú */
+.menu-flotante a {
+    color: #fff; /* Letras blancas */
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* 4. Efecto al pasar el cursor sobre el menú */
+.menu-flotante a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
