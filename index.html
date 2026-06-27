@@ -2,17 +2,116 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="estilo.css">
-    <title>Los Cócteles de Willian</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador Profesional | Los Cócteles de Willian</title>
+    <style>
+        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 15px; }
+        .contenedor { max-width: 500px; margin: auto; border: 1px solid #FFD700; padding: 20px; border-radius: 10px; }
+        h1 { color: #FFD700; text-align: center; font-size: 1.5em; margin-bottom: 5px; }
+        .reglas { font-size: 0.8em; margin-bottom: 20px; color: #ccc; line-height: 1.4; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .campo { width: 100%; padding: 10px; margin: 8px 0; background: #222; color: #fff; border: 1px solid #FFD700; border-radius: 5px; box-sizing: border-box; }
+        table { width: 100%; margin-top: 10px; border-collapse: collapse; }
+        td { padding: 6px 5px; border-bottom: 1px solid #222; font-size: 0.9em; }
+        .input-cant { width: 50px; padding: 5px; background: #333; color: #FFD700; border: 1px solid #FFD700; text-align: center; }
+        .btn-enviar { width: 100%; padding: 15px; background: #25D366; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; color: white; margin-top: 15px; }
+        .btn-reinicio { width: 100%; padding: 10px; background: #8B0000; border: none; border-radius: 5px; cursor: pointer; color: white; margin-top: 10px; }
+        #contador { text-align: center; font-weight: bold; color: #FFD700; margin: 10px 0; }
+    </style>
 </head>
 <body>
-    <div class="contenido">
-        <img src="logo.png" class="logo" alt="Logo">
-        <h1>LOS CÓCTELES DE WILLIAN</h1>
-        <p>32 años de excelencia | RIF: J-50833687-9</p>
-        <h2>Nuestros Servicios</h2>
-        <p>Catering Profesional, Coctelería de autor y Parrilla Gourmet.</p>
-        <a href="cotizador.html" class="btn-whatsapp">IR AL COTIZADOR INTELIGENTE</a>
+<div class="contenedor">
+    <h1>Los Cócteles de Willian</h1>
+    
+    <div class="reglas">
+        • <b>Mínimo:</b> 50 cócteles totales.<br>
+        • <b>Insumos:</b> Cliente provee hielo, Coca-Cola y 7-Up.
     </div>
+
+    <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
+    <input type="number" id="invitados" class="campo" placeholder="Número de invitados">
+    <select id="tipoEvento" class="campo">
+        <option value="Boda">Boda</option><option value="Cumpleaños">Cumpleaños</option><option value="Corporativo">Corporativo</option>
+    </select>
+    <input type="date" id="fecha" class="campo">
+    <input type="text" id="lugar" class="campo" placeholder="Lugar del evento">
+    <select id="fueraZona" class="campo">
+        <option value="Dentro de zona">Dentro de zona operativa</option><option value="Fuera de zona">Fuera de zona (requiere logística)</option>
+    </select>
+
+    <div id="contador">Total cócteles: 0 / 50</div>
+
+    <table>
+        <tr><td>Bartender Extra ($70)</td><td><input type="number" class="input-cant" data-nombre="Bartender Extra" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Mesonero ($65)</td><td><input type="number" class="input-cant" data-nombre="Mesonero" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Fruit Punch ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Fruit Punch" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Piña Colada ($2)</td><td><input type="number" class="input-cant" data-nombre="Piña Colada" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Daiquirí ($2)</td><td><input type="number" class="input-cant" data-nombre="Daiquirí" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Ron Punch ($2)</td><td><input type="number" class="input-cant" data-nombre="Ron Punch" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Cuba Libre ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Cuba Libre" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Mojito Cubano ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Mojito Cubano" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Sex on the Beach ($2.50)</td><td><input type="number" class="input-cant" data-nombre="Sex on the Beach" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Caipiroska ($2)</td><td><input type="number" class="input-cant" data-nombre="Caipiroska" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Destornillador ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Destornillador" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Frutos Secos ($2)</td><td><input type="number" class="input-cant" data-nombre="Frutos Secos" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Canto de Sirena ($3)</td><td><input type="number" class="input-cant" data-nombre="Canto de Sirena" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Coco Loco ($3)</td><td><input type="number" class="input-cant" data-nombre="Coco Loco" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Orgasmo ($3)</td><td><input type="number" class="input-cant" data-nombre="Orgasmo" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Orgasmo Múltiple ($4)</td><td><input type="number" class="input-cant" data-nombre="Orgasmo Múltiple" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Margarita Blue ($3)</td><td><input type="number" class="input-cant" data-nombre="Margarita Blue" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Polvo de Medianoche ($3)</td><td><input type="number" class="input-cant" data-nombre="Polvo de Medianoche" value="0" onchange="actualizar()"></td></tr>
+    </table>
+
+    <div style="margin: 15px 0;"><input type="checkbox" id="aceptar"> Acepto condiciones.</div>
+
+    <button class="btn-enviar" onclick="enviar()">SOLICITAR PRESUPUESTO</button>
+    <button class="btn-reinicio" onclick="window.location.reload()">REINICIAR</button>
+</div>
+
+<script>
+    function actualizar() {
+        let total = 0;
+        document.querySelectorAll('.input-cant').forEach(i => { total += parseInt(i.value) || 0; });
+        document.getElementById('contador').innerText = "Total cócteles: " + total + " / 50";
+    }
+
+    function enviar() {
+        let totalCant = 0;
+        let totalDolares = 0;
+        let listaPedido = "";
+        const precios = {
+            "Bartender Extra": 70, "Mesonero": 65, "Fruit Punch": 1.8, "Piña Colada": 2,
+            "Daiquirí": 2, "Ron Punch": 2, "Cuba Libre": 1.8, "Mojito Cubano": 1.8,
+            "Sex on the Beach": 2.5, "Caipiroska": 2, "Destornillador": 1.8,
+            "Frutos Secos": 2, "Canto de Sirena": 3, "Coco Loco": 3,
+            "Orgasmo": 3, "Orgasmo Múltiple": 4, "Margarita Blue": 3, "Polvo de Medianoche": 3
+        };
+
+        document.querySelectorAll('.input-cant').forEach(i => { 
+            let cant = parseInt(i.value) || 0;
+            let nombre = i.dataset.nombre;
+            if(cant > 0) {
+                totalCant += cant;
+                totalDolares += (cant * precios[nombre]);
+                listaPedido += `${nombre}: ${cant} ($${(cant * precios[nombre]).toFixed(2)})\n`;
+            }
+        });
+
+        if(totalCant < 50) { alert("¡Atención! Mínimo 50 cócteles."); return; }
+        if(!document.getElementById('aceptar').checked) { alert("Debes aceptar las condiciones."); return; }
+        
+        let texto = `*Nueva Solicitud - Los Cócteles de Willian*\n\n` +
+                    `👤 Cliente: ${document.getElementById('nombre').value}\n` +
+                    `👥 Invitados: ${document.getElementById('invitados').value}\n` +
+                    `📍 Tipo: ${document.getElementById('tipoEvento').value}\n` +
+                    `📅 Fecha: ${document.getElementById('fecha').value}\n` +
+                    `🏠 Lugar: ${document.getElementById('lugar').value}\n` +
+                    `🚚 Zona: ${document.getElementById('fueraZona').value}\n\n` +
+                    `*Detalle del Pedido:*\n${listaPedido}` +
+                    `--------------------------\n` +
+                    `💰 TOTAL ESTIMADO: $${totalDolares.toFixed(2)}`;
+        
+        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(texto), '_blank');
+    }
+</script>
 </body>
 </html>
