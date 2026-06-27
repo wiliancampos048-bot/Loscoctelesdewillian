@@ -1,72 +1,52 @@
-/* --- Estilos Generales: Fondo Negro Elegante --- */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding-top: 80px;
-    background-color: #0d0d0d; /* Fondo negro profundo elegante */
+/* Fuerza el fondo negro profundo en toda la página */
+html, body {
+    background-color: #000000 !important;
     color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Títulos en Dorado */
+h1, h2, h3 {
+    color: #FFD700 !important;
+}
+
+/* Menú Negro con borde Dorado */
+.menu {
+    background-color: #000000 !important;
+    border-bottom: 2px solid #FFD700 !important;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
     text-align: center;
 }
 
-/* --- Menú Flotante --- */
-.menu { 
-    background-color: #000000 !important; 
-    padding: 15px 0; 
-    text-align: center; 
-    position: fixed; 
-    top: 0; 
-    width: 100%; 
-    z-index: 1000; 
-    border-bottom: 2px solid #FFD700; /* Borde dorado */
-}
-.menu a { 
-    color: white; 
-    margin: 0 10px; 
-    text-decoration: none; 
-    font-weight: bold; 
-}
-
-/* --- Secciones con fondo oscuro --- */
+/* Secciones */
 section {
+    background-color: #000000; /* Negro para que no haya diferencia con el body */
     padding: 20px;
-    margin: 10px;
-    background: #1a1a1a; /* Fondo gris oscuro para secciones */
-    border-radius: 10px;
+    margin-top: 80px;
 }
 
-/* --- Títulos en Dorado/Amarillo --- */
-h1, h2 { color: #FFD700; } /* Títulos en dorado */
-
-/* --- Tabla del Cotizador --- */
-.tabla-cotizador { 
-    width: 100%; 
-    max-width: 500px; 
-    margin: 20px auto; 
-    border-collapse: collapse; 
+/* Tabla y elementos */
+.tabla-cotizador {
     color: #ffffff;
-}
-.tabla-cotizador td, .tabla-cotizador th { 
-    padding: 10px; 
-    border-bottom: 1px solid #333; 
-    text-align: left; 
-}
-.cantidad { 
-    width: 50px; 
-    padding: 5px; 
-    background: #333; 
-    color: white; 
-    border: 1px solid #555;
-    border-radius: 4px;
+    width: 100%;
+    border-collapse: collapse;
 }
 
-/* --- Botón WhatsApp --- */
+.tabla-cotizador td, .tabla-cotizador th {
+    border-bottom: 1px solid #333;
+    padding: 10px;
+}
+
 .btn-whatsapp {
-    padding: 15px 30px;
     background-color: #25D366;
     color: white;
+    padding: 15px;
     border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
     cursor: pointer;
-    margin-top: 20px;
 }
