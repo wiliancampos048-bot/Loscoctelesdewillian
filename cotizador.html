@@ -1,6 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Cotizador Inteligente</title>
+</head>
 <body>
     <div class="contenido">
         <img src="logo.png" class="logo" alt="Logo">
-        <h1>LOS CÓCTELES DE WILLIAN</h1>
-        </div>
+        <h1>Cotizador</h1>
+        <form action="https://wa.me/584248237912" method="get">
+            <div class="servicio-item">
+                <label>Selecciona tus cócteles:</label><br>
+                <input type="checkbox" name="cocktail1" value="Mojito"> Mojito - $5<br>
+                <input type="checkbox" name="cocktail2" value="PinaColada"> Piña Colada - $6
+            </div>
+            <div class="servicio-item">
+                <input type="text" name="text" placeholder="Nombre y Apellido" style="width:90%; padding:8px;" required>
+            </div>
+            <button type="submit" class="btn-whatsapp">SOLICITAR COTIZACIÓN</button>
+        </form>
+        <a href="index.html" style="color: #FFD700; text-decoration: none;">Volver al Inicio</a>
+    </div>
 </body>
+</html>
