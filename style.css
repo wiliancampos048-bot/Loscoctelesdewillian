@@ -1,14 +1,12 @@
-/* --- Estilos Generales --- */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding-top: 80px;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #000000;
+    color: #ffffff;
     text-align: center;
 }
 
-/* --- Menú Flotante Negro Sólido --- */
 .menu { 
     background-color: #000000 !important; 
     padding: 15px 0; 
@@ -19,58 +17,52 @@ body {
     z-index: 1000; 
     border-bottom: 2px solid #FFD700;
 }
+
 .menu a { 
     color: white; 
     margin: 0 10px; 
     text-decoration: none; 
     font-weight: bold; 
-    font-size: 1em;
-}
-.menu a:hover { 
-    color: #FFD700; 
 }
 
-/* --- Estilos de Secciones --- */
-header {
-    padding: 20px;
-    background: white;
-}
 section {
     padding: 20px;
     margin: 10px;
-    background: white;
+    background: #1a1a1a;
     border-radius: 10px;
 }
 
-/* --- Tabla del Cotizador --- */
+h1, h2, h3 { color: #ffffff; }
+
 .tabla-cotizador { 
     width: 100%; 
     max-width: 500px; 
     margin: 20px auto; 
     border-collapse: collapse; 
+    color: #ffffff;
 }
+
 .tabla-cotizador td, .tabla-cotizador th { 
     padding: 10px; 
-    border-bottom: 1px solid #ddd; 
+    border-bottom: 1px solid #444; 
     text-align: left; 
 }
+
 .cantidad { 
     width: 50px; 
     padding: 5px; 
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    background: #333; 
+    color: white; 
+    border: 1px solid #555;
 }
 
-/* --- Galería --- */
 .galeria-img { 
     width: 100%; 
     max-width: 400px; 
     border-radius: 10px; 
     margin-top: 10px; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* --- Botones --- */
 .btn-whatsapp {
     padding: 15px 30px;
     background-color: #25D366;
@@ -79,13 +71,4 @@ section {
     border-radius: 5px;
     font-size: 1.1em;
     cursor: pointer;
-    margin-top: 20px;
-}
-.btn-whatsapp:hover {
-    background-color: #128C7E;
-}
-
-/* --- Responsive (Para móviles) --- */
-@media (max-width: 600px) {
-    .menu a { font-size: 0.8em; margin: 0 5px; }
 }
