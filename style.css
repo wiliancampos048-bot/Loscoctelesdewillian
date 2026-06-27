@@ -1,19 +1,20 @@
-/* --- ESTILO GLOBAL Y ESTRUCTURA --- */
+/* --- ESTILO GLOBAL --- */
 body {
     background-color: #000;
     color: #fff;
     margin: 0;
-    padding-top: 100px; /* Espacio para el menú fijo */
+    padding-top: 100px; /* Espacio para que el menú no tape el inicio */
     font-family: Arial, sans-serif;
+    text-align: center;
 }
 
-/* --- MENÚ FLOTANTE --- */
+/* --- MENÚ FLOTANTE OVALADO --- */
 .menu-flotante {
     position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #d32f2f;
+    background-color: #d32f2f; /* Rojo cápsula */
     padding: 10px 25px;
     border-radius: 50px;
     display: flex;
@@ -22,39 +23,27 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 .menu-flotante a {
-    color: white;
+    color: #fff;
     text-decoration: none;
     font-weight: bold;
     font-size: 14px;
+    text-transform: uppercase;
 }
 
 /* --- SECCIONES Y CONTENIDO --- */
-section {
-    padding: 40px 20px;
-    text-align: center;
-    border-bottom: 1px solid #333;
-}
-h2 { color: #FFD700; margin-bottom: 25px; }
+.logo { width: 150px; border-radius: 50%; margin-bottom: 10px; }
+h1 { color: #FFD700; }
+h2 { color: #FFD700; margin-top: 30px; }
 
-/* Galería Organizada */
-.contenedor-galeria {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-.contenedor-galeria img {
-    width: 100%;
-    border-radius: 10px;
-    border: 2px solid #333;
-}
-
-/* Videos */
-video {
-    width: 100%;
-    max-width: 500px;
-    display: block;
-    margin: 15px auto;
-    border-radius: 10px;
+/* --- BOTÓN DE COTIZACIÓN --- */
+.btn-cotizacion {
+    background-color: #25D366;
+    color: #000;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 16px;
 }
