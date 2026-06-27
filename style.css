@@ -1,0 +1,18 @@
+body { background-color: #000000 !important; color: #ffffff !important; font-family: Arial, sans-serif; margin: 0; padding-top: 80px; }
+
+.menu { background-color: #000000 !important; border-bottom: 2px solid #FFD700 !important; padding: 15px; position: fixed; top: 0; width: 100%; z-index: 1000; text-align: center; }
+.menu a { color: #FFD700; text-decoration: none; font-weight: bold; margin: 0 10px; }
+
+.hero { text-align: center; padding: 40px 20px; border-bottom: 2px solid #FFD700; }
+.logo { width: 150px; border-radius: 50%; border: 3px solid #FFD700; }
+h1, h2 { color: #FFD700 !important; text-align: center; }
+
+section { padding: 20px; border-bottom: 1px solid #333; }
+.tabla-cotizador { width: 100%; max-width: 500px; margin: 20px auto; color: white; border-collapse: collapse; }
+.tabla-cotizador td, .tabla-cotizador th { padding: 10px; border-bottom: 1px solid #333; }
+.cantidad { width: 50px; background: #333; color: white; border: 1px solid #555; }
+
+.galeria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.galeria-img { width: 100%; border-radius: 10px; border: 1px solid #FFD700; }
+
+.btn-whatsapp { background-color: #25D366; color: white; padding: 15px; border: none; cursor: pointer; display: block; margin: 20px auto; font-weight: bold; }
