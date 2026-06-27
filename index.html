@@ -9,20 +9,23 @@
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Menú Moderno Flotante */
+        /* Menú Flotante Moderno */
         .menu { 
             background: rgba(0, 0, 0, 0.95); 
             padding: 15px; 
             text-align: center; 
             position: fixed; 
             top: 0; 
-            width: 100%;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #8b0000;
+            width: 100%; 
+            z-index: 1000; 
+            border-bottom: 2px solid #FFD700;
         }
         .menu a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; }
-        body { padding-top: 70px; }
+        body { padding-top: 80px; font-family: Arial, sans-serif; }
+        .tabla-cotizador { width: 100%; max-width: 500px; margin: 0 auto; border-collapse: collapse; }
+        .tabla-cotizador td, .tabla-cotizador th { padding: 10px; border-bottom: 1px solid #444; text-align: left; }
+        .cantidad { width: 50px; }
+        .galeria-img { width: 100%; max-width: 400px; border-radius: 10px; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -32,85 +35,46 @@
         <a href="#calculadora">Cotizador</a>
         <a href="#parrilla">Parrilla</a>
         <a href="#barra">Barra</a>
-        <a href="#formacion">Aula Virtual</a>
         <a href="#contacto">Contacto</a>
     </nav>
 
-    <header id="inicio" class="encabezamiento">
+    <header id="inicio">
         <img src="mi-logo.png" alt="Logo" style="width: 150px; border-radius: 50%;">
         <h1>LOS CÓCTELES DE WILLIAN</h1>
-        <p>Maestro Técnico Productivo | Catering, Parrilla y Barra</p>
     </header>
 
-    <section id="calculadora" class="seccion-cotizador">
+    <section id="calculadora">
         <h2 style="color: #FFD700;">Cotizador y Reservas</h2>
-        <div class="contenedor-formulario">
-            <p style="font-size: 0.9em;">Políticas: 50% anticipo para apartar fecha. Aceptamos BS (Tasa BCV), USDT y Euros.</p>
-            <input type="text" id="fecha" placeholder="Fecha del evento" class="input-form">
-            <input type="text" id="lugar" placeholder="Lugar o Dirección" class="input-form">
-            <input type="text" id="hora" placeholder="Hora de inicio" class="input-form">
-
-            <table class="tabla-cotizador">
-                <tr><th>Producto/Servicio</th><th>Precio</th><th>Cant.</th></tr>
-                <tr><td>Fruitponch</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Piña Colada</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Daiquiri (Floridita o Frozen)</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Ron Ponch</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Cuba Libre</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Mojito Cubano</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Sex on the Beach</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Caipirosca</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Destornillador</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Magallanes Campeón</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Arcoíris</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Cóctel Frutos Secos</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Canto de Sirena</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Coco Loco</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Orgasmo</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Orgasmo Multiple</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Margarita Blue</td><td>$2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
-                <tr><td>Mesoneros</td><td>$60</td><td><input type="number" class="cantidad" data-precio="60" value="0"></td></tr>
-                <tr><td>Bartender</td><td>$70</td><td><input type="number" class="cantidad" data-precio="70" value="0"></td></tr>
-                <tr><td>Parrilleros (hasta 20kg)</td><td>$70</td><td><input type="number" class="cantidad" data-precio="70" value="0"></td></tr>
-                <tr><td>Kilo adicional</td><td>$5</td><td><input type="number" class="cantidad" data-precio="5" value="0"></td></tr>
-            </table>
-            <h3>Total: $<span id="total">0</span></h3>
-            <button onclick="enviarPedido()" class="btn-whatsapp">SOLICITAR CONTRATO Y FECHA</button>
-        </div>
+        <input type="text" id="fecha" placeholder="Fecha" style="width: 90%; padding: 10px; margin-bottom: 5px;">
+        <input type="text" id="lugar" placeholder="Lugar" style="width: 90%; padding: 10px; margin-bottom: 5px;">
+        
+        <table class="tabla-cotizador">
+            <tr><th>Producto</th><th>$</th><th>Cant.</th></tr>
+            <tr><td>Fruitponch</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+            <tr><td>Piña Colada</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+            <tr><td>Daiquiri</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+            <tr><td>Ron Ponch</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+            <tr><td>Cuba Libre</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+            <tr><td>Mojito Cubano</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+            <tr><td>Sex on the Beach</td><td>2</td><td><input type="number" class="cantidad" data-precio="2" value="0"></td></tr>
+            <tr><td>Mesoneros</td><td>60</td><td><input type="number" class="cantidad" data-precio="60" value="0"></td></tr>
+            <tr><td>Bartender</td><td>70</td><td><input type="number" class="cantidad" data-precio="70" value="0"></td></tr>
+        </table>
+        <h3>Total: $<span id="total">0</span></h3>
+        <button onclick="enviarPedido()" style="padding: 15px; background: green; color: white; border: none; border-radius: 5px;">SOLICITAR CONTRATO</button>
     </section>
 
     <section id="parrilla">
         <h2>Maestría en Parrilla</h2>
-        <a href="https://www.facebook.com/share/r/17rXGQdFGM/"><img src="foto-parrilla-destacada.jpg" alt="Parrilla" class="galeria-img" style="width:100%; max-width:600px;"></a>
+        <img src="foto-parrilla-destacada.jpg" class="galeria-img">
     </section>
 
     <section id="barra">
         <h2>Experiencia en Barra</h2>
-        <img src="foto-barra-destacada.jpg" alt="Barra" class="galeria-img" style="width:100%; max-width:600px;">
-    </section>
-
-    <section id="formacion">
-        <h2>Aula Virtual (INCES)</h2>
-        <div class="formulario-inscripcion">
-            <form action="https://formsubmit.co/los.cocteles.de.willian@gmail.com" method="POST">
-                <input type="text" name="nombre" placeholder="Nombre completo" required class="input-form">
-                <input type="text" name="contacto" placeholder="Teléfono" required class="input-form">
-                <button type="submit" class="btn-whatsapp">SOLICITAR ACCESO</button>
-            </form>
-        </div>
-    </section>
-
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <div class="contacto-grid">
-            <a href="https://wa.me/584248237912"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-            <a href="https://t.me/loscoctelesdewillianfpoficial"><i class="fa-brands fa-telegram"></i> Telegram</a>
-            <a href="https://www.instagram.com/loscoctelesdewillianfp"><i class="fa-brands fa-instagram"></i> Instagram</a>
-        </div>
+        <img src="foto-barra-destacada.jpg" class="galeria-img">
     </section>
 
     <script>
-        if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
         document.querySelectorAll('.cantidad').forEach(input => {
             input.addEventListener('input', () => {
                 let total = 0;
@@ -119,9 +83,9 @@
             });
         });
         function enviarPedido() {
-            let msg = "Hola Willian, quiero apartar mi fecha.%0AFecha: " + document.getElementById('fecha').value + "%0ALugar: " + document.getElementById('lugar').value + "%0AHora: " + document.getElementById('hora').value + "%0ATotal Estimado: $" + document.getElementById('total').innerText;
+            let msg = "Fecha: " + document.getElementById('fecha').value + " Total: $" + document.getElementById('total').innerText;
             window.open("https://wa.me/584248237912?text=" + msg);
         }
     </script>
 </body>
-</html>
+    </html>en un yrytytt6w tr
