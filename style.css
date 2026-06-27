@@ -1,18 +1,17 @@
-/* Fuerza el fondo negro profundo en toda la página */
-html, body {
+/* DISEÑO TOTALMENTE NEGRO Y DORADO */
+body {
     background-color: #000000 !important;
-    color: #ffffff;
+    color: #ffffff !important;
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding-top: 80px;
 }
 
-/* Títulos en Dorado */
 h1, h2, h3 {
     color: #FFD700 !important;
+    text-align: center;
 }
 
-/* Menú Negro con borde Dorado */
 .menu {
     background-color: #000000 !important;
     border-bottom: 2px solid #FFD700 !important;
@@ -24,17 +23,35 @@ h1, h2, h3 {
     text-align: center;
 }
 
-/* Secciones */
-section {
-    background-color: #000000; /* Negro para que no haya diferencia con el body */
-    padding: 20px;
-    margin-top: 80px;
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
 }
 
-/* Tabla y elementos */
+section {
+    background-color: #000000;
+    padding: 20px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 5px auto;
+    display: block;
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+}
+
 .tabla-cotizador {
     color: #ffffff;
     width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
     border-collapse: collapse;
 }
 
@@ -43,10 +60,16 @@ section {
     padding: 10px;
 }
 
+.cantidad {
+    width: 50px;
+}
+
 .btn-whatsapp {
     background-color: #25D366;
     color: white;
-    padding: 15px;
+    padding: 15px 30px;
     border: none;
     cursor: pointer;
+    margin: 20px auto;
+    display: block;
 }
