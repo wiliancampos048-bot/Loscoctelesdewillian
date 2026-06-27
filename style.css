@@ -3,18 +3,18 @@ body {
     background-color: #000;
     color: #fff;
     margin: 0;
-    padding-top: 100px; /* Espacio para que el menú no tape el inicio */
+    padding-top: 100px;
     font-family: Arial, sans-serif;
     text-align: center;
 }
 
-/* --- MENÚ FLOTANTE OVALADO --- */
+/* --- MENÚ FLOTANTE (CÁPSULA) --- */
 .menu-flotante {
     position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #d32f2f; /* Rojo cápsula */
+    background-color: #d32f2f;
     padding: 10px 25px;
     border-radius: 50px;
     display: flex;
@@ -30,20 +30,12 @@ body {
     text-transform: uppercase;
 }
 
-/* --- SECCIONES Y CONTENIDO --- */
-.logo { width: 150px; border-radius: 50%; margin-bottom: 10px; }
-h1 { color: #FFD700; }
-h2 { color: #FFD700; margin-top: 30px; }
-
-/* --- BOTÓN DE COTIZACIÓN --- */
-.btn-cotizacion {
-    background-color: #25D366;
-    color: #000;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    display: inline-block;
-    margin-top: 15px;
-    font-size: 16px;
+/* --- ELEMENTOS DE CONTENIDO --- */
+.logo { width: 150px; border-radius: 50%; margin: 10px auto; display: block; }
+h1 { color: #FFD700; font-size: 24px; }
+h2 { color: #FFD700; margin-top: 30px; border-top: 1px solid #333; padding-top: 20px; }
+.btn-whatsapp { 
+    background-color: #25D366; color: #000; padding: 15px 30px; 
+    text-decoration: none; border-radius: 8px; font-weight: bold; 
+    display: inline-block; margin-top: 20px; 
 }
