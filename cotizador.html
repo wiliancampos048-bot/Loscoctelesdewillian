@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador Inteligente | Los Cócteles de Willian</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contenedor-cotizador { padding: 100px 20px; text-align: center; }
+        .tabla-cotizador { width: 100%; max-width: 800px; margin: 20px auto; border-collapse: collapse; color: #fff; }
+        .tabla-cotizador th, .tabla-cotizador td { padding: 12px; border-bottom: 1px solid #FFD700; text-align: center; }
+        .input-cantidad { width: 50px; background: #222; color: #FFD700; border: 1px solid #FFD700; text-align: center; }
+        .subtotal { font-weight: bold; color: #FFD700; }
+        .input-datos { width: 90%; max-width: 400px; margin: 10px 0; padding: 10px; background: #222; color: #fff; border: 1px solid #FFD700; }
+        h2 { color: #FFD700; }
+    </style>
+</head>
+<body>
+
+    <nav class="menu">
+        <a href="index.html">Volver al Inicio</a>
+    </nav>
+
+    <div class="contenedor-cotizador">
+        <h1>Cotizador Inteligente</h1>
+        
+        <input type="date" id="fecha-evento" class="input-datos" placeholder="Fecha del evento">
+        <input type="text" id="lugar-evento" class="input-datos" placeholder="Lugar del evento">
+
+        <table class="tabla-cotizador">
+            <tr>
+                <th>Producto/Servicio</th>
+                <th>Precio ($)</th>
+                <th>Cantidad</th>
+                <th>Subtotal ($)</th>
+            </tr>
+            <tr>
+                <td>Cóctel Estándar</td>
+                <td>2.0</td>
+                <td><input type="number" class="input-cantidad" data-precio="2.0" data-nombre="Cóctel Estándar" value="0" oninput="calcular()"></td>
+                <td class="subtotal">$0.00</td>
+            </tr>
+            <tr>
+                <td>Servicio Parrillero</td>
+                <td>60.0</td>
+                <td><input type="number" class="input-cantidad" data-precio="60.0" data-nombre="Servicio Parrillero" value="0" oninput="calcular()"></td>
+                <td class="subtotal">$0.00</td>
+            </tr>
+        </table>
+        
+        <h2>Total General: $<span id="total-general">0.00</span></h2>
+        
+        <button onclick="enviarWhatsApp()" style="background:#25D366; color:white; padding:15px; border:none; border-radius:5px; cursor:pointer; font-weight:bold;">SOLICITAR PRESUPUESTO POR WHATSAPP</button>
+    </div>
+
+    <script>
+        function calcular() {
+            let totalGeneral = 0;
+            const filas = document.querySelectorAll('.tabla-cotizador tr');
+            for (let i = 1; i < filas.length; i++) {
+                const fila = filas[i];
+                const input = fila.querySelector('.input-cantidad');
+                const precio = parseFloat(input.dataset.precio);
+                const cantidad = parseFloat(input.value) || 0;
+                const subtotal = precio * cantidad;
+                fila.querySelector('.subtotal').innerText = '$' + subtotal.toFixed(2);
+                totalGeneral += subtotal;
+            }
+            document.getElementById('total-general').innerText = totalGeneral.toFixed(2);
+        }
+
+        function enviarWhatsApp() {
+            let fecha = document.getElementById('fecha-evento').value;
+            let lugar = document.getElementById('lugar-evento').value;
+            let total = document.getElementById('total-general').innerText;
+            let mensaje = `Hola Willian, solicito un presupuesto:\n- Fecha: ${fecha}\n- Lugar: ${lugar}\n\nDetalle:\n`;
+
+            const filas = document.querySelectorAll('.tabla-cotizador tr');
+            for (let i = 1; i < filas.length; i++) {
+                const input = filas[i].querySelector('.input-cantidad');
+                if (input.value > 0) {
+                    mensaje += `- ${input.dataset.nombre}: ${input.value} x $${input.dataset.precio} = $${(input.value * input.dataset.precio).toFixed(2)}\n`;
+                }
+            }
+            mensaje += `\nTotal General: $${total}`;
+            window.open("https://wa.me/584248237912?text=" + encodeURIComponent(mensaje));
+        }
+    </script>
+</body>
+</html>
