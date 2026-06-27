@@ -1,41 +1,43 @@
-<script>
-    function toggleMusica() { var audio = document.getElementById("musicaFondo"); audio.paused ? audio.play() : audio.pause(); }
+function enviar() {
+    let totalCant = 0;
+    let totalDolares = 0;
+    let listaPedido = "";
     
-    function actualizar() {
-        let total = 0;
-        document.querySelectorAll('.input-cant').forEach(i => { total += parseInt(i.value) || 0; });
-        document.getElementById('contador').innerText = "Total cócteles: " + total + " / 50";
-    }
+    // Lista de precios para el cálculo
+    const precios = {
+        "Bartender Extra": 70, "Mesonero": 65, "Fruit Punch": 1.8, "Piña Colada": 2,
+        "Daiquirí": 2, "Ron Punch": 2, "Cuba Libre": 1.8, "Mojito Cubano": 1.8,
+        "Sex on the Beach": 2.5, "Caipiroska": 2, "Destornillador": 1.8,
+        "Frutos Secos": 2, "Canto de Sirena": 3, "Coco Loco": 3,
+        "Orgasmo": 3, "Orgasmo Múltiple": 4, "Margarita Blue": 3, "Polvo de Medianoche": 3
+    };
 
-    function enviar() {
-        let total = 0;
-        let listaPedido = "";
-        
-        // Calcular total y construir la lista de productos
-        document.querySelectorAll('.input-cant').forEach(i => { 
-            let cant = parseInt(i.value) || 0;
-            total += cant;
-            if(cant > 0) {
-                listaPedido += `${i.dataset.nombre}: ${cant}\n`;
-            }
-        });
+    // Calcular totales y construir lista
+    document.querySelectorAll('.input-cant').forEach(i => { 
+        let cant = parseInt(i.value) || 0;
+        let nombre = i.dataset.nombre;
+        if(cant > 0) {
+            totalCant += cant;
+            totalDolares += (cant * precios[nombre]);
+            listaPedido += `${nombre}: ${cant} ($${(cant * precios[nombre]).toFixed(2)})\n`;
+        }
+    });
 
-        // Validaciones
-        if(total < 50) { alert("¡Atención! El mínimo para activar el servicio es de 50 cócteles."); return; }
-        if(!document.getElementById('aceptar').checked) { alert("Debes aceptar las condiciones para continuar."); return; }
-        
-        // Construcción del mensaje profesional
-        let msg = `*Nueva Solicitud - Los Cócteles de Willian*\n\n`;
-        msg += `👤 Cliente: ${document.getElementById('nombre').value}\n`;
-        msg += `👥 Invitados: ${document.getElementById('invitados').value}\n`;
-        msg += `📍 Tipo: ${document.getElementById('tipoEvento').value}\n`;
-        msg += `📅 Fecha: ${document.getElementById('fecha').value}\n`;
-        msg += `🏠 Lugar: ${document.getElementById('lugar').value}\n`;
-        msg += `🚚 Fuera de zona: ${document.getElementById('fueraZona').value}\n\n`;
-        msg += `*Detalle del Pedido:*\n${listaPedido}`;
-        
-        // Codificación correcta para WhatsApp
-        let url = "https://wa.me/584248237912?text=" + encodeURIComponent(msg);
-        window.open(url, '_blank');
-    }
-</script>
+    // Validaciones
+    if(totalCant < 50) { alert("¡Atención! El mínimo para activar el servicio es de 50 cócteles."); return; }
+    if(!document.getElementById('aceptar').checked) { alert("Debes aceptar las condiciones para continuar."); return; }
+    
+    // Construcción del mensaje con vista previa y total
+    let texto = `*Nueva Solicitud - Los Cócteles de Willian*\n\n` +
+                `👤 Cliente: ${document.getElementById('nombre').value}\n` +
+                `👥 Invitados: ${document.getElementById('invitados').value}\n` +
+                `📍 Tipo: ${document.getElementById('tipoEvento').value}\n` +
+                `📅 Fecha: ${document.getElementById('fecha').value}\n` +
+                `🏠 Lugar: ${document.getElementById('lugar').value}\n` +
+                `🚚 Fuera de zona: ${document.getElementById('fueraZona').value}\n\n` +
+                `*Detalle del Pedido:*\n${listaPedido}\n` +
+                `--------------------------\n` +
+                `💰 TOTAL ESTIMADO: $${totalDolares.toFixed(2)}`;
+    
+    window.open("https://wa.me/584248237912?text=" + encodeURIComponent(texto), '_blank');
+}
