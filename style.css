@@ -1,109 +1,92 @@
-/* --- ESTILO COMPLETO DE LOS CÓCTELES DE WILLIAN --- */
-
-/* Estilos Globales */
-html { scroll-behavior: smooth; }
-body { 
-    background-color: #1a1a1a; 
-    color: #ffffff; 
-    font-family: sans-serif; 
-    margin: 0; 
-    padding: 0; 
+/* --- Estilos Generales --- */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding-top: 80px; /* Espacio para que el menú no tape el contenido */
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
 }
 
-/* Menú Fijo */
+/* --- Menú Flotante Moderno --- */
 .menu { 
-    background: #333; 
-    padding: 15px; 
+    background: rgba(0, 0, 0, 0.95); 
+    padding: 15px 0; 
     text-align: center; 
-    position: sticky; 
+    position: fixed; 
     top: 0; 
-    z-index: 1000;
+    width: 100%; 
+    z-index: 1000; 
+    border-bottom: 2px solid #FFD700;
+    backdrop-filter: blur(10px);
 }
 .menu a { 
     color: white; 
     margin: 0 10px; 
     text-decoration: none; 
     font-weight: bold; 
+    font-size: 1em;
+}
+.menu a:hover { 
+    color: #FFD700; 
 }
 
-/* Cabecera */
-.encabezamiento { 
-    padding: 50px 20px; 
-    text-align: center; 
-    background: #000; 
+/* --- Estilos de Secciones --- */
+header {
+    padding: 20px;
+    background: white;
+}
+section {
+    padding: 20px;
+    margin: 10px;
+    background: white;
+    border-radius: 10px;
 }
 
-/* Cotizador */
-.seccion-cotizador { 
-    padding: 40px 20px; 
-    background: #222; 
-}
-.contenedor-formulario { 
-    max-width: 600px; 
-    margin: auto; 
-    background: #333; 
-    padding: 25px; 
-    border-radius: 10px; 
-    border: 1px solid #8b0000; 
-}
-.input-form { 
-    width: 100%; 
-    padding: 12px; 
-    margin-bottom: 10px; 
-    background: #444; 
-    border: none; 
-    color: white; 
-    border-radius: 5px; 
-    box-sizing: border-box; 
-}
+/* --- Tabla del Cotizador --- */
 .tabla-cotizador { 
     width: 100%; 
-    color: white; 
-    margin-bottom: 20px; 
+    max-width: 500px; 
+    margin: 20px auto; 
+    border-collapse: collapse; 
 }
-.tabla-cotizador td { 
+.tabla-cotizador td, .tabla-cotizador th { 
     padding: 10px; 
-    border-bottom: 1px solid #444; 
+    border-bottom: 1px solid #ddd; 
+    text-align: left; 
 }
 .cantidad { 
-    width: 60px; 
+    width: 50px; 
     padding: 5px; 
-    background: #444; 
-    border: 1px solid #8b0000; 
-    color: white; 
-    text-align: center; 
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
-.btn-whatsapp { 
+
+/* --- Galería --- */
+.galeria-img { 
     width: 100%; 
-    padding: 15px; 
-    background-color: #25D366; 
-    border: none; 
-    color: white; 
-    font-weight: bold; 
-    cursor: pointer; 
-    border-radius: 5px; 
+    max-width: 400px; 
+    border-radius: 10px; 
+    margin-top: 10px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Secciones generales */
-section { padding: 40px 20px; }
-h2 { text-align: center; }
-
-/* Contacto */
-.contacto-grid { 
-    display: flex; 
-    justify-content: center; 
-    gap: 20px; 
-    margin-top: 20px; 
+/* --- Botones --- */
+.btn-whatsapp {
+    padding: 15px 30px;
+    background-color: #25D366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 20px;
 }
-.contacto-grid a { 
-    color: #FFD700; 
-    text-decoration: none; 
-    font-weight: bold; 
+.btn-whatsapp:hover {
+    background-color: #128C7E;
 }
 
-/* Footer */
-footer { 
-    background: #000; 
-    text-align: center; 
-    padding: 20px; 
+/* --- Responsive (Para móviles) --- */
+@media (max-width: 600px) {
+    .menu a { font-size: 0.8em; margin: 0 5px; }
 }
