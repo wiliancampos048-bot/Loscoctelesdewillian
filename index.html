@@ -5,54 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Los Cócteles de Willian | Profesionales del Servicio</title>
     <link rel="stylesheet" href="estilo.css">
+    <style>
+        /* Estilos del Menú Flotante (Burbuja Inferior) */
+        .menu-flotante {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            z-index: 1000;
+            border: 1px solid #d4af37;
+        }
+        .menu-flotante a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .menu-flotante a:hover { color: #d4af37; }
+    </style>
 </head>
 <body>
 
-    <!-- Encabezado y Logo -->
+    <!-- Menú Flotante -->
+    <nav class="menu-flotante">
+        <a href="index.html">Inicio</a>
+        <a href="cotizador.html">Cotizar</a>
+    </nav>
+
+    <!-- Encabezado -->
     <header class="header">
         <img src="mi-logo.png" alt="Logo Los Cócteles de Willian" class="logo">
         <h1>Los Cócteles de Willian</h1>
         <p>33 años de excelencia | RIF: J-50833687-9</p>
     </header>
 
-    <!-- Bloque de Perfil Profesional -->
+    <!-- Perfil Profesional -->
     <section class="seccion perfil-card">
         <h2>Willian Antonio Campos</h2>
         <p><strong>Bartender, Mixólogo y Parrillero Profesional</strong></p>
-        <p>Con más de 33 años de trayectoria en la industria de la hospitalidad, mi enfoque como "Hospitólogo" combina la técnica precisa con la excelencia en el servicio al cliente.</p>
-        <p><em>Nota: Certificaciones técnicas disponibles para revisión presencial.</em></p>
+        <p>Como "Hospitólogo", combino técnica precisa y excelencia en el servicio al cliente.</p>
     </section>
 
-    <!-- Lema de Servicio -->
+    <!-- Lema -->
     <section class="lema-container">
-        "Los Cócteles de Willian: La excelencia es el ingrediente que marca la diferencia en cada evento."
+        "La excelencia es el ingrediente que marca la diferencia."
     </section>
-
-    <!-- Sección de Testimonios -->
-    <section class="seccion testimonios">
-        <h3>Lo que dicen nuestros clientes</h3>
-        <div class="testimonio-item">
-            "La experiencia y el trato de Willian elevaron el nivel de nuestro evento. Profesionalismo puro."
-        </div>
-        <div class="testimonio-item">
-            "Sus cócteles no solo son bebidas, son obras de arte técnicas."
-        </div>
-    </section>
-
-    <!-- Botón de Acción -->
-    <div class="seccion">
-        <a href="cotizador.html" class="boton-cotizador">IR AL COTIZADOR INTELIGENTE</a>
-    </div>
 
     <!-- Botón Flotante WhatsApp -->
     <a href="https://wa.me/584248237912" class="whatsapp-btn" target="_blank">
-        ¡Contáctame por WhatsApp!
+        WhatsApp
     </a>
 
-    <!-- Pie de Página -->
+    <!-- Footer -->
     <footer class="footer">
-        <p>Santa Cruz, El Tigre, Anzoátegui, Venezuela.</p>
-        <p><em>"Los paracaidistas no mueren, solo van al infierno a reagruparse."</em></p>
+        <p>Santa Cruz, El Tigre, Anzoátegui.</p>
     </footer>
 
 </body>
