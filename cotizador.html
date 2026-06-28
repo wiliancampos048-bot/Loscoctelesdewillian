@@ -41,31 +41,31 @@
     </select>
     <input type="date" id="fecha" class="campo">
     <input type="text" id="lugar" class="campo" placeholder="Lugar del evento">
-    <select id="fueraZona" class="campo" onchange="actualizar()">
+    <select id="fueraZona" class="campo">
         <option value="No">Dentro de zona operativa</option><option value="Si">Fuera de zona (requiere logística)</option>
     </select>
 
-    <div id="contador">Total cócteles: 0 / 50</div>
-
     <table>
-        <tr><td>Bartender Extra ($70)</td><td><input type="number" class="input-cant" data-nombre="Bartender Extra" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Mesonero ($65)</td><td><input type="number" class="input-cant" data-nombre="Mesonero" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Fruit Punch ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Fruit Punch" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Piña Colada ($2)</td><td><input type="number" class="input-cant" data-nombre="Piña Colada" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Daiquirí ($2)</td><td><input type="number" class="input-cant" data-nombre="Daiquirí" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Ron Punch ($2)</td><td><input type="number" class="input-cant" data-nombre="Ron Punch" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Cuba Libre ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Cuba Libre" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Mojito Cubano ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Mojito Cubano" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Sex on the Beach ($2.50)</td><td><input type="number" class="input-cant" data-nombre="Sex on the Beach" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Caipiroska ($2)</td><td><input type="number" class="input-cant" data-nombre="Caipiroska" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Destornillador ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Destornillador" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Frutos Secos ($2)</td><td><input type="number" class="input-cant" data-nombre="Frutos Secos" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Canto de Sirena ($3)</td><td><input type="number" class="input-cant" data-nombre="Canto de Sirena" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Coco Loco ($3)</td><td><input type="number" class="input-cant" data-nombre="Coco Loco" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Orgasmo ($3)</td><td><input type="number" class="input-cant" data-nombre="Orgasmo" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Orgasmo Múltiple ($4)</td><td><input type="number" class="input-cant" data-nombre="Orgasmo Múltiple" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Margarita Blue ($3)</td><td><input type="number" class="input-cant" data-nombre="Margarita Blue" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Polvo de Medianoche ($3)</td><td><input type="number" class="input-cant" data-nombre="Polvo de Medianoche" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Parrillero hasta 20kg ($70)</td><td><input type="number" class="input-cant" data-nombre="Parrillero 20kg" value="0"></td></tr>
+        <tr><td>Proteína adicional ($5/kg)</td><td><input type="number" class="input-cant" data-nombre="Proteína Adicional" value="0"></td></tr>
+        <tr><td>Bartender Extra ($70)</td><td><input type="number" class="input-cant" data-nombre="Bartender Extra" value="0"></td></tr>
+        <tr><td>Mesonero ($65)</td><td><input type="number" class="input-cant" data-nombre="Mesonero" value="0"></td></tr>
+        <tr><td>Fruit Punch ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Fruit Punch" value="0"></td></tr>
+        <tr><td>Piña Colada ($2)</td><td><input type="number" class="input-cant" data-nombre="Piña Colada" value="0"></td></tr>
+        <tr><td>Daiquirí ($2)</td><td><input type="number" class="input-cant" data-nombre="Daiquirí" value="0"></td></tr>
+        <tr><td>Ron Punch ($2)</td><td><input type="number" class="input-cant" data-nombre="Ron Punch" value="0"></td></tr>
+        <tr><td>Cuba Libre ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Cuba Libre" value="0"></td></tr>
+        <tr><td>Mojito Cubano ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Mojito Cubano" value="0"></td></tr>
+        <tr><td>Sex on the Beach ($2.50)</td><td><input type="number" class="input-cant" data-nombre="Sex on the Beach" value="0"></td></tr>
+        <tr><td>Caipiroska ($2)</td><td><input type="number" class="input-cant" data-nombre="Caipiroska" value="0"></td></tr>
+        <tr><td>Destornillador ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Destornillador" value="0"></td></tr>
+        <tr><td>Frutos Secos ($2)</td><td><input type="number" class="input-cant" data-nombre="Frutos Secos" value="0"></td></tr>
+        <tr><td>Canto de Sirena ($3)</td><td><input type="number" class="input-cant" data-nombre="Canto de Sirena" value="0"></td></tr>
+        <tr><td>Coco Loco ($3)</td><td><input type="number" class="input-cant" data-nombre="Coco Loco" value="0"></td></tr>
+        <tr><td>Orgasmo ($3)</td><td><input type="number" class="input-cant" data-nombre="Orgasmo" value="0"></td></tr>
+        <tr><td>Orgasmo Múltiple ($4)</td><td><input type="number" class="input-cant" data-nombre="Orgasmo Múltiple" value="0"></td></tr>
+        <tr><td>Margarita Blue ($3)</td><td><input type="number" class="input-cant" data-nombre="Margarita Blue" value="0"></td></tr>
+        <tr><td>Polvo de Medianoche ($3)</td><td><input type="number" class="input-cant" data-nombre="Polvo de Medianoche" value="0"></td></tr>
     </table>
 
     <div style="margin: 15px 0;"><input type="checkbox" id="aceptar"> Acepto condiciones de insumos y logística.</div>
@@ -75,23 +75,29 @@
 </div>
 
 <script>
-    function toggleMusica() { var audio = document.getElementById("musicaFondo"); audio.paused ? audio.play() : audio.pause(); }
-    function actualizar() {
-        let total = 0;
-        document.querySelectorAll('.input-cant').forEach(i => { total += parseInt(i.value) || 0; });
-        document.getElementById('contador').innerText = "Total cócteles: " + total + " / 50";
+    function toggleMusica() {
+        var audio = document.getElementById("musicaFondo");
+        audio.paused ? audio.play() : audio.pause();
     }
+
     function enviar() {
-        let total = 0;
-        document.querySelectorAll('.input-cant').forEach(i => { total += parseInt(i.value) || 0; });
-        if(total < 50) { alert("¡Atención! El mínimo para activar el servicio es de 50 cócteles."); return; }
-        if(!document.getElementById('aceptar').checked) { alert("Debes aceptar las condiciones para continuar."); return; }
+        const nombre = document.getElementById('nombre').value;
+        const lugar = document.getElementById('lugar').value;
+        const fecha = document.getElementById('fecha').value;
+        const acepta = document.getElementById('aceptar').checked;
         
-        let msg = `*Nueva Solicitud - Los Cócteles de Willian*\n\nCliente: ${document.getElementById('nombre').value}\nInvitados: ${document.getElementById('invitados').value}\nTipo: ${document.getElementById('tipoEvento').value}\nFecha: ${document.getElementById('fecha').value}\nLugar: ${document.getElementById('lugar').value}\nZona: ${document.getElementById('fueraZona').value}\n\n*Pedido:*\n`;
-        document.querySelectorAll('.input-cant').forEach(i => { if(i.value > 0) msg += `${i.dataset.nombre}: ${i.value}\n`; });
-        
-        window.open("https://chat.whatsapp.com/I5RUgFoRcwpCUuyuj1zvvu?text=" + encodeURIComponent(msg), '_blank');
+        if (!nombre || !fecha || !lugar) { alert("Complete los campos obligatorios"); return; }
+        if (!acepta) { alert("Debe aceptar las condiciones"); return; }
+
+        let detalle = `Nueva Cotización de ${nombre}%0AFecha: ${fecha}%0ALugar: ${lugar}%0AItems:%0A`;
+        const inputs = document.querySelectorAll('.input-cant');
+        inputs.forEach(i => {
+            if (i.value > 0) detalle += `- ${i.dataset.nombre}: ${i.value}%0A`;
+        });
+
+        // Envío directo al número de la empresa
+        window.location.href = "https://wa.me/584267746622?text=" + detalle;
     }
 </script>
 </body>
-</html>
+    </html>
