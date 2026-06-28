@@ -6,7 +6,6 @@
     <title>Los Cócteles de Willian | Profesionales del Servicio</title>
     <link rel="stylesheet" href="estilo.css">
     <style>
-        /* Estilos generales */
         body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #121212; color: #fff; }
         .seccion { padding: 40px 20px; max-width: 900px; margin: auto; }
         .header { text-align: center; padding: 20px; background: #000; border-bottom: 2px solid #d4af37; }
@@ -22,19 +21,22 @@
         .galeria-contenedor { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
         .galeria-item img { width: 100%; border-radius: 8px; cursor: pointer; transition: transform 0.3s; }
         
+        /* Lightbox */
+        #lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
+        #lightbox img { max-width: 90%; max-height: 80%; border: 2px solid #d4af37; }
+
         /* Sección de Videos */
         .video-contenedor { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
         .video-card { background: #1a1a1a; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #333; }
-        .video-card a { color: #d4af37; text-decoration: none; font-weight: bold; font-size: 1.2rem; }
-        .video-card img { width: 100%; border-radius: 5px; margin-bottom: 10px; }
+        .video-card a { color: #d4af37; text-decoration: none; font-weight: bold; }
+        .video-card img { width: 100%; border-radius: 8px; margin-bottom: 10px; }
 
-        /* WhatsApp */
+        /* Botón WhatsApp */
         .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px 20px; border-radius: 50px; text-decoration: none; z-index: 1000; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <!-- Menú Flotante -->
     <nav class="menu-flotante">
         <a href="index.html">Inicio</a>
         <a href="cotizador.html">Cotizar</a>
@@ -46,48 +48,56 @@
         <p>33 años de excelencia | RIF: J-50833687-9</p>
     </header>
 
-    <!-- Perfil -->
     <section class="seccion">
         <h2>Willian Antonio Campos</h2>
         <p style="text-align:center;">Bartender, Mixólogo y Parrillero Profesional. "Hospitólogo" con 33 años de trayectoria.</p>
     </section>
 
-    <!-- Galería -->
     <section class="seccion">
         <h2>Galería de Excelencia</h2>
         <div class="galeria-contenedor">
-            <div class="galeria-item"><img src="foto1.jpg" alt="Obra 1"></div>
-            <div class="galeria-item"><img src="foto2.jpg" alt="Obra 2"></div>
+            <div class="galeria-item" onclick="abrirLightbox('foto1.jpg')"><img src="foto1.jpg" alt="Obra 1"></div>
+            <div class="galeria-item" onclick="abrirLightbox('foto2.jpg')"><img src="foto2.jpg" alt="Obra 2"></div>
         </div>
     </section>
 
-    <!-- Nueva Sección: Videos Virales -->
+    <div id="lightbox" onclick="cerrarLightbox()">
+        <img id="lightbox-img" src="" alt="Ampliación">
+    </div>
+
     <section class="seccion">
         <h2>Nuestra Trayectoria en Video</h2>
         <div class="video-contenedor">
-            <!-- Video 1 -->
             <div class="video-card">
-                <a href="https://www.tiktok.com/@tu_usuario" target="_blank">
-                    <img src="thumb_video1.jpg" alt="Ver video en TikTok">
-                    <span>Ver Video 1</span>
+                <a href="https://vt.tiktok.com/ZSCBUxEhH/" target="_blank">
+                    <img src="thumb_video1.jpg" alt="Video 1">
+                    <span>Ver Video Viral 1</span>
                 </a>
             </div>
-            <!-- Video 2 -->
             <div class="video-card">
-                <a href="https://www.facebook.com/tu_video" target="_blank">
-                    <img src="thumb_video2.jpg" alt="Ver video en Facebook">
-                    <span>Ver Video 2</span>
+                <a href="https://vt.tiktok.com/ZSCBfLagS/" target="_blank">
+                    <img src="thumb_video2.jpg" alt="Video 2">
+                    <span>Ver Video Viral 2</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- WhatsApp -->
     <a href="https://wa.me/584248237912" class="whatsapp-btn" target="_blank">WhatsApp</a>
 
     <footer class="header">
         <p>Santa Cruz, El Tigre, Anzoátegui.</p>
+        <p><em>"Los paracaidistas no mueren, solo van al infierno a reagruparse."</em></p>
     </footer>
 
+    <script>
+        function abrirLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+        function cerrarLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
