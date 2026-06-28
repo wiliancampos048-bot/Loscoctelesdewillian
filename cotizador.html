@@ -8,7 +8,7 @@
         body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 15px; }
         .contenedor { max-width: 500px; margin: auto; border: 1px solid #FFD700; padding: 20px; border-radius: 10px; }
         h1 { color: #FFD700; text-align: center; font-size: 1.5em; margin-bottom: 5px; }
-        .musica-box, .chat-box { text-align: center; margin-bottom: 15px; padding: 10px; background: #111; border: 1px solid #FFD700; border-radius: 5px; }
+        .musica-box { text-align: center; margin-bottom: 15px; padding: 10px; background: #111; border: 1px solid #FFD700; border-radius: 5px; }
         .reglas { font-size: 0.8em; margin-bottom: 20px; color: #ccc; line-height: 1.4; border-bottom: 1px solid #333; padding-bottom: 10px; }
         .campo { width: 100%; padding: 10px; margin: 8px 0; background: #222; color: #fff; border: 1px solid #FFD700; border-radius: 5px; box-sizing: border-box; }
         table { width: 100%; margin-top: 10px; border-collapse: collapse; }
@@ -17,7 +17,7 @@
         .btn-enviar { width: 100%; padding: 15px; background: #25D366; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; color: white; margin-top: 15px; }
         .btn-chat { width: 100%; padding: 10px; background: #3483fa; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; color: white; margin-top: 10px; }
         .btn-reinicio { width: 100%; padding: 10px; background: #8B0000; border: none; border-radius: 5px; cursor: pointer; color: white; margin-top: 10px; }
-        #contador { text-align: center; font-weight: bold; color: #FFD700; margin: 10px 0; }
+        #contador, #presupuesto { text-align: center; font-weight: bold; color: #FFD700; margin: 10px 0; }
     </style>
 </head>
 <body>
@@ -31,8 +31,7 @@
 
     <div class="reglas">
         • <b>Mínimo:</b> 50 cócteles totales.<br>
-        • <b>Insumos:</b> Cliente provee hielo, Coca-Cola y 7-Up.<br>
-        • <b>Zona:</b> Fuera de El Tigre, El Tigrito y San Tomé aplica cargo por logística.
+        • <b>Insumos:</b> Cliente provee hielo, Coca-Cola y 7-Up.
     </div>
 
     <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
@@ -42,36 +41,25 @@
     </select>
     <input type="date" id="fecha" class="campo">
     <input type="text" id="lugar" class="campo" placeholder="Lugar del evento">
-    <select id="fueraZona" class="campo" onchange="actualizar()">
-        <option value="No">Dentro de zona operativa</option><option value="Si">Fuera de zona (requiere logística)</option>
-    </select>
-
+    
     <div id="contador">Total cócteles: 0 / 50</div>
+    <div id="presupuesto">Total estimado: $0</div>
 
     <table>
-        <tr><td>Parrillero (20kg) ($70)</td><td><input type="number" class="input-cant" data-nombre="Parrillero 20kg" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Proteína Adic. ($5/kg)</td><td><input type="number" class="input-cant" data-nombre="Proteína Adicional" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Bartender Extra ($70)</td><td><input type="number" class="input-cant" data-nombre="Bartender Extra" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Mesonero ($65)</td><td><input type="number" class="input-cant" data-nombre="Mesonero" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Fruit Punch ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Fruit Punch" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Piña Colada ($2)</td><td><input type="number" class="input-cant" data-nombre="Piña Colada" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Daiquirí ($2)</td><td><input type="number" class="input-cant" data-nombre="Daiquirí" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Ron Punch ($2)</td><td><input type="number" class="input-cant" data-nombre="Ron Punch" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Cuba Libre ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Cuba Libre" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Mojito Cubano ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Mojito Cubano" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Sex on the Beach ($2.50)</td><td><input type="number" class="input-cant" data-nombre="Sex on the Beach" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Caipiroska ($2)</td><td><input type="number" class="input-cant" data-nombre="Caipiroska" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Destornillador ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Destornillador" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Frutos Secos ($2)</td><td><input type="number" class="input-cant" data-nombre="Frutos Secos" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Canto de Sirena ($3)</td><td><input type="number" class="input-cant" data-nombre="Canto de Sirena" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Coco Loco ($3)</td><td><input type="number" class="input-cant" data-nombre="Coco Loco" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Orgasmo ($3)</td><td><input type="number" class="input-cant" data-nombre="Orgasmo" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Orgasmo Múltiple ($4)</td><td><input type="number" class="input-cant" data-nombre="Orgasmo Múltiple" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Margarita Blue ($3)</td><td><input type="number" class="input-cant" data-nombre="Margarita Blue" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Polvo de Medianoche ($3)</td><td><input type="number" class="input-cant" data-nombre="Polvo de Medianoche" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Parrillero ($70)</td><td><input type="number" class="input-cant" data-nombre="Parrillero 20kg" data-precio="70" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Proteína Adic. ($5)</td><td><input type="number" class="input-cant" data-nombre="Proteína Adicional" data-precio="5" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Bartender Extra ($70)</td><td><input type="number" class="input-cant" data-nombre="Bartender Extra" data-precio="70" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Mesonero ($65)</td><td><input type="number" class="input-cant" data-nombre="Mesonero" data-precio="65" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Fruit Punch ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Fruit Punch" data-precio="1.80" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Piña Colada ($2)</td><td><input type="number" class="input-cant" data-nombre="Piña Colada" data-precio="2" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Daiquirí ($2)</td><td><input type="number" class="input-cant" data-nombre="Daiquirí" data-precio="2" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Ron Punch ($2)</td><td><input type="number" class="input-cant" data-nombre="Ron Punch" data-precio="2" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Cuba Libre ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Cuba Libre" data-precio="1.80" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Mojito Cubano ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Mojito Cubano" data-precio="1.80" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Sex on the Beach ($2.50)</td><td><input type="number" class="input-cant" data-nombre="Sex on the Beach" data-precio="2.50" value="0" onchange="actualizar()"></td></tr>
     </table>
 
-    <div style="margin: 15px 0;"><input type="checkbox" id="aceptar"> Acepto condiciones de insumos y logística.</div>
+    <div style="margin: 15px 0;"><input type="checkbox" id="aceptar"> Acepto condiciones.</div>
 
     <button class="btn-enviar" onclick="enviar()">SOLICITAR PRESUPUESTO</button>
     <button class="btn-chat" onclick="chatDirecto()">¿Dudas? Chat Directo</button>
@@ -85,25 +73,30 @@
     }
 
     function actualizar() {
-        let total = 0;
+        let totalC = 0;
+        let totalP = 0;
         document.querySelectorAll('.input-cant').forEach(input => {
-            total += parseInt(input.value) || 0;
+            let cant = parseInt(input.value) || 0;
+            let precio = parseFloat(input.dataset.precio) || 0;
+            totalC += cant;
+            totalP += (cant * precio);
         });
-        document.getElementById('contador').innerText = "Total cócteles: " + total + " / 50";
+        document.getElementById('contador').innerText = "Total cócteles: " + totalC + " / 50";
+        document.getElementById('presupuesto').innerText = "Total estimado: $" + totalP.toFixed(2);
+        return totalP;
     }
 
     function chatDirecto() {
-        const telefono = "584267746622";
-        const mensaje = "Hola, tengo una duda sobre sus servicios.";
-        window.location.href = "whatsapp://send?phone=" + telefono + "&text=" + encodeURIComponent(mensaje);
+        window.location.href = "whatsapp://send?phone=584267746622&text=Hola,%20tengo%20una%20duda%20sobre%20sus%20servicios.";
     }
 
     function enviar() {
         const nombre = document.getElementById('nombre').value;
-        const total = Array.from(document.querySelectorAll('.input-cant')).reduce((a, b) => a + (parseInt(b.value) || 0), 0);
+        const totalC = Array.from(document.querySelectorAll('.input-cant')).reduce((a, b) => a + (parseInt(b.value) || 0), 0);
+        const totalP = actualizar();
         
         if (!nombre || !document.getElementById('fecha').value || !document.getElementById('lugar').value) { alert("Complete los campos obligatorios"); return; }
-        if (total < 50) { alert("El mínimo es de 50 cócteles."); return; }
+        if (totalC < 50) { alert("El mínimo es de 50 cócteles."); return; }
         if (!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones"); return; }
 
         let detalleItems = "";
@@ -113,16 +106,12 @@
 
         let mensaje = `*Nueva Solicitud - Los Cócteles de Willian*\n\n` +
                       `👤 Cliente: ${nombre}\n` +
-                      `👥 Invitados: ${document.getElementById('invitados').value}\n` +
-                      `📍 Tipo: ${document.getElementById('tipoEvento').value}\n` +
                       `📅 Fecha: ${document.getElementById('fecha').value}\n` +
                       `🏠 Lugar: ${document.getElementById('lugar').value}\n\n` +
-                      `🚚 Zona: ${document.getElementById('fueraZona').value}\n\n` +
-                      `*Detalle del Pedido:*\n${detalleItems}` +
+                      `*Detalle del Pedido:*\n${detalleItems}\n` +
                       `--------------------------\n` +
-                      `💰 TOTAL ESTIMADO: (A calcular por usted)`;
+                      `💰 TOTAL ESTIMADO: $${totalP.toFixed(2)}`;
 
-        // Forzamos la apertura directa mediante protocolo interno
         window.location.href = "whatsapp://send?phone=584267746622&text=" + encodeURIComponent(mensaje);
     }
 </script>
