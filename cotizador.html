@@ -93,7 +93,9 @@
     }
 
     function chatDirecto() {
-        window.location.href = "https://wa.me/584267746622?text=Hola,%20tengo%20una%20duda%20sobre%20sus%20servicios.";
+        const telefono = "584267746622";
+        const mensaje = "Hola, tengo una duda sobre sus servicios.";
+        window.location.href = "whatsapp://send?phone=" + telefono + "&text=" + encodeURIComponent(mensaje);
     }
 
     function enviar() {
@@ -104,25 +106,24 @@
         if (total < 50) { alert("El mínimo es de 50 cócteles."); return; }
         if (!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones"); return; }
 
-        alert("Generando solicitud de presupuesto...");
-
         let detalleItems = "";
         document.querySelectorAll('.input-cant').forEach(i => {
-            if (i.value > 0) detalleItems += `- ${i.dataset.nombre}: ${i.value}%0A`;
+            if (i.value > 0) detalleItems += `- ${i.dataset.nombre}: ${i.value}\n`;
         });
 
-        let mensaje = `*Nueva Solicitud - Los Cócteles de Willian*%0A%0A` +
-                      `👤 Cliente: ${nombre}%0A` +
-                      `👥 Invitados: ${document.getElementById('invitados').value}%0A` +
-                      `📍 Tipo: ${document.getElementById('tipoEvento').value}%0A` +
-                      `📅 Fecha: ${document.getElementById('fecha').value}%0A` +
-                      `🏠 Lugar: ${document.getElementById('lugar').value}%0A%0A` +
-                      `🚚 Zona: ${document.getElementById('fueraZona').value}%0A%0A` +
-                      `*Detalle del Pedido:*%0A${detalleItems}%0A` +
-                      `--------------------------%0A` +
+        let mensaje = `*Nueva Solicitud - Los Cócteles de Willian*\n\n` +
+                      `👤 Cliente: ${nombre}\n` +
+                      `👥 Invitados: ${document.getElementById('invitados').value}\n` +
+                      `📍 Tipo: ${document.getElementById('tipoEvento').value}\n` +
+                      `📅 Fecha: ${document.getElementById('fecha').value}\n` +
+                      `🏠 Lugar: ${document.getElementById('lugar').value}\n\n` +
+                      `🚚 Zona: ${document.getElementById('fueraZona').value}\n\n` +
+                      `*Detalle del Pedido:*\n${detalleItems}` +
+                      `--------------------------\n` +
                       `💰 TOTAL ESTIMADO: (A calcular por usted)`;
 
-        window.location.href = "https://wa.me/584267746622?text=" + mensaje;
+        // Forzamos la apertura directa mediante protocolo interno
+        window.location.href = "whatsapp://send?phone=584267746622&text=" + encodeURIComponent(mensaje);
     }
 </script>
 </body>
