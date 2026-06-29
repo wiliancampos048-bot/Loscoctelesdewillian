@@ -8,53 +8,65 @@
 </head>
 <body>
 <div class="contenedor">
-    <h1>Los Cócteles de Willian</h1>
-    <div class="reglas">
-        • <b>Mínimo:</b> 50 cócteles totales.<br>
-        • <b>Insumos:</b> Cliente provee hielo, transporte, espacio y mesón.
-    </div>
+    <h1>Cotizador</h1>
     <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
     <input type="number" id="invitados" class="campo" placeholder="Número de invitados">
-    <select id="tipoEvento" class="campo">
-        <option>Boda</option><option>Cumpleaños</option><option>Corporativo</option>
-    </select>
     <input type="date" id="fecha" class="campo">
-    <input type="text" id="lugar" class="campo" placeholder="Lugar del evento">
-    <table>
-        <tr style="color: #FFD700;"><th>Producto</th><th>Precio</th><th>Cant.</th></tr>
-        <tr><td>Parrillero</td><td>$70</td><td><input type="number" class="input-cant" data-precio="70" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Piña Colada</td><td>$2</td><td><input type="number" class="input-cant" data-precio="2" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Mojito Cubano</td><td>$1.80</td><td><input type="number" class="input-cant" data-precio="1.80" value="0" onchange="actualizar()"></td></tr>
-    </table>
-    <div id="contador">Total cócteles: 0 / 50</div>
-    <div id="presupuesto">TOTAL ESTIMADO: $0.00</div>
-    <div class="payment-methods">
-        <b>Métodos de pago:</b>
-        <ul><li>Pago móvil (Tasa a BDV)</li><li>USDT Electrónico</li><li>$ / € en físico (10% desc.)</li></ul>
-    </div>
-    <div class="policy">
-        <b>⚠️ Política de Apartado:</b><br>
-        • 50% presencial al firmar contrato.<br>
-        • 50% restante 1 hora antes del evento.
-    </div>
-    <input type="checkbox" id="aceptar"> Acepto los términos y condiciones.<br>
-    <button class="btn-enviar" onclick="enviar()">ENVIAR SOLICITUD</button>
+    <textarea id="notas" class="campo" placeholder="Observaciones (Lugar, requerimientos especiales...)"></textarea>
+    
+    <label style="color: #FFD700;">Seleccionar:</label>
+    <select id="productoSelect" class="campo" onchange="agregarProducto()">
+        <option value="">-- Elige un producto --</option>
+        <option value="Bartender" data-precio="70">Bartender ($70)</option>
+        <option value="Kg extra Proteína" data-precio="5">Kg Extra Proteína ($5)</option>
+        <option value="Parrillero" data-precio="70">Parrillero ($70)</option>
+        <option value="Mesonero" data-precio="65">Mesonero ($65)</option>
+        <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option>
+        <option value="Daiquiri" data-precio="2">Daiquiri ($2)</option>
+        <option value="Ron Punch" data-precio="1.8">Ron Punch ($1.8)</option>
+        <option value="Cuba Libre" data-precio="1.8">Cuba Libre ($1.8)</option>
+        <option value="Destornillador" data-precio="1.8">Destornillador ($1.8)</option>
+        <option value="Sex on the Beach" data-precio="2.5">Sex on the Beach ($2.5)</option>
+        <option value="Caipiroska" data-precio="1.8">Caipiroska ($1.8)</option>
+        <option value="Mojito Cubano" data-precio="2">Mojito Cubano ($2)</option>
+        <option value="Polvo de media noche" data-precio="3">Polvo de media noche ($3)</option>
+        <option value="Arcoíris" data-precio="2.5">Arcoíris ($2.5)</option>
+        <option value="Tequila Sunrise" data-precio="3">Tequila Sunrise ($3)</option>
+        <option value="Canto de Sirena" data-precio="3.5">Canto de Sirena ($3.5)</option>
+        <option value="Frutos Secos" data-precio="2.5">Cóctel Frutos Secos ($2.5)</option>
+        <option value="Coco Loco" data-precio="3">Coco Loco ($3)</configuration>
+        <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option>
+        <option value="Orgasmo Múltiple" data-precio="5">Orgasmo Múltiple ($5)</option>
+        <option value="Margarita" data-precio="3">Margarita ($3)</option>
+    </select>
+
+    <div id="lista-pedido" class="lista-pedido"></div>
+    <div id="presupuesto">TOTAL: $0.00</div>
+
+    <button class="btn-enviar" onclick="enviarWhatsApp()">SOLICITAR POR WHATSAPP</button>
     <button class="btn-reinicio" onclick="window.location.reload()">REINICIAR</button>
 </div>
+
 <script>
-    function actualizar() {
-        let tC = 0, tP = 0;
-        document.querySelectorAll('.input-cant').forEach(i => {
-            let c = parseInt(i.value) || 0;
-            tC += c; tP += (c * parseFloat(i.dataset.precio));
-        });
-        document.getElementById('contador').innerText = "Total cócteles: " + tC + " / 50";
-        document.getElementById('presupuesto').innerText = "TOTAL ESTIMADO: $" + tP.toFixed(2);
+    let total = 0;
+    let items = [];
+    function agregarProducto() {
+        let select = document.getElementById('productoSelect');
+        let opt = select.options[select.selectedIndex];
+        if (opt.value === "") return;
+        total += parseFloat(opt.dataset.precio);
+        items.push(opt.value);
+        document.getElementById('lista-pedido').innerHTML += "<div>" + opt.value + " - $" + opt.dataset.precio + "</div>";
+        document.getElementById('presupuesto').innerText = "TOTAL: $" + total.toFixed(2);
+        select.value = "";
     }
-    function enviar() {
-        if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones."); return; }
-        // AQUÍ PUEDES AGREGAR EL ENVÍO A WHATSAPP SI QUIERES
-        alert("Solicitud enviada al Maestro Willian.");
+    function enviarWhatsApp() {
+        let nombre = document.getElementById('nombre').value;
+        let invitados = document.getElementById('invitados').value;
+        let fecha = document.getElementById('fecha').value;
+        let notas = document.getElementById('notas').value;
+        let msg = "Hola Willian, soy " + nombre + ". Invitados: " + invitados + ". Fecha: " + fecha + ". Pedido: " + items.join(", ") + ". Observaciones: " + notas + ". Total: $" + total.toFixed(2);
+        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
     }
 </script>
 </body>
