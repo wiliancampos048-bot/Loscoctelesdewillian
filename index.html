@@ -4,55 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Los Cócteles de Willian | Profesionales del Servicio</title>
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="style.css">
     <style>
+        /* MANTEN TU CSS INTERNO TAL CUAL LO TIENES */
         body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #121212; color: #fff; }
         .seccion { padding: 40px 20px; max-width: 900px; margin: auto; }
         .header { text-align: center; padding: 20px; background: #000; border-bottom: 2px solid #d4af37; }
         .logo { max-width: 150px; }
         h2 { color: #d4af37; text-align: center; }
-
-        /* Menú Flotante */
         .menu-flotante { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.9); padding: 12px 25px; border-radius: 30px; display: flex; gap: 20px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); z-index: 1000; border: 1px solid #d4af37; }
         .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; }
         .menu-flotante a:hover { color: #d4af37; }
-
-        /* Galería */
         .galeria-contenedor { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
         .galeria-item img { width: 100%; border-radius: 8px; cursor: pointer; transition: transform 0.3s; }
-        
-        /* Lightbox */
         #lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
         #lightbox img { max-width: 90%; max-height: 80%; border: 2px solid #d4af37; }
-
-        /* Sección de Videos */
         .video-contenedor { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
         .video-card { background: #1a1a1a; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #333; }
         .video-card a { color: #d4af37; text-decoration: none; font-weight: bold; }
         .video-card img { width: 100%; border-radius: 8px; margin-bottom: 10px; }
-
-        /* Botón WhatsApp */
         .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px 20px; border-radius: 50px; text-decoration: none; z-index: 1000; font-weight: bold; }
     </style>
 </head>
 <body>
-
     <nav class="menu-flotante">
         <a href="index.html">Inicio</a>
         <a href="cotizador.html">Cotizar</a>
     </nav>
-
     <header class="header">
         <img src="mi-logo.png" alt="Logo Los Cócteles de Willian" class="logo">
         <h1>Los Cócteles de Willian</h1>
         <p>33 años de excelencia | RIF: J-50833687-9</p>
     </header>
-
     <section class="seccion">
         <h2>Willian Antonio Campos</h2>
         <p style="text-align:center;">Bartender, Mixólogo y Parrillero Profesional. "Hospitólogo" con 33 años de trayectoria.</p>
     </section>
-
     <section class="seccion">
         <h2>Galería de Excelencia</h2>
         <div class="galeria-contenedor">
@@ -60,11 +47,9 @@
             <div class="galeria-item" onclick="abrirLightbox('foto2.jpg')"><img src="foto2.jpg" alt="Obra 2"></div>
         </div>
     </section>
-
     <div id="lightbox" onclick="cerrarLightbox()">
         <img id="lightbox-img" src="" alt="Ampliación">
     </div>
-
     <section class="seccion">
         <h2>Nuestra Trayectoria en Video</h2>
         <div class="video-contenedor">
@@ -82,22 +67,14 @@
             </div>
         </div>
     </section>
-
     <a href="https://wa.me/584248237912" class="whatsapp-btn" target="_blank">WhatsApp</a>
-
     <footer class="header">
         <p>Santa Cruz, El Tigre, Anzoátegui.</p>
         <p><em>"Los paracaidistas no mueren, solo van al infierno a reagruparse."</em></p>
     </footer>
-
     <script>
-        function abrirLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
-            document.getElementById('lightbox').style.display = 'flex';
-        }
-        function cerrarLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-        }
+        function abrirLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; }
+        function cerrarLightbox() { document.getElementById('lightbox').style.display = 'none'; }
     </script>
 </body>
 </html>
