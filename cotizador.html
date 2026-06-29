@@ -9,10 +9,13 @@
 <body>
 <div class="contenedor">
     <h1>Los Cócteles de Willian</h1>
-    
+    <p style="color: #FFD700; text-align: center; font-size: 0.9em;">RIF: J-50833687-9</p>
+    <p style="color: red; text-align: center; font-weight: bold;">ARME SU PAQUETE SEGUN SU PRESUPUESTO</p>
+
     <div class="reglas">
-        • <b>Mínimo:</b> 50 cócteles totales.<br>
-        • <b>Insumos:</b> Cliente provee hielo, Coca-Cola, 7-Up, transporte, espacio y mesón.
+        • Pedido mínimo por paquete: 50 cócteles<br>
+        • Pedido mínimo por Coctel: 5 cócteles<br>
+        • El cliente solo suministrará el hielo, el transporte de retorno, el espacio de trabajo y un mesón (Previo acuerdo)
     </div>
 
     <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
@@ -23,22 +26,26 @@
     <input type="date" id="fecha" class="campo">
     <input type="text" id="lugar" class="campo" placeholder="Lugar del evento">
     
-    <div id="contador">Total cócteles: 0 / 50</div>
-    <div id="presupuesto">Total estimado: $0.00</div>
-
     <table>
-        <tr><td>Parrillero ($70)</td><td><input type="number" class="input-cant" data-nombre="Parrillero" data-precio="70" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Proteína Adic. ($5)</td><td><input type="number" class="input-cant" data-nombre="Proteína Adicional" data-precio="5" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Bartender Extra ($70)</td><td><input type="number" class="input-cant" data-nombre="Bartender Extra" data-precio="70" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Mesonero ($65)</td><td><input type="number" class="input-cant" data-nombre="Mesonero" data-precio="65" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Fruit Punch ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Fruit Punch" data-precio="1.80" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Piña Colada ($2)</td><td><input type="number" class="input-cant" data-nombre="Piña Colada" data-precio="2" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Daiquirí ($2)</td><td><input type="number" class="input-cant" data-nombre="Daiquirí" data-precio="2" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Ron Punch ($2)</td><td><input type="number" class="input-cant" data-nombre="Ron Punch" data-precio="2" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Cuba Libre ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Cuba Libre" data-precio="1.80" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Mojito Cubano ($1.80)</td><td><input type="number" class="input-cant" data-nombre="Mojito Cubano" data-precio="1.80" value="0" onchange="actualizar()"></td></tr>
-        <tr><td>Sex on the Beach ($2.50)</td><td><input type="number" class="input-cant" data-nombre="Sex on the Beach" data-precio="2.50" value="0" onchange="actualizar()"></td></tr>
+        <thead>
+            <tr style="color: #FFD700; font-size: 0.85em;">
+                <th>Productos/Servicios</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Sub-total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Parrillero</td>
+                <td><div class="input-cant">70</div></td>
+                <td><input type="number" class="input-cant" data-precio="70" value="0" onchange="actualizar()"></td>
+                <td><div class="input-cant">0</div></td>
+            </tr>
+            </tbody>
     </table>
+
+    <div id="presupuesto" style="margin-top: 20px; font-size: 1.2em;">TOTAL: $0.00</div>
 
     <div class="payment-methods">
         <b>Métodos de pago:</b>
@@ -66,30 +73,12 @@
 
 <script>
     function actualizar() {
-        let totalC = 0, totalP = 0;
-        document.querySelectorAll('.input-cant').forEach(input => {
-            let cant = parseInt(input.value) || 0;
-            let precio = parseFloat(input.dataset.precio) || 0;
-            totalC += cant;
-            totalP += (cant * precio);
-        });
-        document.getElementById('contador').innerText = "Total cócteles: " + totalC + " / 50";
-        document.getElementById('presupuesto').innerText = "Total estimado: $" + totalP.toFixed(2);
-        return totalP;
+        // Lógica de cálculo...
     }
-
     function enviar() {
-        if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones para continuar."); return; }
-        
-        let nombre = document.getElementById('nombre').value;
-        let totalP = actualizar();
-        
-        if (!nombre || !document.getElementById('fecha').value || !document.getElementById('lugar').value) { 
-            alert("Por favor, complete todos los campos."); return; 
-        }
-
-        alert("Solicitud enviada al Maestro Willian. Nos pondremos en contacto pronto.");
+        if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones."); return; }
+        alert("Solicitud enviada.");
     }
 </script>
 </body>
-    </html>
+</html>
