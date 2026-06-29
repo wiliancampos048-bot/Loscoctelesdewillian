@@ -41,7 +41,7 @@
         <option value="Margarita" data-precio="3">Margarita ($3)</option>
     </select>
     
-    <input type="number" id="cantidad" class="campo" placeholder="Cantidad (ej: 5, 10, 20...)" min="1">
+    <input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1">
     <button class="btn-enviar" style="background:#444; margin-bottom:10px;" onclick="agregarProducto()">AÑADIR A LA LISTA</button>
 
     <div class="lista-pedido" id="lista-pedido"><b>Resumen de tu selección:</b></div>
@@ -62,33 +62,41 @@
 <script>
     let total = 0;
     let items = [];
+
     function agregarProducto() {
         let select = document.getElementById('productoSelect');
         let opt = select.options[select.selectedIndex];
         let cantidad = document.getElementById('cantidad').value;
-        
-        if (opt.value === "" || cantidad === "" || cantidad < 1) {
-            alert("Selecciona un producto y una cantidad válida.");
-            return;
-        }
+        if (opt.value === "" || cantidad < 1) return;
         
         let subtotal = parseFloat(opt.dataset.precio) * cantidad;
         total += subtotal;
-        let textoItem = cantidad + "x " + opt.value + " ($" + subtotal.toFixed(2) + ")";
-        items.push(textoItem);
+        let idUnico = Date.now();
+        items.push({id: idUnico, desc: cantidad + "x " + opt.value, precio: subtotal});
         
-        document.getElementById('lista-pedido').innerHTML += "<div>• " + textoItem + "</div>";
-        document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2);
-        
-        select.value = "";
-        document.getElementById('cantidad').value = "";
+        actualizarLista();
+        select.value = ""; document.getElementById('cantidad').value = "";
     }
+
+    function eliminarProducto(id) {
+        let index = items.findIndex(item => item.id === id);
+        total -= items[index].precio;
+        items.splice(index, 1);
+        actualizarLista();
+    }
+
+    function actualizarLista() {
+        let lista = document.getElementById('lista-pedido');
+        lista.innerHTML = "<b>Resumen:</b>";
+        items.forEach(item => {
+            lista.innerHTML += "<div>" + item.desc + " ($" + item.precio.toFixed(2) + ") <button onclick='eliminarProducto(" + item.id + ")' style='background:red; color:white; border:none; cursor:pointer;'>X</button></div>";
+        });
+        document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2);
+    }
+
     function enviarWhatsApp() {
         if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones."); return; }
-        let nombre = document.getElementById('nombre').value;
-        let invitados = document.getElementById('invitados').value;
-        let fecha = document.getElementById('fecha').value;
-        let msg = "Hola Willian, quiero cotizar: *Cliente:* " + nombre + ", *Invitados:* " + invitados + ", *Fecha:* " + fecha + ", *Pedido:* " + items.join(", ") + ". *Total a invertir:* $" + total.toFixed(2);
+        let msg = "Pedido de " + document.getElementById('nombre').value + ": " + items.map(i => i.desc).join(", ") + ". Total: $" + total.toFixed(2);
         window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
     }
 </script>
