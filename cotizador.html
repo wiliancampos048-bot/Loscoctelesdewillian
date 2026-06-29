@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizador | Los Cócteles de Willian</title>
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="contenedor">
@@ -13,7 +13,6 @@
         • <b>Mínimo:</b> 50 cócteles totales.<br>
         • <b>Insumos:</b> Cliente provee hielo, transporte, espacio y mesón.
     </div>
-
     <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
     <input type="number" id="invitados" class="campo" placeholder="Número de invitados">
     <select id="tipoEvento" class="campo">
@@ -21,33 +20,27 @@
     </select>
     <input type="date" id="fecha" class="campo">
     <input type="text" id="lugar" class="campo" placeholder="Lugar del evento">
-    
     <table>
         <tr style="color: #FFD700;"><th>Producto</th><th>Precio</th><th>Cant.</th></tr>
         <tr><td>Parrillero</td><td>$70</td><td><input type="number" class="input-cant" data-precio="70" value="0" onchange="actualizar()"></td></tr>
         <tr><td>Piña Colada</td><td>$2</td><td><input type="number" class="input-cant" data-precio="2" value="0" onchange="actualizar()"></td></tr>
         <tr><td>Mojito Cubano</td><td>$1.80</td><td><input type="number" class="input-cant" data-precio="1.80" value="0" onchange="actualizar()"></td></tr>
     </table>
-
     <div id="contador">Total cócteles: 0 / 50</div>
     <div id="presupuesto">TOTAL ESTIMADO: $0.00</div>
-
     <div class="payment-methods">
         <b>Métodos de pago:</b>
         <ul><li>Pago móvil (Tasa a BDV)</li><li>USDT Electrónico</li><li>$ / € en físico (10% desc.)</li></ul>
     </div>
-
     <div class="policy">
         <b>⚠️ Política de Apartado:</b><br>
         • 50% presencial al firmar contrato.<br>
         • 50% restante 1 hora antes del evento.
     </div>
-
     <input type="checkbox" id="aceptar"> Acepto los términos y condiciones.<br>
     <button class="btn-enviar" onclick="enviar()">ENVIAR SOLICITUD</button>
     <button class="btn-reinicio" onclick="window.location.reload()">REINICIAR</button>
 </div>
-
 <script>
     function actualizar() {
         let tC = 0, tP = 0;
@@ -60,6 +53,7 @@
     }
     function enviar() {
         if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones."); return; }
+        // AQUÍ PUEDES AGREGAR EL ENVÍO A WHATSAPP SI QUIERES
         alert("Solicitud enviada al Maestro Willian.");
     }
 </script>
