@@ -9,12 +9,14 @@
 <body>
 <div class="contenedor">
     <h1>Cotizador</h1>
+    <p class="subtitulo">"Arme usted su paquete a todo costo según su presupuesto, nos adaptamos a su necesidad."</p>
+    
     <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
     <input type="number" id="invitados" class="campo" placeholder="Número de invitados">
     <input type="date" id="fecha" class="campo">
-    <textarea id="notas" class="campo" placeholder="Observaciones (Lugar, requerimientos especiales...)"></textarea>
+    <textarea id="notas" class="campo" placeholder="Observaciones o requerimientos especiales"></textarea>
     
-    <label style="color: #FFD700;">Seleccionar:</label>
+    <label style="color: #FFD700;">Seleccionar productos:</label>
     <select id="productoSelect" class="campo" onchange="agregarProducto()">
         <option value="">-- Elige un producto --</option>
         <option value="Bartender" data-precio="70">Bartender ($70)</option>
@@ -34,16 +36,24 @@
         <option value="Tequila Sunrise" data-precio="3">Tequila Sunrise ($3)</option>
         <option value="Canto de Sirena" data-precio="3.5">Canto de Sirena ($3.5)</option>
         <option value="Frutos Secos" data-precio="2.5">Cóctel Frutos Secos ($2.5)</option>
-        <option value="Coco Loco" data-precio="3">Coco Loco ($3)</configuration>
+        <option value="Coco Loco" data-precio="3">Coco Loco ($3)</option>
         <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option>
         <option value="Orgasmo Múltiple" data-precio="5">Orgasmo Múltiple ($5)</option>
         <option value="Margarita" data-precio="3">Margarita ($3)</option>
     </select>
 
-    <div id="lista-pedido" class="lista-pedido"></div>
-    <div id="presupuesto">TOTAL: $0.00</div>
+    <div class="lista-pedido" id="lista-pedido"><b>Resumen de tu selección:</b></div>
+    <div id="presupuesto">TOTAL A INVERTIR: $0.00</div>
 
-    <button class="btn-enviar" onclick="enviarWhatsApp()">SOLICITAR POR WHATSAPP</button>
+    <div class="condiciones">
+        <b>Condiciones:</b><br>
+        • 50% para apartar fecha.<br>
+        • 50% restante al finalizar el servicio.<br>
+        • 33 años de trayectoria profesional garantizan nuestra calidad.
+    </div>
+
+    <input type="checkbox" id="aceptar"> <b>Acepto las condiciones y términos.</b><br>
+    <button class="btn-enviar" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button>
     <button class="btn-reinicio" onclick="window.location.reload()">REINICIAR</button>
 </div>
 
@@ -56,16 +66,17 @@
         if (opt.value === "") return;
         total += parseFloat(opt.dataset.precio);
         items.push(opt.value);
-        document.getElementById('lista-pedido').innerHTML += "<div>" + opt.value + " - $" + opt.dataset.precio + "</div>";
-        document.getElementById('presupuesto').innerText = "TOTAL: $" + total.toFixed(2);
+        document.getElementById('lista-pedido').innerHTML += "<div>• " + opt.value + ": $" + opt.dataset.precio + "</div>";
+        document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2);
         select.value = "";
     }
     function enviarWhatsApp() {
+        if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones para continuar."); return; }
         let nombre = document.getElementById('nombre').value;
         let invitados = document.getElementById('invitados').value;
         let fecha = document.getElementById('fecha').value;
         let notas = document.getElementById('notas').value;
-        let msg = "Hola Willian, soy " + nombre + ". Invitados: " + invitados + ". Fecha: " + fecha + ". Pedido: " + items.join(", ") + ". Observaciones: " + notas + ". Total: $" + total.toFixed(2);
+        let msg = "Hola Willian, quiero cotizar: *Cliente:* " + nombre + ", *Invitados:* " + invitados + ", *Fecha:* " + fecha + ", *Pedido:* " + items.join(", ") + ", *Notas:* " + notas + ". *Total a invertir:* $" + total.toFixed(2);
         window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
     }
 </script>
