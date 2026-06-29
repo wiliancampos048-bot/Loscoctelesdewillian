@@ -3,81 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotizador Profesional | Los Cócteles de Willian</title>
+    <title>Cotizador | Los Cócteles de Willian</title>
     <link rel="stylesheet" href="Style.css">
 </head>
 <body>
 <div class="contenedor">
     <h1>Los Cócteles de Willian</h1>
-    <p style="color: #FFD700; text-align: center; font-size: 0.9em;">RIF: J-50833687-9</p>
-    <p style="color: red; text-align: center; font-weight: bold;">ARME SU PAQUETE SEGUN SU PRESUPUESTO</p>
-
     <div class="reglas">
-        • Pedido mínimo por paquete: 50 cócteles<br>
-        • Pedido mínimo por Coctel: 5 cócteles<br>
-        • El cliente solo suministrará el hielo, el transporte de retorno, el espacio de trabajo y un mesón (Previo acuerdo)
+        • <b>Mínimo:</b> 50 cócteles totales.<br>
+        • <b>Insumos:</b> Cliente provee hielo, transporte, espacio y mesón.
     </div>
 
     <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
     <input type="number" id="invitados" class="campo" placeholder="Número de invitados">
     <select id="tipoEvento" class="campo">
-        <option>Boda</option><option>Cumpleaños</option><option>Corporativo</option><option>Otro</option>
+        <option>Boda</option><option>Cumpleaños</option><option>Corporativo</option>
     </select>
     <input type="date" id="fecha" class="campo">
     <input type="text" id="lugar" class="campo" placeholder="Lugar del evento">
     
     <table>
-        <thead>
-            <tr style="color: #FFD700; font-size: 0.85em;">
-                <th>Productos/Servicios</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Sub-total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Parrillero</td>
-                <td><div class="input-cant">70</div></td>
-                <td><input type="number" class="input-cant" data-precio="70" value="0" onchange="actualizar()"></td>
-                <td><div class="input-cant">0</div></td>
-            </tr>
-            </tbody>
+        <tr style="color: #FFD700;"><th>Producto</th><th>Precio</th><th>Cant.</th></tr>
+        <tr><td>Parrillero</td><td>$70</td><td><input type="number" class="input-cant" data-precio="70" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Piña Colada</td><td>$2</td><td><input type="number" class="input-cant" data-precio="2" value="0" onchange="actualizar()"></td></tr>
+        <tr><td>Mojito Cubano</td><td>$1.80</td><td><input type="number" class="input-cant" data-precio="1.80" value="0" onchange="actualizar()"></td></tr>
     </table>
 
-    <div id="presupuesto" style="margin-top: 20px; font-size: 1.2em;">TOTAL: $0.00</div>
+    <div id="contador">Total cócteles: 0 / 50</div>
+    <div id="presupuesto">TOTAL ESTIMADO: $0.00</div>
 
     <div class="payment-methods">
         <b>Métodos de pago:</b>
-        <ul>
-            <li>Pago móvil (Tasa a BDV)</li>
-            <li>USDT Electrónico</li>
-            <li>$ en físico (10% de descuento)</li>
-            <li>€ en físico (10% de descuento)</li>
-        </ul>
+        <ul><li>Pago móvil (Tasa a BDV)</li><li>USDT Electrónico</li><li>$ / € en físico (10% desc.)</li></ul>
     </div>
 
     <div class="policy">
         <b>⚠️ Política de Apartado:</b><br>
-        • 50% de abono presencial al firmar contrato para bloquear la fecha.<br>
-        • 50% restante liquidado obligatoriamente 1 hora antes de iniciar el evento.
+        • 50% presencial al firmar contrato.<br>
+        • 50% restante 1 hora antes del evento.
     </div>
 
-    <div style="margin: 15px 0;">
-        <input type="checkbox" id="aceptar"> Acepto los términos y condiciones.
-    </div>
-
+    <input type="checkbox" id="aceptar"> Acepto los términos y condiciones.<br>
     <button class="btn-enviar" onclick="enviar()">ENVIAR SOLICITUD</button>
     <button class="btn-reinicio" onclick="window.location.reload()">REINICIAR</button>
 </div>
 
 <script>
     function actualizar() {
-        // Lógica de cálculo...
+        let tC = 0, tP = 0;
+        document.querySelectorAll('.input-cant').forEach(i => {
+            let c = parseInt(i.value) || 0;
+            tC += c; tP += (c * parseFloat(i.dataset.precio));
+        });
+        document.getElementById('contador').innerText = "Total cócteles: " + tC + " / 50";
+        document.getElementById('presupuesto').innerText = "TOTAL ESTIMADO: $" + tP.toFixed(2);
     }
     function enviar() {
         if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones."); return; }
-        alert("Solicitud enviada.");
+        alert("Solicitud enviada al Maestro Willian.");
     }
 </script>
 </body>
