@@ -1,99 +1,112 @@
-<!DOCTYPE html><html lang="es"><head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<title>Cotizador | Los Cócteles de Willian</title> 
-<link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
-</head><body><div class="contenedor"> <h1>Cotizador</h1>
-<p class="subtitulo">"Arme usted su paquete a todo costo según su presupuesto, nos adaptamos a su necesidad."</p>
-<input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente"> 
-<input type="text" id="telefonoCliente" class="campo" placeholder="Teléfono del cliente">
-<input type="text" id="tipoEvento" class="campo" placeholder="Tipo de evento">
-<input type="text" id="direccionEvento" class="campo" placeholder="Dirección del evento">
-<input type="number" id="invitados" class="campo" placeholder="Número de invitados">
-<input type="date" id="fecha" class="campo">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador | Los Cócteles de Willian</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Cotizador</h1>
+        <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
+        <input type="text" id="telefonoCliente" class="campo" placeholder="Teléfono del cliente">
+        <input type="text" id="tipoEvento" class="campo" placeholder="Tipo de evento">
+        <input type="text" id="direccionEvento" class="campo" placeholder="Dirección del evento">
+        <input type="number" id="invitados" class="campo" placeholder="Número de invitados">
 
-<label style="color: #FFD700;">Seleccionar productos:</label> 
-<select id="productoSelect" class="campo"> 
-    <option value="">-- Elige un producto --</option> 
-    <option value="Bartender" data-precio="70">Bartender ($70)</option>
-    <option value="Kg extra Proteína" data-precio="5">Kg Extra Proteína ($5)</option> 
-    <option value="Parrillero" data-precio="70">Parrillero ($70)</option> 
-    <option value="Mesonero" data-precio="65">Mesonero ($65)</option> 
-    <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option> 
-    <option value="Daiquiri" data-precio="2">Daiquiri ($2)</option>
-    <option value="Ron Punch" data-precio="1.8">Ron Punch ($1.8)</option> 
-    <option value="Cuba Libre" data-precio="1.8">Cuba Libre ($1.8)</option> 
-    <option value="Caipiroska" data-precio="1.8">Caipiroska ($1.8)</option>
-    <option value="Destornillador" data-precio="1.8">Destornillador ($1.8)</option>
-    <option value="Sex on the Beach" data-precio="2.5">Sex on the Beach ($2.5)</option>
-    <option value="Mojito Cubano" data-precio="2">Mojito Cubano ($2)</option>
-    <option value="Polvo de media noche" data-precio="3">Polvo de media noche ($3)</option> 
-    <option value="Arcoíris" data-precio="2.5">Arcoíris ($2.5)</option>
-    <option value="Tequila Sunrise" data-precio="3">Tequila Sunrise ($3)</option> 
-    <option value="Canto de Sirena" data-precio="3.5">Canto de Sirena ($3.5)</option>
-    <option value="Cóctel Frutos Secos" data-precio="2.5">Cóctel Frutos Secos ($2.5)</option>
-    <option value="Coco Loco" data-precio="3">Coco Loco ($3)</option> 
-    <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option> 
-    <option value="Orgasmo Múltiple" data-precio="5">Orgasmo Múltiple ($5)</option>
-    <option value="Margarita" data-precio="3">Margarita ($3)</option> 
-</select>
-<input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1"> 
-<button class="btn-enviar" style="background:#444; margin-bottom:10px;" onclick="agregarProducto()">AÑADIR A LA LISTA</button> 
-<div class="lista-pedido" id="lista-pedido"><b>Resumen de tu selección:</b></div>
-<div id="presupuesto">TOTAL A INVERTIR: $0.00</div> 
+        <select id="productoSelect" class="campo">
+            <option value="">-- Elige un producto --</option>
+            <option value="Bartender" data-precio="70">Bartender ($70)</option>
+            <option value="Kg extra Proteína" data-precio="5">Kg Extra Proteína ($5)</option>
+            <option value="Parrillero" data-precio="70">Parrillero ($70)</option>
+            <option value="Mesonero" data-precio="65">Mesonero ($65)</option>
+            <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option>
+            <option value="Daiquiri" data-precio="2">Daiquiri ($2)</option>
+            <option value="Ron Punch" data-precio="1.8">Ron Punch ($1.8)</option>
+            <option value="Cuba Libre" data-precio="1.8">Cuba Libre ($1.8)</option>
+            <option value="Caipiroska" data-precio="1.8">Caipiroska ($1.8)</option>
+            <option value="Destornillador" data-precio="1.8">Destornillador ($1.8)</option>
+            <option value="Sex on the Beach" data-precio="2.5">Sex on the Beach ($2.5)</option>
+            <option value="Mojito Cubano" data-precio="2">Mojito Cubano ($2)</option>
+            <option value="Polvo de media noche" data-precio="3">Polvo de media noche ($3)</option>
+            <option value="Arcoíris" data-precio="2.5">Arcoíris ($2.5)</option>
+            <option value="Tequila Sunrise" data-precio="3">Tequila Sunrise ($3)</option>
+            <option value="Canto de Sirena" data-precio="3.5">Canto de Sirena ($3.5)</option>
+            <option value="Cóctel Frutos Secos" data-precio="2.5">Cóctel Frutos Secos ($2.5)</option>
+            <option value="Coco Loco" data-precio="3">Coco Loco ($3)</option>
+            <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option>
+            <option value="Orgasmo Múltiple" data-precio="5">Orgasmo Múltiple ($5)</option>
+            <option value="Margarita" data-precio="3">Margarita ($3)</option>
+        </select>
+        <input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1">
+        <button class="btn-enviar" style="background:#444; margin-bottom:10px;" onclick="agregarProducto()">AÑADIR A LA LISTA</button>
 
-<button class="btn-enviar" style="background:#d4af37; margin-top:10px;" onclick="generarFactura()">GENERAR FACTURA PDF</button>
+        <div class="lista-pedido" id="lista-pedido"><b>Resumen:</b></div>
+        <div id="presupuesto">TOTAL: $0.00</div>
+        <input type="checkbox" id="aceptar"> <b>Acepto condiciones.</b><br>
+        <button class="btn-enviar" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button>
+        <button class="btn-enviar" style="background:#d4af37; margin-top:10px;" onclick="generarFactura()">GENERAR FACTURA PDF</button>
 
-<script>
-    let total = 0; let items = []; 
-    function agregarProducto() {
-        let select = document.getElementById('productoSelect');
-        let opt = select.options[select.selectedIndex];
-        let cantidad = document.getElementById('cantidad').value;
-        if (opt.value === "" || cantidad < 1) return; 
-        let subtotal = parseFloat(opt.dataset.precio) * cantidad;
-        total += subtotal;
-        items.push({id: Date.now(), desc: cantidad + "x " + opt.value, precio: subtotal});
-        actualizarLista();
-    }
-    function actualizarLista() {
-        let lista = document.getElementById('lista-pedido'); 
-        lista.innerHTML = "<b>Resumen:</b>";
-        items.forEach(item => {
-            lista.innerHTML += "<div>" + item.desc + " ($" + item.precio.toFixed(2) + ")</div>";
-        });
-        document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2); 
-    }
-    function generarFactura() {
-        let ventana = window.open('', '_blank');
-        ventana.document.write(`
-            <div style="font-family: Arial; padding: 20px; border: 2px solid #FFD700; max-width: 500px; margin: auto; color: #000;">
-                <div style="text-align: center;">
-                    <h2>Los Cócteles de Willian</h2>
-                    <p><strong>Emprendimiento Willian Campos</strong><br>RIF: J-50833687-9 | Tel: 04248237912</p>
-                </div>
-                <hr>
-                <p><strong>Nº Cotización:</strong> ${Date.now().toString().slice(-6)}</p>
-                <p><strong>Cliente:</strong> ${document.getElementById('nombre').value}</p>
-                <p><strong>Teléfono:</strong> ${document.getElementById('telefonoCliente').value}</p>
-                <p><strong>Evento:</strong> ${document.getElementById('tipoEvento').value}</p>
-                <p><strong>Dirección:</strong> ${document.getElementById('direccionEvento').value}</p>
-                <p><strong>Invitados:</strong> ${document.getElementById('invitados').value}</p>
-                <hr>
-                <table style="width: 100%;">${items.map(i => `<tr><td>${i.desc}</td><td style="text-align: right;">$${i.precio.toFixed(2)}</td></tr>`).join('')}</table>
-                <hr>
-                <p>IVA: $0.00 | Descuentos: $0.00</p>
-                <p>Sub-total: $${total.toFixed(2)}</p>
-                <p style="font-size: 1.8em; text-align: right; color: #8B0000;"><strong>TOTAL: $${total.toFixed(2)}</strong></p>
-                <hr>
-                <div style="font-size: 0.8em;">
-                    <p><strong>Nuestras reglas de oro:</strong> Calidad, respeto y puntualidad.</p>
-                    <p><strong>Medios de pago:</strong> Efectivo, Pago Móvil o Divisas.</p>
-                    <p><strong>Ofertas:</strong> Consulte nuestras promociones vigentes.</p>
-                    <p style="text-align: center;"><strong>Dirección:</strong> Santa Cruz, Edo. Aragua y El Tigre, Edo. Anzoátegui, Venezuela.</p>
-                </div>
-            </div>
-        `);
-        ventana.document.close();
-    }
-</script>
-</body></html>
+        <script>
+            if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+            let total = 0; let items = [];
+            function agregarProducto() {
+                let select = document.getElementById('productoSelect');
+                let opt = select.options[select.selectedIndex];
+                let cantidad = document.getElementById('cantidad').value;
+                if (opt.value === "" || cantidad < 1) return;
+                let subtotal = parseFloat(opt.dataset.precio) * cantidad;
+                total += subtotal;
+                items.push({id: Date.now(), desc: cantidad + "x " + opt.value, precio: subtotal});
+                actualizarLista();
+            }
+            function eliminarProducto(id) {
+                let index = items.findIndex(item => item.id === id);
+                total -= items[index].precio;
+                items.splice(index, 1);
+                actualizarLista();
+            }
+            function actualizarLista() {
+                let lista = document.getElementById('lista-pedido');
+                lista.innerHTML = "<b>Resumen:</b>";
+                items.forEach(item => {
+                    lista.innerHTML += "<div>" + item.desc + " ($" + item.precio.toFixed(2) + ") <button onclick='eliminarProducto("+item.id+")' style='background:red; color:white; border:none;'>X</button></div>";
+                });
+                document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2);
+            }
+            function generarFactura() {
+                let ventana = window.open('', '_blank');
+                ventana.document.write(`
+                    <div style="font-family: Arial; padding: 20px; border: 2px solid #FFD700; max-width: 450px; margin: auto;">
+                        <div style="text-align: center;">
+                            <img src="mi-logo.png" style="width: 80px;"><br>
+                            <h2>Los Cócteles de Willian</h2>
+                            <p><strong>Emprendimiento Willian Campos</strong><br>RIF: J-50833687-9 | Tel: 04248237912</p>
+                        </div>
+                        <hr>
+                        <p><strong>Nº Cotización:</strong> ${Date.now().toString().slice(-6)}</p>
+                        <p><strong>Cliente:</strong> ${document.getElementById('nombre').value}</p>
+                        <p><strong>Teléfono:</strong> ${document.getElementById('telefonoCliente').value}</p>
+                        <p><strong>Evento:</strong> ${document.getElementById('tipoEvento').value}</p>
+                        <p><strong>Dirección:</strong> ${document.getElementById('direccionEvento').value}</p>
+                        <table style="width: 100%;">${items.map(i => `<tr><td>${i.desc}</td><td style="text-align: right;">$${i.precio.toFixed(2)}</td></tr>`).join('')}</table>
+                        <hr>
+                        <p style="font-size: 1.5em; text-align: right; color: #8B0000;"><strong>TOTAL: $${total.toFixed(2)}</strong></p>
+                        <hr>
+                        <p><strong>Reglas de oro:</strong> Calidad, respeto y puntualidad.</p>
+                        <p style="text-align: center;">Santa Cruz, Edo. Aragua y El Tigre, Edo. Anzoátegui, Venezuela.</p>
+                        <button onclick="window.print()">IMPRIMIR / GUARDAR PDF</button>
+                    </div>
+                `);
+                ventana.document.close();
+            }
+            function enviarWhatsApp() {
+                if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones."); return; }
+                let msg = "Nuevo pedido de " + document.getElementById('nombre').value + ": " + items.map(i => i.desc).join(", ") + ". Total: $" + total.toFixed(2);
+                window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
+            }
+        </script>
+    </body>
+</html>
