@@ -1,104 +1,109 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotizador | Los Cócteles de Willian</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="contenedor">
-    <h1>Cotizador</h1>
-    <p class="subtitulo">"Arme usted su paquete a todo costo según su presupuesto, nos adaptamos a su necesidad."</p>
-    
-    <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
-    <input type="number" id="invitados" class="campo" placeholder="Número de invitados">
-    <input type="date" id="fecha" class="campo">
-    
-    <label style="color: #FFD700;">Seleccionar productos:</label>
-    <select id="productoSelect" class="campo">
-        <option value="">-- Elige un producto --</option>
-        <option value="Bartender" data-precio="70">Bartender ($70)</option>
-        <option value="Kg extra Proteína" data-precio="5">Kg Extra Proteína ($5)</option>
-        <option value="Parrillero" data-precio="70">Parrillero ($70)</option>
-        <option value="Mesonero" data-precio="65">Mesonero ($65)</option>
-        <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option>
-        <option value="Daiquiri" data-precio="2">Daiquiri ($2)</option>
-        <option value="Ron Punch" data-precio="1.8">Ron Punch ($1.8)</option>
-        <option value="Cuba Libre" data-precio="1.8">Cuba Libre ($1.8)</option>
-        <option value="Destornillador" data-precio="1.8">Destornillador ($1.8)</option>
-        <option value="Sex on the Beach" data-precio="2.5">Sex on the Beach ($2.5)</option>
-        <option value="Caipiroska" data-precio="1.8">Caipiroska ($1.8)</option>
-        <option value="Mojito Cubano" data-precio="2">Mojito Cubano ($2)</option>
-        <option value="Polvo de media noche" data-precio="3">Polvo de media noche ($3)</option>
-        <option value="Arcoíris" data-precio="2.5">Arcoíris ($2.5)</option>
-        <option value="Tequila Sunrise" data-precio="3">Tequila Sunrise ($3)</option>
-        <option value="Canto de Sirena" data-precio="3.5">Canto de Sirena ($3.5)</option>
-        <option value="Frutos Secos" data-precio="2.5">Cóctel Frutos Secos ($2.5)</option>
-        <option value="Coco Loco" data-precio="3">Coco Loco ($3)</option>
-        <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option>
-        <option value="Orgasmo Múltiple" data-precio="5">Orgasmo Múltiple ($5)</option>
-        <option value="Margarita" data-precio="3">Margarita ($3)</option>
-    </select>
-    
-    <input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1">
-    <button class="btn-enviar" style="background:#444; margin-bottom:10px;" onclick="agregarProducto()">AÑADIR A LA LISTA</button>
+<!DOCTYPE html><html lang="es"><head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Cotizador | Los Cócteles de Willian</title> 
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+</head><body><div class="contenedor"> <h1>Cotizador</h1>
+<p class="subtitulo">"Arme usted su paquete a todo costo según su presupuesto, nos adaptamos a su necesidad."</p>
+<input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente"> 
+<input type="number" id="invitados" class="campo" placeholder="Número de invitados">
+<input type="date" id="fecha" class="campo">
+<label style="color: #FFD700;">Seleccionar productos:</label> 
+<select id="productoSelect" class="campo"> 
+    <option value="">-- Elige un producto --</option> 
+    <option value="Bartender" data-precio="70">Bartender ($70)</option>
+    <option value="Kg extra Proteína" data-precio="5">Kg Extra Proteína ($5)</option> 
+    <option value="Parrillero" data-precio="70">Parrillero ($70)</option> 
+    <option value="Mesonero" data-precio="65">Mesonero ($65)</option> 
+    <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option> 
+    <option value="Daiquiri" data-precio="2">Daiquiri ($2)</option>
+    <option value="Ron Punch" data-precio="1.8">Ron Punch ($1.8)</option> 
+    <option value="Cuba Libre" data-precio="1.8">Cuba Libre ($1.8)</option> 
+    <option value="Caipiroska" data-precio="1.8">Caipiroska ($1.8)</option>
+    <option value="Destornillador" data-precio="1.8">Destornillador ($1.8)</option>
+    <option value="Sex on the Beach" data-precio="2.5">Sex on the Beach ($2.5)</option>
+    <option value="Mojito Cubano" data-precio="2">Mojito Cubano ($2)</option>
+    <option value="Polvo de media noche" data-precio="3">Polvo de media noche ($3)</option> 
+    <option value="Arcoíris" data-precio="2.5">Arcoíris ($2.5)</option>
+    <option value="Tequila Sunrise" data-precio="3">Tequila Sunrise ($3)</option> 
+    <option value="Canto de Sirena" data-precio="3.5">Canto de Sirena ($3.5)</option>
+    <option value="Cóctel Frutos Secos" data-precio="2.5">Cóctel Frutos Secos ($2.5)</option>
+    <option value="Coco Loco" data-precio="3">Coco Loco ($3)</option> 
+    <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option> 
+    <option value="Orgasmo Múltiple" data-precio="5">Orgasmo Múltiple ($5)</option>
+    <option value="Margarita" data-precio="3">Margarita ($3)</option> 
+</select>
+<input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1"> 
+<button class="btn-enviar" style="background:#444; margin-bottom:10px;" onclick="agregarProducto()">AÑADIR A LA LISTA</button> 
+<div class="lista-pedido" id="lista-pedido"><b>Resumen de tu selección:</b></div>
+<div id="presupuesto">TOTAL A INVERTIR: $0.00</div> 
 
-    <div class="lista-pedido" id="lista-pedido"><b>Resumen de tu selección:</b></div>
-    <div id="presupuesto">TOTAL A INVERTIR: $0.00</div>
+<div class="condiciones">
+    <b>Condiciones:</b><br> • 50% para apartar fecha.<br>
+    • 50% restante al menos una hora antes del inicio del evento.<br> • 33 años de trayectoria profesional garantizan nuestra calidad. 
+</div> 
+<input type="checkbox" id="aceptar"> <b>Acepto las condiciones y términos.</b><br> 
+<button class="btn-enviar" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button> 
+<button class="btn-reinicio" onclick="window.location.reload()">REINICIAR</button>
 
-    <div class="condiciones">
-        <b>Condiciones:</b><br>
-        • 50% para apartar fecha.<br>
-        • 50% restante al menos una hora antes del inicio del evento.<br>
-        • 33 años de trayectoria profesional garantizan nuestra calidad.
+<!-- SECCIÓN PRIVADA -->
+<div style="margin-top: 30px; border: 1px solid #FFD700; padding: 10px; border-radius: 5px;">
+    <h3 style="color: #FFD700; cursor: pointer; text-align: center;" onclick="toggleHistorial()">📋 Registro Privado (Solo para Willian)</h3>
+    <div id="seccion-historial" style="display: none;">
+        <div id="historial-lista" style="font-size: 0.8em; color: #fff; margin-bottom: 10px;"></div>
+        <button class="btn-reinicio" style="background:#8B0000;" onclick="borrarHistorial()">BORRAR TODO EL HISTORIAL</button>
     </div>
-
-    <input type="checkbox" id="aceptar"> <b>Acepto las condiciones y términos.</b><br>
-    <button class="btn-enviar" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button>
-    <button class="btn-reinicio" onclick="window.location.reload()">REINICIAR</button>
+</div>
 </div>
 
 <script>
-    let total = 0;
-    let items = [];
-
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+    let total = 0; let items = []; 
     function agregarProducto() {
         let select = document.getElementById('productoSelect');
         let opt = select.options[select.selectedIndex];
         let cantidad = document.getElementById('cantidad').value;
-        if (opt.value === "" || cantidad < 1) return;
-        
+        if (opt.value === "" || cantidad < 1) return; 
         let subtotal = parseFloat(opt.dataset.precio) * cantidad;
         total += subtotal;
         let idUnico = Date.now();
         items.push({id: idUnico, desc: cantidad + "x " + opt.value, precio: subtotal});
-        
         actualizarLista();
         select.value = ""; document.getElementById('cantidad').value = "";
     }
-
-    function eliminarProducto(id) {
+    function eliminarProducto(id) { 
         let index = items.findIndex(item => item.id === id);
         total -= items[index].precio;
         items.splice(index, 1);
-        actualizarLista();
-    }
-
+        actualizarLista(); 
+    } 
     function actualizarLista() {
-        let lista = document.getElementById('lista-pedido');
+        let lista = document.getElementById('lista-pedido'); 
         lista.innerHTML = "<b>Resumen:</b>";
         items.forEach(item => {
             lista.innerHTML += "<div>" + item.desc + " ($" + item.precio.toFixed(2) + ") <button onclick='eliminarProducto(" + item.id + ")' style='background:red; color:white; border:none; cursor:pointer;'>X</button></div>";
         });
-        document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2);
+        document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2); 
     }
-
-    function enviarWhatsApp() {
+    // Funciones del Registro Privado
+    function toggleHistorial() {
+        let s = document.getElementById('seccion-historial');
+        s.style.display = (s.style.display === "none") ? "block" : "none";
+        let h = JSON.parse(localStorage.getItem('misEventos') || "[]");
+        document.getElementById('historial-lista').innerHTML = h.map(e => "<p style='border-bottom:1px solid #444; padding:5px;'>"+e.fecha+" | "+e.cliente+" | $"+e.total+"</p>").join("");
+    }
+    function guardarRegistro() {
+        let h = JSON.parse(localStorage.getItem('misEventos') || "[]");
+        h.push({fecha: new Date().toLocaleDateString(), cliente: document.getElementById('nombre').value, total: total.toFixed(2)});
+        localStorage.setItem('misEventos', JSON.stringify(h));
+    }
+    function borrarHistorial() {
+        if(confirm("¿Seguro que desea borrar todo?")) { localStorage.removeItem('misEventos'); location.reload(); }
+    }
+    function enviarWhatsApp() { 
         if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones."); return; }
-        let msg = "Pedido de " + document.getElementById('nombre').value + ": " + items.map(i => i.desc).join(", ") + ". Total: $" + total.toFixed(2);
-        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
+        guardarRegistro();
+        let msg = "Pedido de " + document.getElementById('nombre').value + ":" + items.map(i => i.desc).join(", ") + ". Total: $" + total.toFixed(2); 
+        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg)); 
     }
 </script>
-</body>
-</html>
+</body></html>
