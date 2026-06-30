@@ -1,77 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotizador | Los Cócteles de Willian</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #000000; color: #ffffff; margin: 0; display: flex; justify-content: center; }
-        .wrapper { width: 100%; max-width: 500px; background-color: #000000; min-height: 100vh; padding: 20px; box-sizing: border-box; border-left: 1px solid #333; border-right: 1px solid #333; }
-        h1 { color: #d4af37; text-align: center; text-transform: uppercase; }
-        .campo { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; box-sizing: border-box; }
-        .btn-enviar { width: 100%; padding: 15px; background: #d4af37; border: none; color: #000; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top: 10px; }
-        .menu-flotante { text-align: center; margin-bottom: 20px; }
-        .menu-flotante a { color: #d4af37; text-decoration: none; font-weight: bold; }
-    </style>
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Cotizador | Los Cócteles de Willian</title> 
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
-<div class="wrapper">
-    <nav class="menu-flotante"><a href="index.html">← Volver a Inicio</a></nav>
-    <h1>Cotizador</h1>
-    <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
-    <select id="productoSelect" class="campo">
-        <option value="">-- Elige un producto --</option>
-        <option value="Bartender" data-precio="70">Bartender ($70)</option>
-        <option value="Parrillero" data-precio="70">Parrillero ($70)</option>
-        <option value="Mesonero" data-precio="65">Mesonero ($65)</option>
-        <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option>
-        <option value="Daiquiri" data-precio="2">Daiquiri ($2)</option>
-        <option value="Ron Punch" data-precio="1.8">Ron Punch ($1.8)</option>
-        <option value="Cuba Libre" data-precio="1.8">Cuba Libre ($1.8)</option>
-        <option value="Caipiroska" data-precio="1.8">Caipiroska ($1.8)</option>
-        <option value="Destornillador" data-precio="1.8">Destornillador ($1.8)</option>
-        <option value="Sex on the Beach" data-precio="2.5">Sex on the Beach ($2.5)</option>
-        <option value="Mojito Cubano" data-precio="2">Mojito Cubano ($2)</option>
-        <option value="Polvo de media noche" data-precio="3">Polvo de media noche ($3)</option>
-        <option value="Arcoíris" data-precio="2.5">Arcoíris ($2.5)</option>
-        <option value="Tequila Sunrise" data-precio="3">Tequila Sunrise ($3)</option>
-        <option value="Canto de Sirena" data-precio="3.5">Canto de Sirena ($3.5)</option>
-        <option value="Cóctel Frutos Secos" data-precio="2.5">Cóctel Frutos Secos ($2.5)</option>
-        <option value="Coco Loco" data-precio="3">Coco Loco ($3)</option>
-        <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option>
-        <option value="Orgasmo Múltiple" data-precio="5">Orgasmo Múltiple ($5)</option>
-        <option value="Margarita" data-precio="3">Margarita ($3)</option>
-        <option value="Magallanes Campeón" data-precio="3">Magallanes Campeón ($3)</option>
-    </select>
-    <input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1">
-    <button class="btn-enviar" onclick="agregarProducto()">AÑADIR A LA LISTA</button>
-    <div id="lista-pedido" style="margin-top:20px; color:#ccc;"><b>Resumen:</b></div>
-    <div id="presupuesto" style="font-size: 1.5em; font-weight: bold; margin-top:20px; color:#d4af37; text-align:center;">TOTAL: $0.00</div>
-    <button class="btn-enviar" style="background:#25d366; color:white;" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button>
-
-    <script>
-        let total = 0; let items = [];
-        function agregarProducto() {
-            let select = document.getElementById('productoSelect');
-            let opt = select.options[select.selectedIndex];
-            let cantidad = document.getElementById('cantidad').value;
-            if (opt.value === "" || cantidad < 1) return;
-            let subtotal = parseFloat(opt.dataset.precio) * cantidad;
-            total += subtotal;
-            items.push({desc: cantidad + "x " + opt.value, precio: subtotal});
-            actualizarLista();
-        }
-        function actualizarLista() {
-            let lista = document.getElementById('lista-pedido');
-            lista.innerHTML = "<b>Resumen:</b>";
-            items.forEach(item => { lista.innerHTML += "<div>" + item.desc + " ($" + item.precio.toFixed(2) + ")</div>"; });
-            document.getElementById('presupuesto').innerText = "TOTAL: $" + total.toFixed(2);
-        }
-        function enviarWhatsApp() {
-            let msg = "Pedido de " + document.getElementById('nombre').value + ": " + items.map(i => i.desc).join(", ") + ". Total: $" + total.toFixed(2);
-            window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
-        }
+    <div class="contenedor"> 
+        <h1>Cotizador</h1> 
+        <p class="subtitulo">"Arme usted su paquete a todo costo según su presupuesto, nos adaptamos a su necesidad."</p> 
+        <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente"> 
+        <input type="number" id="invitados" class="campo" placeholder="Número de invitados"> 
+        <input type="date" id="fecha" class="campo"> 
+        <label style="color: #FFD700;">Seleccionar productos:</label> 
+        <select id="productoSelect" class="campo"> 
+            <option value="">-- Elige un producto --</option> 
+            <option value="Bartender" data-precio="70">Bartender ($70)</option> 
+            <option value="Parrillero" data-precio="70">Parrillero ($70)</option> 
+            <option value="Kg extra Proteína" data-precio="5">Kg Extra Proteína ($5)</option> 
+            <option value="Mesonero" data-precio="65">Mesonero ($65)</option> 
+            <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option> 
+            <option value="Daiquiri" data-precio="2">Daiquiri ($2)</option> 
+            <option value="Ron Punch" data-precio="1.8">Ron Punch ($1.8)</option> 
+            <option value="Cuba Libre" data-precio="1.8">Cuba Libre ($1.8)</option> 
+            <option value="Caipiroska" data-precio="1.8">Caipiroska ($1.8)</option> 
+            <option value="Destornillador" data-precio="1.8">Destornillador ($1.8)</option> 
+            <option value="Sex on the Beach" data-precio="2.5">Sex on the Beach ($2.5)</option> 
+            <option value="Mojito Cubano" data-precio="2">Mojito Cubano ($2)</option> 
+            <option value="Polvo de media noche" data-precio="3">Polvo de media noche ($3)</option> 
+            <option value="Arcoíris" data-precio="2.5">Arcoíris ($2.5)</option> 
+            <option value="Tequila Sunrise" data-precio="3">Tequila Sunrise ($3)</option> 
+            <option value="Canto de Sirena" data-precio="3.5">Canto de Sirena ($3.5)</option> 
+            <option value="Frutos Secos" data-precio="2.5">Cóctel Frutos Secos ($2.5)</option> 
+            <option value="Coco Loco" data-precio="3">Coco Loco ($3)</option> 
+            <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option> 
+            <option value="Orgasmo Múltiple" data-precio="5">Orgasmo Múltiple ($5)</option> 
+            <option value="Margarita" data-precio="3">Margarita ($3)</option> 
+        </select> 
+        <input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1"> 
+        <button class="btn-enviar" style="background:#444; margin-bottom:10px;" onclick="agregarProducto()">AÑADIR A LA LISTA</button> 
+        <div class="lista-pedido" id="lista-pedido"><b>Resumen de tu selección:</b></div> 
+        <div id="presupuesto">TOTAL A INVERTIR: $0.00</div> 
+        <div class="condiciones"> 
+            <b>Condiciones:</b><br> 
+            • 50% para apartar fecha.<br> 
+            • 50% restante al menos una hora antes del inicio del evento.<br> 
+            • 33 años de trayectoria profesional garantizan nuestra calidad. 
+        </div> 
+        <input type="checkbox" id="aceptar"> <b>Acepto las condiciones y términos.</b><br> 
+        <button class="btn-enviar" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button> 
+        <button class="btn-reinicio" onclick="window.location.reload()">REINICIAR</button> 
+    </div> 
+    <script> 
+        let total = 0; let items = []; 
+        function agregarProducto() { 
+            let select = document.getElementById('productoSelect'); 
+            let opt = select.options[select.selectedIndex]; 
+            let cantidad = document.getElementById('cantidad').value; 
+            if (opt.value === "" || cantidad < 1) return; 
+            let subtotal = parseFloat(opt.dataset.precio) * cantidad; 
+            total += subtotal; 
+            let idUnico = Date.now(); 
+            items.push({id: idUnico, desc: cantidad + "x " + opt.value, precio: subtotal}); 
+            actualizarLista(); 
+            select.value = ""; document.getElementById('cantidad').value = ""; 
+        } 
+        function eliminarProducto(id) { 
+            let index = items.findIndex(item => item.id === id); 
+            total -= items[index].precio; 
+            items.splice(index, 1); 
+            actualizarLista(); 
+        } 
+        function actualizarLista() { 
+            let lista = document.getElementById('lista-pedido'); 
+            lista.innerHTML = "<b>Resumen:</b>"; 
+            items.forEach(item => { lista.innerHTML += "<div>" + item.desc + " ($" + item.precio.toFixed(2) + ") <button onclick='eliminarProducto(" + item.id + ")' style='background:red; color:white; border:none; cursor:pointer;'>X</button></div>"; }); 
+            document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2); 
+        } 
+        function enviarWhatsApp() { 
+            if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones."); return; } 
+            let msg = "Pedido de " + document.getElementById('nombre').value + ": " + items.map(i => i.desc).join(", ") + ". Total: $" + total.toFixed(2); 
+            window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg)); 
+        } 
     </script>
-</div>
 </body>
 </html>
