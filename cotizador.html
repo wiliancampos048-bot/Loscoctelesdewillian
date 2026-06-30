@@ -2,40 +2,54 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizador | Los Cócteles de Willian</title>
     <style>
-        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 15px; }
-        .contenedor { max-width: 500px; margin: auto; border: 2px solid #FFD700; padding: 20px; border-radius: 10px; background: #000; }
-        h1 { color: #FFD700; text-align: center; font-size: 1.8em; margin-bottom: 10px; text-transform: uppercase; }
-        label { color: #FFD700; font-weight: bold; display: block; margin-top: 10px; }
-        .campo { width: 100%; padding: 12px; margin: 8px 0; background: #222; color: #fff; border: 1px solid #FFD700; border-radius: 5px; box-sizing: border-box; }
-        .btn-enviar { width: 100%; padding: 15px; background: #25d366; border: none; border-radius: 5px; font-weight: bold; color: white; cursor: pointer; margin-top: 10px; }
-        .btn-secundario { background: #555; }
-        .btn-del { background: #ff0000; color: white; border: none; padding: 2px 8px; cursor: pointer; border-radius: 3px; }
-        #presupuesto { text-align: center; font-weight: bold; color: #FFD700; margin: 20px 0; font-size: 1.3em; border: 1px solid #FFD700; padding: 10px; }
+        body { background: #000; color: #fff; font-family: sans-serif; padding: 20px; }
+        .contenedor { max-width: 500px; margin: auto; border: 2px solid #FFD700; padding: 20px; border-radius: 10px; }
+        h1 { color: #FFD700; text-align: center; text-transform: uppercase; }
+        .campo { width: 100%; padding: 10px; margin: 5px 0; background: #222; color: #fff; border: 1px solid #FFD700; }
+        .btn { width: 100%; padding: 12px; margin-top: 10px; border: none; font-weight: bold; cursor: pointer; }
+        .btn-verde { background: #25d366; color: white; }
+        .btn-oro { background: #FFD700; color: #000; }
+        .btn-rojo { background: #8B0000; color: white; }
+        .btn-del { background: #ff0000; color: white; border: none; padding: 2px 5px; }
     </style>
 </head>
 <body>
 <div class="contenedor">
     <h1>Cotizador</h1>
-    <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente" required>
-    <input type="tel" id="telefono" class="campo" placeholder="Teléfono del Cliente" required>
-    <input type="text" id="direccion" class="campo" placeholder="Dirección del evento" required>
+    <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
+    <input type="tel" id="telefono" class="campo" placeholder="Teléfono del Cliente">
+    <input type="text" id="direccion" class="campo" placeholder="Dirección del evento">
     <input type="date" id="fecha" class="campo">
 
-    <label>Servicios y Productos:</label>
+    <label style="color:#FFD700;"><b>Arma tu parrilla (gramajes):</b></label>
+    <select id="parrillaDetalle" class="campo">
+        <option value="">-- Seleccionar corte / acompañamiento --</option>
+        <option value="200g Solomo">200g Solomo</option>
+        <option value="200g Lomito">200g Lomito</option>
+        <option value="200g Punta Nacional">200g Punta nacional</option>
+        <option value="200g Punta Angus">200g Punta angus</option>
+        <option value="100g Pechuga de pollo">100g Pechuga de pollo</option>
+        <option value="½ muslo de pollo">½ muslo de pollo</option>
+        <option value="200g Cochino">200g Cochino</option>
+        <option value="1 Chorizo">1 Chorizo</option>
+        <option value="1 Morcilla">1 Morcilla</option>
+        <option value="Ensalada rayada dulce">Ensalada rayada dulce</option>
+        <option value="Ensalada mixta">Ensalada mixta</option>
+        <option value="Yuca frita">Yuca frita</option>
+        <option value="Yuca sancochada">Yuca sancochada</option>
+        <option value="Bollito">Bollito</option>
+        <option value="Guasacaca">Guasacaca</option>
+    </select>
+
+    <label style="color:#FFD700;"><b>Menú Completo:</b></label>
     <select id="productoSelect" class="campo">
-        <optgroup label="Parrillas">
+        <optgroup label="Parrillas (Plato armado)">
             <option value="Parrilla de Solomo" data-precio="20">Parrilla de Solomo ($20)</option>
             <option value="Parrilla de Lomito" data-precio="25">Parrilla de Lomito ($25)</option>
             <option value="Parrilla Punta Nacional" data-precio="20">Parrilla Punta Nacional ($20)</option>
             <option value="Parrilla Angus" data-precio="30">Parrilla Angus ($30)</option>
-        </optgroup>
-        <optgroup label="Servicios">
-            <option value="Bartender" data-precio="70">Bartender ($70)</option>
-            <option value="Mesonero" data-precio="65">Mesonero ($65)</option>
-            <option value="Parrillero" data-precio="70">Parrillero ($70)</option>
         </optgroup>
         <optgroup label="Cócteles">
             <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option>
@@ -57,59 +71,54 @@
             <option value="Margarita" data-precio="3">Margarita ($3)</option>
             <option value="Magallanes Campeón" data-precio="3">Magallanes Campeón ($3)</option>
         </optgroup>
+        <optgroup label="Servicios">
+            <option value="Bartender" data-precio="70">Bartender ($70)</option>
+            <option value="Mesonero" data-precio="65">Mesonero ($65)</option>
+            <option value="Parrillero" data-precio="70">Parrillero ($70)</option>
+        </optgroup>
     </select>
-    <input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1">
-    <button class="btn-enviar btn-secundario" onclick="agregarProducto()">AÑADIR A LA LISTA</button>
+    <input type="number" id="cantidad" class="campo" placeholder="Cantidad">
+    <button class="btn btn-verde" onclick="agregar()">AÑADIR A LISTA</button>
 
     <div id="lista-pedido" style="margin-top:15px;"><b>Resumen:</b></div>
-    <div id="presupuesto">TOTAL A INVERTIR: $0.00</div>
+    <div id="presupuesto" style="color:#FFD700; font-size:1.2em; text-align:center;">TOTAL: $0.00</div>
 
-    <label>Método de pago:</label>
-    <select id="pago" class="campo">
-        <option value="Efectivo">Efectivo</option>
-        <option value="Pago Móvil">Pago Móvil</option>
-        <option value="Zelle">Zelle</option>
-    </select>
-
-    <textarea id="notas" class="campo" placeholder="Notas adicionales para el evento..."></textarea>
-
-    <input type="checkbox" id="aceptar"> <b>Acepto las condiciones.</b>
-    
-    <button class="btn-enviar" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button>
-    <button class="btn-enviar btn-secundario" onclick="copiarResumen()">COPIAR RESUMEN</button>
+    <button class="btn btn-verde" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button>
+    <button class="btn btn-oro" onclick="alert('Generando factura...')">GENERAR FACTURA</button>
+    <button class="btn btn-rojo" onclick="window.location.reload()">REINICIAR</button>
 </div>
 
 <script>
     let total = 0; let items = [];
-    function agregarProducto() {
-        let sel = document.getElementById('productoSelect');
-        let opt = sel.options[sel.selectedIndex];
+    function agregar() {
+        let pDet = document.getElementById('parrillaDetalle').value;
+        let pSel = document.getElementById('productoSelect');
+        let opt = pSel.options[pSel.selectedIndex];
         let cant = document.getElementById('cantidad').value;
-        if (!opt.value || cant < 1) return;
-        let subtotal = parseFloat(opt.dataset.precio) * cant;
-        total += subtotal;
+        let desc = pDet ? pDet : opt.value;
+        let precio = opt.dataset.precio ? parseFloat(opt.dataset.precio) : 0;
+        if (!desc || cant < 1) return;
+        total += (precio * cant);
         let id = Date.now();
-        items.push({id, desc: cant + "x " + opt.value, precio: subtotal});
+        items.push({id, desc: cant + "x " + desc, precio: (precio * cant)});
         render();
     }
     function render() {
         let lista = document.getElementById('lista-pedido');
         lista.innerHTML = "<b>Resumen:</b>";
         items.forEach(i => {
-            lista.innerHTML += `<div>${i.desc} ($${i.precio.toFixed(2)}) <button class="btn-del" onclick="items=items.filter(x=>x.id!==${i.id}); total-=${i.precio}; render()">X</button></div>`;
+            lista.innerHTML += `<div>${i.desc} ($${i.precio.toFixed(2)}) <button class='btn-del' onclick='remover(${i.id}, ${i.precio})'>X</button></div>`;
         });
-        document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2);
+        document.getElementById('presupuesto').innerText = "TOTAL: $" + total.toFixed(2);
+    }
+    function remover(id, precio) {
+        items = items.filter(i => i.id !== id);
+        total -= precio;
+        render();
     }
     function enviarWhatsApp() {
-        let nom = document.getElementById('nombre').value;
-        if (!nom || !document.getElementById('aceptar').checked) { alert("Complete los campos y acepte condiciones."); return; }
-        alert("¡Maestro Willian, tiene una solicitud de nuevo evento!");
-        let msg = `NUEVO EVENTO: ${nom}\nFecha: ${document.getElementById('fecha').value}\nItems: ${items.map(i=>i.desc).join(", ")}\nPago: ${document.getElementById('pago').value}\nNotas: ${document.getElementById('notas').value}\nTotal: $${total.toFixed(2)}`;
-        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
-    }
-    function copiarResumen() {
-        let texto = "Resumen de evento:\n" + items.map(i=>i.desc).join("\n") + "\nTotal: $" + total.toFixed(2);
-        navigator.clipboard.writeText(texto); alert("Resumen copiado al portapapeles.");
+        let msg = `SOLICITUD: ${document.getElementById('nombre').value}\nItems: ${items.map(i=>i.desc).join(", ")}\nTotal: $${total.toFixed(2)}`;
+        window.open("https://wa.me/584267746622?text=" + encodeURIComponent(msg));
     }
 </script>
 </body>
