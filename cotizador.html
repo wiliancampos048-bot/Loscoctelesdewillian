@@ -4,26 +4,27 @@
     <meta charset="UTF-8">
     <title>Cotizador | Los Cócteles de Willian</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; padding: 20px; }
-        .contenedor { max-width: 500px; margin: auto; border: 2px solid #FFD700; padding: 20px; border-radius: 10px; }
-        h1 { color: #FFD700; text-align: center; text-transform: uppercase; }
-        .campo { width: 100%; padding: 10px; margin: 5px 0; background: #222; color: #fff; border: 1px solid #FFD700; }
-        .btn { width: 100%; padding: 12px; margin-top: 10px; border: none; font-weight: bold; cursor: pointer; }
+        body { background: #000; color: #fff; font-family: sans-serif; padding: 5px; } /* Menos padding general */
+        .contenedor { max-width: 450px; margin: auto; border: 2px solid #FFD700; padding: 10px; border-radius: 8px; } /* Menos padding interno */
+        h1 { color: #FFD700; text-align: center; font-size: 1.4em; margin: 5px 0; text-transform: uppercase; }
+        .campo { width: 100%; padding: 8px; margin: 4px 0; background: #222; color: #fff; border: 1px solid #FFD700; font-size: 0.9em; }
+        .btn { width: 100%; padding: 10px; margin-top: 5px; border: none; font-weight: bold; cursor: pointer; font-size: 0.9em; }
         .btn-verde { background: #25d366; color: white; }
         .btn-oro { background: #FFD700; color: #000; }
         .btn-rojo { background: #8B0000; color: white; }
-        .btn-del { background: #ff0000; color: white; border: none; padding: 2px 5px; }
+        .btn-del { background: #ff0000; color: white; border: none; padding: 1px 5px; font-size: 0.8em; }
+        #presupuesto { color:#FFD700; font-size:1.1em; text-align:center; margin: 10px 0; font-weight: bold; }
     </style>
 </head>
 <body>
 <div class="contenedor">
     <h1>Cotizador</h1>
-    <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
-    <input type="tel" id="telefono" class="campo" placeholder="Teléfono del Cliente">
-    <input type="text" id="direccion" class="campo" placeholder="Dirección del evento">
+    <input type="text" id="nombre" class="campo" placeholder="Nombre">
+    <input type="tel" id="telefono" class="campo" placeholder="Teléfono">
+    <input type="text" id="direccion" class="campo" placeholder="Dirección">
     <input type="date" id="fecha" class="campo">
 
-    <label style="color:#FFD700;"><b>Arma tu parrilla (gramajes):</b></label>
+    <label style="color:#FFD700; font-size: 0.85em;"><b>Parrilla (gramajes):</b></label>
     <select id="parrillaDetalle" class="campo">
         <option value="">-- Seleccionar corte / acompañamiento --</option>
         <option value="200g Solomo">200g Solomo</option>
@@ -43,9 +44,9 @@
         <option value="Guasacaca">Guasacaca</option>
     </select>
 
-    <label style="color:#FFD700;"><b>Menú Completo:</b></label>
+    <label style="color:#FFD700; font-size: 0.85em;"><b>Menú Completo:</b></label>
     <select id="productoSelect" class="campo">
-        <optgroup label="Parrillas (Plato armado)">
+        <optgroup label="Parrillas">
             <option value="Parrilla de Solomo" data-precio="20">Parrilla de Solomo ($20)</option>
             <option value="Parrilla de Lomito" data-precio="25">Parrilla de Lomito ($25)</option>
             <option value="Parrilla Punta Nacional" data-precio="20">Parrilla Punta Nacional ($20)</option>
@@ -80,8 +81,8 @@
     <input type="number" id="cantidad" class="campo" placeholder="Cantidad">
     <button class="btn btn-verde" onclick="agregar()">AÑADIR A LISTA</button>
 
-    <div id="lista-pedido" style="margin-top:15px;"><b>Resumen:</b></div>
-    <div id="presupuesto" style="color:#FFD700; font-size:1.2em; text-align:center;">TOTAL: $0.00</div>
+    <div id="lista-pedido" style="margin-top:10px; font-size: 0.85em;"><b>Resumen:</b></div>
+    <div id="presupuesto">TOTAL: $0.00</div>
 
     <button class="btn btn-verde" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button>
     <button class="btn btn-oro" onclick="alert('Generando factura...')">GENERAR FACTURA</button>
@@ -118,7 +119,7 @@
     }
     function enviarWhatsApp() {
         let msg = `SOLICITUD: ${document.getElementById('nombre').value}\nItems: ${items.map(i=>i.desc).join(", ")}\nTotal: $${total.toFixed(2)}`;
-        window.open("https://wa.me/584267746622?text=" + encodeURIComponent(msg));
+        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
     }
 </script>
 </body>
