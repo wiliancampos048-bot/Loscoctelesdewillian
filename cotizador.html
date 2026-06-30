@@ -2,29 +2,30 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizador | Los Cócteles de Willian</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; padding: 5px; } /* Menos padding general */
-        .contenedor { max-width: 450px; margin: auto; border: 2px solid #FFD700; padding: 10px; border-radius: 8px; } /* Menos padding interno */
-        h1 { color: #FFD700; text-align: center; font-size: 1.4em; margin: 5px 0; text-transform: uppercase; }
-        .campo { width: 100%; padding: 8px; margin: 4px 0; background: #222; color: #fff; border: 1px solid #FFD700; font-size: 0.9em; }
-        .btn { width: 100%; padding: 10px; margin-top: 5px; border: none; font-weight: bold; cursor: pointer; font-size: 0.9em; }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; }
+        .contenedor { width: 100%; max-width: 600px; margin: auto; border: 2px solid #FFD700; padding: 15px; border-radius: 8px; box-sizing: border-box; }
+        h1 { color: #FFD700; text-align: center; font-size: 1.5em; margin: 0 0 10px 0; text-transform: uppercase; }
+        .campo { width: 100%; padding: 12px; margin: 5px 0; background: #222; color: #fff; border: 1px solid #FFD700; border-radius: 5px; box-sizing: border-box; font-size: 16px; } /* 16px evita que el iPhone haga zoom automático */
+        .btn { width: 100%; padding: 12px; margin-top: 8px; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
         .btn-verde { background: #25d366; color: white; }
         .btn-oro { background: #FFD700; color: #000; }
         .btn-rojo { background: #8B0000; color: white; }
-        .btn-del { background: #ff0000; color: white; border: none; padding: 1px 5px; font-size: 0.8em; }
-        #presupuesto { color:#FFD700; font-size:1.1em; text-align:center; margin: 10px 0; font-weight: bold; }
+        .btn-del { background: #ff0000; color: white; border: none; padding: 5px 10px; border-radius: 3px; }
+        #presupuesto { color:#FFD700; font-size:1.3em; text-align:center; margin: 15px 0; font-weight: bold; border-top: 1px solid #333; padding-top: 10px; }
     </style>
 </head>
 <body>
 <div class="contenedor">
     <h1>Cotizador</h1>
-    <input type="text" id="nombre" class="campo" placeholder="Nombre">
+    <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
     <input type="tel" id="telefono" class="campo" placeholder="Teléfono">
     <input type="text" id="direccion" class="campo" placeholder="Dirección">
     <input type="date" id="fecha" class="campo">
 
-    <label style="color:#FFD700; font-size: 0.85em;"><b>Parrilla (gramajes):</b></label>
+    <label style="color:#FFD700; font-size: 0.9em;"><b>Parrilla (gramajes):</b></label>
     <select id="parrillaDetalle" class="campo">
         <option value="">-- Seleccionar corte / acompañamiento --</option>
         <option value="200g Solomo">200g Solomo</option>
@@ -44,7 +45,7 @@
         <option value="Guasacaca">Guasacaca</option>
     </select>
 
-    <label style="color:#FFD700; font-size: 0.85em;"><b>Menú Completo:</b></label>
+    <label style="color:#FFD700; font-size: 0.9em;"><b>Menú Completo:</b></label>
     <select id="productoSelect" class="campo">
         <optgroup label="Parrillas">
             <option value="Parrilla de Solomo" data-precio="20">Parrilla de Solomo ($20)</option>
@@ -81,7 +82,7 @@
     <input type="number" id="cantidad" class="campo" placeholder="Cantidad">
     <button class="btn btn-verde" onclick="agregar()">AÑADIR A LISTA</button>
 
-    <div id="lista-pedido" style="margin-top:10px; font-size: 0.85em;"><b>Resumen:</b></div>
+    <div id="lista-pedido" style="margin-top:15px; font-size: 0.9em;"><b>Resumen:</b></div>
     <div id="presupuesto">TOTAL: $0.00</div>
 
     <button class="btn btn-verde" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button>
@@ -108,7 +109,7 @@
         let lista = document.getElementById('lista-pedido');
         lista.innerHTML = "<b>Resumen:</b>";
         items.forEach(i => {
-            lista.innerHTML += `<div>${i.desc} ($${i.precio.toFixed(2)}) <button class='btn-del' onclick='remover(${i.id}, ${i.precio})'>X</button></div>`;
+            lista.innerHTML += `<div style="margin-bottom:5px;">${i.desc} ($${i.precio.toFixed(2)}) <button class='btn-del' onclick='remover(${i.id}, ${i.precio})'>X</button></div>`;
         });
         document.getElementById('presupuesto').innerText = "TOTAL: $" + total.toFixed(2);
     }
