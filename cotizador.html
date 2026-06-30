@@ -1,88 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Cotizador | Los Cócteles de Willian</title> 
-    <link rel="stylesheet" href="style.css"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador | Los Cócteles de Willian</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="contenedor"> 
-        <h1>Cotizador</h1> 
-        <p class="subtitulo">"Arme usted su paquete a todo costo según su presupuesto, nos adaptamos a su necesidad."</p> 
-        <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente"> 
-        <input type="number" id="invitados" class="campo" placeholder="Número de invitados"> 
-        <input type="date" id="fecha" class="campo"> 
-        <label style="color: #FFD700;">Seleccionar productos:</label> 
-        <select id="productoSelect" class="campo"> 
-            <option value="">-- Elige un producto --</option> 
-            <option value="Bartender" data-precio="70">Bartender ($70)</option> 
-            <option value="Parrillero" data-precio="70">Parrillero ($70)</option> 
-            <option value="Kg extra Proteína" data-precio="5">Kg Extra Proteína ($5)</option> 
-            <option value="Mesonero" data-precio="65">Mesonero ($65)</option> 
-            <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option> 
-            <option value="Daiquiri" data-precio="2">Daiquiri ($2)</option> 
-            <option value="Ron Punch" data-precio="1.8">Ron Punch ($1.8)</option> 
-            <option value="Cuba Libre" data-precio="1.8">Cuba Libre ($1.8)</option> 
-            <option value="Caipiroska" data-precio="1.8">Caipiroska ($1.8)</option> 
-            <option value="Destornillador" data-precio="1.8">Destornillador ($1.8)</option> 
-            <option value="Sex on the Beach" data-precio="2.5">Sex on the Beach ($2.5)</option> 
-            <option value="Mojito Cubano" data-precio="2">Mojito Cubano ($2)</option> 
-            <option value="Polvo de media noche" data-precio="3">Polvo de media noche ($3)</option> 
-            <option value="Arcoíris" data-precio="2.5">Arcoíris ($2.5)</option> 
-            <option value="Tequila Sunrise" data-precio="3">Tequila Sunrise ($3)</option> 
-            <option value="Canto de Sirena" data-precio="3.5">Canto de Sirena ($3.5)</option> 
-            <option value="Frutos Secos" data-precio="2.5">Cóctel Frutos Secos ($2.5)</option> 
-            <option value="Coco Loco" data-precio="3">Coco Loco ($3)</option> 
-            <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option> 
-            <option value="Orgasmo Múltiple" data-precio="5">Orgasmo Múltiple ($5)</option> 
-            <option value="Margarita" data-precio="3">Margarita ($3)</option> 
-        </select> 
-        <input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1"> 
-        <button class="btn-enviar" style="background:#444; margin-bottom:10px;" onclick="agregarProducto()">AÑADIR A LA LISTA</button> 
-        <div class="lista-pedido" id="lista-pedido"><b>Resumen de tu selección:</b></div> 
-        <div id="presupuesto">TOTAL A INVERTIR: $0.00</div> 
-        <div class="condiciones"> 
-            <b>Condiciones:</b><br> 
-            • 50% para apartar fecha.<br> 
-            • 50% restante al menos una hora antes del inicio del evento.<br> 
-            • 33 años de trayectoria profesional garantizan nuestra calidad. 
-        </div> 
-        <input type="checkbox" id="aceptar"> <b>Acepto las condiciones y términos.</b><br> 
-        <button class="btn-enviar" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button> 
-        <button class="btn-reinicio" onclick="window.location.reload()">REINICIAR</button> 
-    </div> 
-    <script> 
-        let total = 0; let items = []; 
-        function agregarProducto() { 
-            let select = document.getElementById('productoSelect'); 
-            let opt = select.options[select.selectedIndex]; 
-            let cantidad = document.getElementById('cantidad').value; 
-            if (opt.value === "" || cantidad < 1) return; 
-            let subtotal = parseFloat(opt.dataset.precio) * cantidad; 
-            total += subtotal; 
-            let idUnico = Date.now(); 
-            items.push({id: idUnico, desc: cantidad + "x " + opt.value, precio: subtotal}); 
-            actualizarLista(); 
-            select.value = ""; document.getElementById('cantidad').value = ""; 
-        } 
-        function eliminarProducto(id) { 
-            let index = items.findIndex(item => item.id === id); 
-            total -= items[index].precio; 
-            items.splice(index, 1); 
-            actualizarLista(); 
-        } 
-        function actualizarLista() { 
-            let lista = document.getElementById('lista-pedido'); 
-            lista.innerHTML = "<b>Resumen:</b>"; 
-            items.forEach(item => { lista.innerHTML += "<div>" + item.desc + " ($" + item.precio.toFixed(2) + ") <button onclick='eliminarProducto(" + item.id + ")' style='background:red; color:white; border:none; cursor:pointer;'>X</button></div>"; }); 
-            document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2); 
-        } 
-        function enviarWhatsApp() { 
-            if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones."); return; } 
-            let msg = "Pedido de " + document.getElementById('nombre').value + ": " + items.map(i => i.desc).join(", ") + ". Total: $" + total.toFixed(2); 
-            window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg)); 
-        } 
-    </script>
+<div class="contenedor">
+    <h1>Cotizador</h1>
+    <p class="subtitulo">"Arme usted su paquete a todo costo según su presupuesto, nos adaptamos a su necesidad."</p>
+
+    <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
+    <input type="tel" id="telefono" class="campo" placeholder="Teléfono del Cliente">
+    <input type="text" id="direccion" class="campo" placeholder="Dirección del evento">
+    <input type="date" id="fecha" class="campo">
+
+    <label style="color: #FFD700;">Tipo de evento:</label>
+    <select id="tipoEvento" class="campo">
+        <option value="">-- Seleccione el tipo de evento --</option>
+        <option value="15 años">15 años</option>
+        <option value="Cumpleaños">Cumpleaños</option>
+        <option value="Bodas">Bodas</option>
+        <option value="Despedida de solteros">Despedida de solteros</option>
+        <option value="Babyshawer">Babyshawer</option>
+        <option value="Eventos corporativos">Eventos corporativos</option>
+        <option value="Cofee break">Cofee break</option>
+        <option value="Fiesta de navidad">Fiesta de navidad</option>
+        <option value="Fiesta de fin de año">Fiesta de fin de año</option>
+        <option value="Parrilladas">Parrilladas</option>
+    </select>
+
+    <label style="color: #FFD700;">Arma tu parrilla:</label>
+    <select id="parrillaSelect" class="campo">
+        <option value="">-- Seleccionar cortes/acompañamientos --</option>
+        <option value="Solomo 200g">200g Solomo</option>
+        <option value="Lomito 200g">200g Lomito</option>
+        <option value="Punta Nacional 200g">200g Punta nacional</option>
+        <option value="Punta Angus 200g">200g Punta angus</option>
+        <option value="Pechuga 100g">100g Pechuga de pollo</option>
+        <option value="½ muslo">½ muslo de pollo</option>
+        <option value="Cochino 200g">200g Cochino</option>
+        <option value="Chorizo">1 Chorizo</option>
+        <option value="Morcilla">1 Morcilla</option>
+        <option value="Ensalada dulce">Ensalada rayada dulce</option>
+        <option value="Ensalada mixta">Ensalada mixta</option>
+        <option value="Yuca frita">Yuca frita</option>
+        <option value="Yuca sancochada">Yuca sancochada</option>
+        <option value="Bollito">Bollito</option>
+        <option value="Guasacaca">Guasacaca</option>
+        <option value="Picante">Picante</option>
+    </select>
+
+    <label style="color: #FFD700;">Otros productos:</label>
+    <select id="productoSelect" class="campo">
+        <option value="">-- Elige otros productos --</option>
+        <option value="Bartender" data-precio="70">Bartender ($70)</option>
+        <option value="Parrillero" data-precio="70">Parrillero ($70)</option>
+        <option value="Mesonero" data-precio="65">Mesonero ($65)</option>
+        <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option>
+        <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option>
+    </select>
+    
+    <input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1">
+    <button class="btn-enviar" style="background:#444;" onclick="agregarProducto()">AÑADIR A LA LISTA</button>
+
+    <div class="lista-pedido" id="lista-pedido"><b>Resumen de tu selección:</b></div>
+    <div id="presupuesto">TOTAL A INVERTIR: $0.00</div>
+
+    <div class="condiciones">
+        <b>Condiciones del evento:</b><br>
+        • 50% al momento de la firma del contrato.<br>
+        • 50% restante por lo menos 12 horas antes del evento.<br>
+        • El cliente deberá colocar un mesón y el hielo.<br>
+        • Asegurar el transporte de retorno.
+    </div>
+
+    <input type="checkbox" id="aceptar"> <b>Acepto las condiciones y términos.</b><br>
+    
+    <button class="btn-enviar" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button>
+    <button class="btn-enviar" style="background:#d4af37; color:black; margin-top:10px;" onclick="generarFactura()">GENERAR FACTURA</button>
+    <button class="btn-reinicio" onclick="window.location.reload()">REINICIAR</button>
+</div>
+
+<script>
+    let total = 0; let items = [];
+    function agregarProducto() {
+        let select = document.getElementById('productoSelect');
+        let opt = select.options[select.selectedIndex];
+        let parrilla = document.getElementById('parrillaSelect').value;
+        let cantidad = document.getElementById('cantidad').value;
+        
+        let descripcion = parrilla ? parrilla : opt.value;
+        let precio = opt.dataset.precio ? parseFloat(opt.dataset.precio) : 0;
+        
+        if (!descripcion || cantidad < 1) return;
+        
+        let subtotal = precio * cantidad;
+        total += subtotal;
+        items.push({desc: cantidad + "x " + descripcion, precio: subtotal});
+        actualizarLista();
+    }
+    
+    function actualizarLista() {
+        let lista = document.getElementById('lista-pedido');
+        lista.innerHTML = "<b>Resumen:</b>";
+        items.forEach(item => { lista.innerHTML += "<div>" + item.desc + "</div>"; });
+        document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2);
+    }
+    
+    function enviarWhatsApp() {
+        if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones."); return; }
+        let msg = "Presupuesto para " + document.getElementById('nombre').value + "\nEvento: " + document.getElementById('tipoEvento').value + "\nDetalle: " + items.map(i => i.desc).join(", ") + "\nTotal: $" + total.toFixed(2);
+        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
+    }
+
+    function generarFactura() {
+        alert("Generando factura para " + document.getElementById('nombre').value + "...");
+        // Aquí se puede añadir lógica para imprimir o generar PDF
+    }
+</script>
 </body>
 </html>
