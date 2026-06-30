@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Los Cócteles de Willian | Profesionales del Servicio</title>
+    <!-- Vinculación de App -->
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* MANTEN TU CSS INTERNO TAL CUAL LO TIENES */
         body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #121212; color: #fff; }
         .seccion { padding: 40px 20px; max-width: 900px; margin: auto; }
         .header { text-align: center; padding: 20px; background: #000; border-bottom: 2px solid #d4af37; }
@@ -73,6 +74,10 @@
         <p><em>"Los paracaidistas no mueren, solo van al infierno a reagruparse."</em></p>
     </footer>
     <script>
+        // Registro del Service Worker para funcionamiento offline
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
         function abrirLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; }
         function cerrarLightbox() { document.getElementById('lightbox').style.display = 'none'; }
     </script>
