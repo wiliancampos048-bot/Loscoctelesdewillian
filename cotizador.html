@@ -70,6 +70,24 @@
         <option value="Bartender" data-precio="70">Bartender ($70)</option>
         <option value="Parrillero" data-precio="70">Parrillero ($70)</option>
         <option value="Mesonero" data-precio="65">Mesonero ($65)</option>
+        <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option>
+        <option value="Daiquiri" data-precio="2">Daiquiri ($2)</option>
+        <option value="Ron Punch" data-precio="1.8">Ron Punch ($1.8)</option>
+        <option value="Cuba Libre" data-precio="1.8">Cuba Libre ($1.8)</option>
+        <option value="Caipiroska" data-precio="1.8">Caipiroska ($1.8)</option>
+        <option value="Destornillador" data-precio="1.8">Destornillador ($1.8)</option>
+        <option value="Sex on the Beach" data-precio="2.5">Sex on the Beach ($2.5)</option>
+        <option value="Mojito Cubano" data-precio="2">Mojito Cubano ($2)</option>
+        <option value="Polvo de media noche" data-precio="3">Polvo de media noche ($3)</option>
+        <option value="Arcoíris" data-precio="2.5">Arcoíris ($2.5)</option>
+        <option value="Tequila Sunrise" data-precio="3">Tequila Sunrise ($3)</option>
+        <option value="Canto de Sirena" data-precio="3.5">Canto de Sirena ($3.5)</option>
+        <option value="Cóctel Frutos Secos" data-precio="2.5">Cóctel Frutos Secos ($2.5)</option>
+        <option value="Coco Loco" data-precio="3">Coco Loco ($3)</option>
+        <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option>
+        <option value="Orgasmo Múltiple" data-precio="5">Orgasmo Múltiple ($5)</option>
+        <option value="Margarita" data-precio="3">Margarita ($3)</option>
+        <option value="Magallanes Campeón" data-precio="3">Magallanes Campeón ($3)</option>
     </select>
     
     <input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1">
@@ -113,7 +131,7 @@
         let msg = "Pedido de " + document.getElementById('nombre').value + ": " + items.join(", ") + ". Total: $" + total.toFixed(2);
         window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
     }
-    function generarFactura() { alert("Generando factura..."); }
+    function generarFactura() { alert("Generando factura para " + document.getElementById('nombre').value + "..."); }
 </script>
 </body>
 </html>
