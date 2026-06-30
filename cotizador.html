@@ -4,7 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizador | Los Cócteles de Willian</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 15px; }
+        .contenedor { max-width: 500px; margin: auto; border: 2px solid #FFD700; padding: 20px; border-radius: 10px; background: #000; }
+        h1 { color: #FFD700; text-align: center; font-size: 1.8em; margin-bottom: 10px; text-transform: uppercase; }
+        .subtitulo { text-align: center; color: #aaa; font-style: italic; font-size: 0.9em; margin-bottom: 20px; }
+        label { color: #FFD700; font-weight: bold; display: block; margin-top: 10px; }
+        .campo { width: 100%; padding: 12px; margin: 8px 0; background: #222; color: #fff; border: 1px solid #FFD700; border-radius: 5px; box-sizing: border-box; }
+        .btn-enviar { width: 100%; padding: 15px; background: #25d366; border: none; border-radius: 5px; font-weight: bold; color: white; cursor: pointer; margin-top: 10px; }
+        .btn-factura { background: #FFD700; color: #000; }
+        .btn-reinicio { width: 100%; padding: 10px; background: #8B0000; border: none; border-radius: 5px; color: white; margin-top: 10px; cursor: pointer; }
+        .condiciones { background: #1a1a1a; padding: 15px; font-size: 0.85em; color: #ccc; border-left: 3px solid #FFD700; margin: 15px 0; }
+        #presupuesto { text-align: center; font-weight: bold; color: #FFD700; margin: 20px 0; font-size: 1.3em; border: 1px solid #FFD700; padding: 10px; }
+    </style>
 </head>
 <body>
 <div class="contenedor">
@@ -16,9 +28,9 @@
     <input type="text" id="direccion" class="campo" placeholder="Dirección del evento">
     <input type="date" id="fecha" class="campo">
 
-    <label style="color: #FFD700;">Tipo de evento:</label>
+    <label>Tipo de evento:</label>
     <select id="tipoEvento" class="campo">
-        <option value="">-- Seleccione el tipo de evento --</option>
+        <option value="">-- Seleccione tipo de evento --</option>
         <option value="15 años">15 años</option>
         <option value="Cumpleaños">Cumpleaños</option>
         <option value="Bodas">Bodas</option>
@@ -31,7 +43,7 @@
         <option value="Parrilladas">Parrilladas</option>
     </select>
 
-    <label style="color: #FFD700;">Arma tu parrilla:</label>
+    <label>Arma tu parrilla:</label>
     <select id="parrillaSelect" class="campo">
         <option value="">-- Seleccionar cortes/acompañamientos --</option>
         <option value="Solomo 200g">200g Solomo</option>
@@ -52,20 +64,18 @@
         <option value="Picante">Picante</option>
     </select>
 
-    <label style="color: #FFD700;">Otros productos:</label>
+    <label>Otros productos:</label>
     <select id="productoSelect" class="campo">
         <option value="">-- Elige otros productos --</option>
         <option value="Bartender" data-precio="70">Bartender ($70)</option>
         <option value="Parrillero" data-precio="70">Parrillero ($70)</option>
         <option value="Mesonero" data-precio="65">Mesonero ($65)</option>
-        <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option>
-        <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option>
     </select>
     
     <input type="number" id="cantidad" class="campo" placeholder="Cantidad" min="1">
     <button class="btn-enviar" style="background:#444;" onclick="agregarProducto()">AÑADIR A LA LISTA</button>
 
-    <div class="lista-pedido" id="lista-pedido"><b>Resumen de tu selección:</b></div>
+    <div id="lista-pedido" style="margin-top:15px; font-size: 0.9em; border-bottom: 1px solid #333; padding-bottom:10px;"><b>Resumen de tu selección:</b></div>
     <div id="presupuesto">TOTAL A INVERTIR: $0.00</div>
 
     <div class="condiciones">
@@ -79,7 +89,7 @@
     <input type="checkbox" id="aceptar"> <b>Acepto las condiciones y términos.</b><br>
     
     <button class="btn-enviar" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button>
-    <button class="btn-enviar" style="background:#d4af37; color:black; margin-top:10px;" onclick="generarFactura()">GENERAR FACTURA</button>
+    <button class="btn-enviar btn-factura" onclick="generarFactura()">GENERAR FACTURA</button>
     <button class="btn-reinicio" onclick="window.location.reload()">REINICIAR</button>
 </div>
 
@@ -90,35 +100,20 @@
         let opt = select.options[select.selectedIndex];
         let parrilla = document.getElementById('parrillaSelect').value;
         let cantidad = document.getElementById('cantidad').value;
-        
-        let descripcion = parrilla ? parrilla : opt.value;
+        let desc = parrilla ? parrilla : (opt.value ? opt.value : "");
         let precio = opt.dataset.precio ? parseFloat(opt.dataset.precio) : 0;
-        
-        if (!descripcion || cantidad < 1) return;
-        
-        let subtotal = precio * cantidad;
-        total += subtotal;
-        items.push({desc: cantidad + "x " + descripcion, precio: subtotal});
-        actualizarLista();
-    }
-    
-    function actualizarLista() {
-        let lista = document.getElementById('lista-pedido');
-        lista.innerHTML = "<b>Resumen:</b>";
-        items.forEach(item => { lista.innerHTML += "<div>" + item.desc + "</div>"; });
+        if (!desc || cantidad < 1) return;
+        total += (precio * cantidad);
+        items.push(cantidad + "x " + desc);
+        document.getElementById('lista-pedido').innerHTML += "<div>" + cantidad + "x " + desc + "</div>";
         document.getElementById('presupuesto').innerText = "TOTAL A INVERTIR: $" + total.toFixed(2);
     }
-    
     function enviarWhatsApp() {
         if(!document.getElementById('aceptar').checked) { alert("Debe aceptar las condiciones."); return; }
-        let msg = "Presupuesto para " + document.getElementById('nombre').value + "\nEvento: " + document.getElementById('tipoEvento').value + "\nDetalle: " + items.map(i => i.desc).join(", ") + "\nTotal: $" + total.toFixed(2);
+        let msg = "Pedido de " + document.getElementById('nombre').value + ": " + items.join(", ") + ". Total: $" + total.toFixed(2);
         window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
     }
-
-    function generarFactura() {
-        alert("Generando factura para " + document.getElementById('nombre').value + "...");
-        // Aquí se puede añadir lógica para imprimir o generar PDF
-    }
+    function generarFactura() { alert("Generando factura..."); }
 </script>
 </body>
 </html>
