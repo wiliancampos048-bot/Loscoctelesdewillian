@@ -1,14 +1,10 @@
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a0a0a; color: #e0e0e0; line-height: 1.6; margin: 0; }
-.header { text-align: center; padding: 60px 20px; background: linear-gradient(to bottom, #000, #1a1a1a); border-bottom: 3px solid #d4af37; }
-.logo { max-width: 150px; }
-h1, h2 { color: #d4af37; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
-.seccion { max-width: 800px; margin: 40px auto; padding: 30px; background: #121212; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.btn-enviar { display: inline-block; padding: 15px 30px; background: #d4af37; color: #000; text-decoration: none; font-weight: bold; border-radius: 50px; transition: transform 0.3s; border: none; cursor: pointer; width: 100%; max-width: 300px; }
-.btn-enviar:hover { transform: scale(1.05); }
-.menu-flotante { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.9); padding: 12px 25px; border-radius: 30px; display: flex; gap: 20px; border: 1px solid #d4af37; z-index: 1000; }
-.menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; }
-.galeria-contenedor { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-.galeria-item img { width: 100%; border-radius: 8px; cursor: pointer; }
-#lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
-#lightbox img { max-width: 90%; max-height: 80%; border: 2px solid #d4af37; }
-.whatsapp-btn { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; }
+/* Estilos para Galería */
+.galeria-contenedor { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+.galeria-item img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; cursor: pointer; transition: 0.3s; border: 2px solid #333; }
+.galeria-item img:hover { border-color: #d4af37; transform: scale(1.03); }
+
+/* Estilos para Videos */
+.video-contenedor { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.video-card { background: #1a1a1a; padding: 10px; border-radius: 12px; text-align: center; border: 1px solid #333; }
+.video-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
+.video-card p { color: #d4af37; font-weight: bold; margin: 10px 0 0 0; }
