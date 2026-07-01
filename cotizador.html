@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizador | Los Cócteles de Willian</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; padding-bottom: 100px; }
         .contenedor { width: 100%; max-width: 600px; margin: auto; border: 2px solid #FFD700; padding: 15px; border-radius: 8px; box-sizing: border-box; }
         h1 { color: #FFD700; text-align: center; font-size: 1.5em; margin: 0 0 10px 0; text-transform: uppercase; }
-        .campo { width: 100%; padding: 12px; margin: 5px 0; background: #222; color: #fff; border: 1px solid #FFD700; border-radius: 5px; box-sizing: border-box; font-size: 16px; } /* 16px evita que el iPhone haga zoom automático */
+        .campo { width: 100%; padding: 12px; margin: 5px 0; background: #222; color: #fff; border: 1px solid #FFD700; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
         .btn { width: 100%; padding: 12px; margin-top: 8px; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
         .btn-verde { background: #25d366; color: white; }
         .btn-oro { background: #FFD700; color: #000; }
         .btn-rojo { background: #8B0000; color: white; }
         .btn-del { background: #ff0000; color: white; border: none; padding: 5px 10px; border-radius: 3px; }
         #presupuesto { color:#FFD700; font-size:1.3em; text-align:center; margin: 15px 0; font-weight: bold; border-top: 1px solid #333; padding-top: 10px; }
+        
+        /* Menú Flotante */
+        .menu-flotante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.95); padding: 10px 15px; border-radius: 30px; display: flex; gap: 15px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); z-index: 1000; border: 1px solid #d4af37; font-size: 12px; }
+        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; }
+        .menu-flotante a:hover { color: #d4af37; }
     </style>
 </head>
 <body>
@@ -25,9 +30,9 @@
     <input type="text" id="direccion" class="campo" placeholder="Dirección">
     <input type="date" id="fecha" class="campo">
 
-    <label style="color:#FFD700; font-size: 0.9em;"><b>Parrilla (gramajes):</b></label>
+    <label style="color:#FFD700; font-size: 0.9em;"><b>Parrilla (Cortes y Acompañamientos):</b></label>
     <select id="parrillaDetalle" class="campo">
-        <option value="">-- Seleccionar corte / acompañamiento --</option>
+        <option value="">-- Seleccionar corte / acompañamiento (Sin costo adicional) --</option>
         <option value="200g Solomo">200g Solomo</option>
         <option value="200g Lomito">200g Lomito</option>
         <option value="200g Punta Nacional">200g Punta nacional</option>
@@ -90,6 +95,15 @@
     <button class="btn btn-rojo" onclick="window.location.reload()">REINICIAR</button>
 </div>
 
+<!-- Menú Flotante -->
+<nav class="menu-flotante">
+    <a href="index.html">Inicio</a>
+    <a href="cotizador.html">Cotizar</a>
+    <a href="fotos.html">Fotos</a>
+    <a href="videos.html">Videos</a>
+    <a href="opiniones.html">Opiniones</a>
+</nav>
+
 <script>
     let total = 0; let items = [];
     function agregar() {
@@ -97,12 +111,26 @@
         let pSel = document.getElementById('productoSelect');
         let opt = pSel.options[pSel.selectedIndex];
         let cant = document.getElementById('cantidad').value;
-        let desc = pDet ? pDet : opt.value;
-        let precio = opt.dataset.precio ? parseFloat(opt.dataset.precio) : 0;
-        if (!desc || cant < 1) return;
-        total += (precio * cant);
+        
+        // Si el cliente selecciona un corte/acompañamiento, es un extra, no un precio
+        let nombreItem = "";
+        let precioItem = 0;
+
+        if (pDet && !pSel.value) {
+            // Caso solo selección de parrilla/acompañamiento
+            nombreItem = pDet;
+            precioItem = 0; 
+        } else if (pSel.value) {
+            // Caso producto con precio
+            nombreItem = (pDet ? pDet + " + " : "") + opt.value;
+            precioItem = parseFloat(opt.dataset.precio);
+        }
+
+        if (!nombreItem || cant < 1) return;
+        
+        total += (precioItem * cant);
         let id = Date.now();
-        items.push({id, desc: cant + "x " + desc, precio: (precio * cant)});
+        items.push({id, desc: cant + "x " + nombreItem, precio: (precioItem * cant)});
         render();
     }
     function render() {
