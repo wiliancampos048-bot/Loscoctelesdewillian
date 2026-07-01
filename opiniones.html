@@ -5,38 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opiniones | Los Cócteles de Willian</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; padding-bottom: 100px; }
-        h1 { color: #FFD700; text-align: center; text-transform: uppercase; }
-        .opiniones-contenedor { max-width: 600px; margin: auto; padding: 10px; }
-        .opinion-item { border-left: 4px solid #FFD700; background: #222; padding: 15px; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
-        .cliente { color: #FFD700; font-weight: bold; margin-bottom: 5px; display: block; }
-        .texto { font-style: italic; }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; padding-bottom: 150px; }
+        h1 { color: #FFD700; text-align: center; text-transform: uppercase; margin-top: 20px; }
         
-        /* Menú Flotante */
-        .menu-flotante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.95); padding: 10px 15px; border-radius: 30px; display: flex; gap: 15px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); z-index: 1000; border: 1px solid #d4af37; font-size: 12px; }
-        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; }
-        .menu-flotante a:hover { color: #d4af37; }
+        .opiniones-contenedor { max-width: 600px; margin: auto; padding: 10px; }
+        
+        .opinion-item { border-left: 4px solid #FFD700; background: #222; padding: 15px; margin-bottom: 20px; border-radius: 0 8px 8px 0; display: flex; align-items: flex-start; gap: 15px; }
+        .avatar { width: 45px; height: 45px; background: #FFD700; color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2em; flex-shrink: 0; }
+        .red-social-tag { font-size: 0.7em; background: #333; padding: 2px 6px; border-radius: 10px; color: #FFD700; border: 1px solid #FFD700; margin-left: 5px; }
+        
+        .form-opinion { max-width: 600px; margin: 20px auto; padding: 20px; border: 2px solid #FFD700; border-radius: 8px; background: #111; }
+        .campo { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #555; background: #000; color: #fff; box-sizing: border-box; font-size: 16px; }
+        .btn { width: 100%; padding: 15px; background: #FFD700; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; color: #000; font-size: 16px; }
+
+        .menu-flotante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.95); padding: 10px 15px; border-radius: 30px; display: flex; gap: 15px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); z-index: 1000; border: 1px solid #d4af37; }
+        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; font-size: 14px; }
     </style>
 </head>
 <body>
     <h1>Lo que dicen de nosotros</h1>
     
-    <div class="opiniones-contenedor">
-        <div class="opinion-item">
-            <span class="cliente">Cliente Satisfecho</span>
-            <p class="texto">"La mejor experiencia en coctelería que hemos tenido en nuestros eventos. Profesionalismo total."</p>
-        </div>
-        <div class="opinion-item">
-            <span class="cliente">Evento Corporativo</span>
-            <p class="texto">"Willian y su equipo hicieron que nuestra fiesta fuera inolvidable. ¡Altamente recomendados!"</p>
-        </div>
-        <div class="opinion-item">
-            <span class="cliente">Fiesta Privada</span>
-            <p class="texto">"El servicio, la puntualidad y el sabor de los cócteles son de otro nivel. Gracias por todo."</p>
-        </div>
+    <div class="opiniones-contenedor" id="lista-opiniones">
+        <!-- Espacio para los comentarios -->
     </div>
 
-    <!-- Menú Flotante -->
+    <div class="form-opinion">
+        <h3 style="color:#FFD700; margin-top:0;">Deja tu opinión:</h3>
+        <input type="text" id="nombreCliente" class="campo" placeholder="Tu nombre">
+        <select id="redSocial" class="campo">
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Instagram">Instagram</option>
+            <option value="TikTok">TikTok</option>
+            <option value="Telegram">Telegram</option>
+        </select>
+        <textarea id="textoOpinion" class="campo" placeholder="Escribe tu comentario aquí..." rows="3"></textarea>
+        <button class="btn" onclick="agregarOpinion()">ENVIAR COMENTARIO</button>
+    </div>
+
     <nav class="menu-flotante">
         <a href="index.html">Inicio</a>
         <a href="cotizador.html">Cotizar</a>
@@ -44,5 +49,26 @@
         <a href="videos.html">Videos</a>
         <a href="opiniones.html">Opiniones</a>
     </nav>
+
+    <script>
+        function agregarOpinion() {
+            let nombre = document.getElementById('nombreCliente').value;
+            let red = document.getElementById('redSocial').value;
+            let texto = document.getElementById('textoOpinion').value;
+            
+            if(!nombre || !texto) { alert("Por favor completa los campos"); return; }
+            
+            let inicial = nombre.charAt(0).toUpperCase();
+            let lista = document.getElementById('lista-opiniones');
+            
+            let nueva = document.createElement('div');
+            nueva.className = 'opinion-item';
+            nueva.innerHTML = `<div class="avatar">${inicial}</div><div><b style="color:#FFD700">${nombre} <span class="red-social-tag">${red}</span></b><p style="margin:5px 0 0 0;">"${texto}"</p></div>`;
+            
+            lista.appendChild(nueva);
+            document.getElementById('nombreCliente').value = "";
+            document.getElementById('textoOpinion').value = "";
+        }
+    </script>
 </body>
 </html>
