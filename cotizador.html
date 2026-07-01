@@ -5,16 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizador | Los Cócteles de Willian FP</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; padding: 20px; padding-bottom: 120px; }
+        body { background: #000; color: #fff; font-family: sans-serif; padding: 20px; padding-bottom: 120px; margin: 0; }
         .contenedor { max-width: 500px; margin: auto; border: 2px solid #FFD700; padding: 20px; border-radius: 10px; background: #111; }
-        h1 { color: #FFD700; text-align: center; }
-        select, input, button { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #FFD700; background: #222; color: #fff; box-sizing: border-box; }
+        h1 { color: #FFD700; text-align: center; text-transform: uppercase; }
         
+        label { font-weight: bold; margin-top: 10px; display: block; color: #FFD700; }
+        select, input[type="number"] { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #FFD700; background: #222; color: #fff; box-sizing: border-box; }
+        
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; font-size: 0.9em; background: #222; padding: 15px; border-radius: 5px; border: 1px solid #FFD700; }
+        
+        button { width: 100%; padding: 15px; margin: 8px 0; border-radius: 5px; font-size: 1.1em; box-sizing: border-box; }
         .btn-verde { background: #25d366; color: #000; font-weight: bold; cursor: pointer; border: none; }
         .btn-rojo { background: #cc0000; color: #fff; font-weight: bold; cursor: pointer; border: none; }
         .btn-amarillo { background: #FFD700; color: #000; font-weight: bold; cursor: pointer; border: none; }
         
         #resumen-pedido { margin-top: 20px; border-top: 2px solid #FFD700; padding-top: 10px; }
+        .item-resumen { background: #000; padding: 10px; margin: 5px 0; border-radius: 4px; border-left: 3px solid #25d366; }
+        
+        .menu-flotante { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; padding: 15px 0; display: flex; justify-content: space-around; z-index: 1000; border-top: 2px solid #d4af37; }
+        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -22,8 +31,15 @@
 <div class="contenedor">
     <h1>Cotizador</h1>
     
-    <label>Producto o Servicio:</label>
+    <label>1. Producto o Servicio:</label>
     <select id="producto">
+        <option value="">-- Seleccionar --</option>
+        <optgroup label="Parrillas">
+            <option value="Parrilla de Solomo|20">Solomo ($20)</option>
+            <option value="Parrilla de Lomito|25">Lomito ($25)</option>
+            <option value="Parrilla Punta Nacional|20">Punta Nacional ($20)</option>
+            <option value="Parrilla Angus|30">Punta Angus ($30)</option>
+        </optgroup>
         <optgroup label="Cócteles">
             <option value="Piña Colada|2">Piña Colada ($2)</option>
             <option value="Daiquiri|2">Daiquiri ($2)</option>
@@ -51,19 +67,38 @@
         </optgroup>
     </select>
 
-    <label>Cantidad:</label>
+    <label>2. Cantidad:</label>
     <input type="number" id="cantidad" value="1" min="1">
+
+    <label>3. Acompañantes (Solo Parrillas):</label>
+    <div class="opciones-grid" id="acompanantes">
+        <label><input type="checkbox" value="Cochino"> Cochino</label>
+        <label><input type="checkbox" value="Pollo"> Pollo</label>
+        <label><input type="checkbox" value="Chorizo"> Chorizo</label>
+        <label><input type="checkbox" value="Morcilla"> Morcilla</label>
+        <label><input type="checkbox" value="Ensalada"> Ensalada</label>
+        <label><input type="checkbox" value="Yuca/Bollito"> Yuca/Bollito</label>
+        <label><input type="checkbox" value="Guasacaca"> Guasacaca</label>
+    </div>
 
     <button class="btn-verde" onclick="agregar()">AÑADIR AL RESUMEN</button>
     <button class="btn-rojo" onclick="reiniciar()">REINICIAR COTIZADOR</button>
     <button class="btn-amarillo" onclick="enviarWhatsApp()">GENERAR FACTURA (WhatsApp)</button>
 
     <div id="resumen-pedido">
-        <h3>Resumen:</h3>
-        <ul id="lista-items"></ul>
-        <h2 id="total-text">TOTAL: $0</h2>
+        <h3 style="color: #FFD700;">Resumen:</h3>
+        <div id="lista-items"></div>
+        <h2 id="total-text" style="color: #FFD700;">TOTAL: $0.00</h2>
     </div>
 </div>
+
+<nav class="menu-flotante">
+    <a href="index.html">Inicio</a>
+    <a href="cotizador.html">Cotizar</a>
+    <a href="fotos.html">Fotos</a>
+    <a href="videos.html">Videos</a>
+    <a href="opiniones.html">Opiniones</a>
+</nav>
 
 <script>
     let pedido = [];
@@ -71,33 +106,56 @@
 
     function agregar() {
         let select = document.getElementById('producto');
+        if (!select.value) { alert("Por favor, selecciona un producto primero."); return; }
+        
         let parts = select.value.split('|');
         let nombre = parts[0];
         let precio = parseFloat(parts[1]);
         let cant = parseInt(document.getElementById('cantidad').value);
         
+        // Recoger acompañantes de la parrilla
+        let extras = [];
+        document.querySelectorAll('#acompanantes input:checked').forEach(c => extras.push(c.value));
+        
+        let descripcionFinal = nombre;
+        if (extras.length > 0) {
+            descripcionFinal += " (" + extras.join(", ") + ")";
+        }
+
         let subtotal = precio * cant;
-        pedido.push({nombre, cant, subtotal});
+        pedido.push({nombre: descripcionFinal, cant: cant, subtotal: subtotal});
         total += subtotal;
+        
+        // Limpiar formulario para el siguiente item
+        select.value = "";
+        document.getElementById('cantidad').value = "1";
+        document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
         
         actualizarUI();
     }
 
     function actualizarUI() {
         let lista = document.getElementById('lista-items');
-        lista.innerHTML = pedido.map(i => `<li>${i.cant}x ${i.nombre} - $${i.subtotal.toFixed(2)}</li>`).join('');
+        lista.innerHTML = pedido.map(i => `<div class="item-resumen">${i.cant}x ${i.nombre} - $${i.subtotal.toFixed(2)}</div>`).join('');
         document.getElementById('total-text').innerText = "TOTAL: $" + total.toFixed(2);
     }
 
     function reiniciar() {
-        pedido = []; total = 0;
+        pedido = []; 
+        total = 0;
+        document.getElementById('producto').value = "";
+        document.getElementById('cantidad').value = "1";
+        document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
         actualizarUI();
     }
 
     function enviarWhatsApp() {
-        if(pedido.length === 0) { alert("¡El pedido está vacío!"); return; }
-        let msg = "Hola Willian, quiero cotizar: " + pedido.map(i => i.cant + "x " + i.nombre).join(", ");
-        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg + " | TOTAL: $" + total.toFixed(2)));
+        if(pedido.length === 0) { alert("¡El pedido está vacío, Capitán!"); return; }
+        let msg = "Hola Willian, quiero cotizar el siguiente pedido:\n\n" + pedido.map(i => i.cant + "x " + i.nombre + " - $" + i.subtotal.toFixed(2)).join("\n");
+        msg += "\n\nTOTAL: $" + total.toFixed(2);
+        
+        // Número de Willian Campos
+        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
     }
 </script>
 
