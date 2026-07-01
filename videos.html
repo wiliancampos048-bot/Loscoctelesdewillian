@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos | Los Cócteles de Willian</title>
+    <style>
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; padding-bottom: 100px; }
+        h1 { color: #FFD700; text-align: center; text-transform: uppercase; }
+        .video-contenedor { display: flex; flex-direction: column; gap: 20px; align-items: center; padding: 10px; max-width: 600px; margin: auto; }
+        .video-item { border: 2px solid #FFD700; border-radius: 10px; overflow: hidden; width: 100%; background: #222; }
+        .video-item img { width: 100%; display: block; }
+        .video-info { padding: 10px; text-align: center; }
+        
+        /* Menú Flotante */
+        .menu-flotante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.95); padding: 10px 15px; border-radius: 30px; display: flex; gap: 15px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); z-index: 1000; border: 1px solid #d4af37; font-size: 12px; }
+        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; }
+        .menu-flotante a:hover { color: #d4af37; }
+    </style>
+</head>
+<body>
+    <h1>Nuestros Videos</h1>
+    
+    <div class="video-contenedor">
+        <div class="video-item">
+            <img src="thumb_video1.jpg" alt="Video 1">
+            <div class="video-info">Demostración de Coctelería</div>
+        </div>
+        <div class="video-item">
+            <img src="thumb_video2.jpg" alt="Video 2">
+            <div class="video-info">Experiencia en Eventos</div>
+        </div>
+    </div>
 
+    <!-- Menú Flotante -->
+    <nav class="menu-flotante">
+        <a href="index.html">Inicio</a>
+        <a href="cotizador.html">Cotizar</a>
+        <a href="fotos.html">Fotos</a>
+        <a href="videos.html">Videos</a>
+        <a href="opiniones.html">Opiniones</a>
+    </nav>
+</body>
+</html>
