@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opiniones | Los Cócteles de Willian</title>
+    <style>
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; padding-bottom: 100px; }
+        h1 { color: #FFD700; text-align: center; text-transform: uppercase; }
+        .opiniones-contenedor { max-width: 600px; margin: auto; padding: 10px; }
+        .opinion-item { border-left: 4px solid #FFD700; background: #222; padding: 15px; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
+        .cliente { color: #FFD700; font-weight: bold; margin-bottom: 5px; display: block; }
+        .texto { font-style: italic; }
+        
+        /* Menú Flotante */
+        .menu-flotante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.95); padding: 10px 15px; border-radius: 30px; display: flex; gap: 15px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); z-index: 1000; border: 1px solid #d4af37; font-size: 12px; }
+        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; }
+        .menu-flotante a:hover { color: #d4af37; }
+    </style>
+</head>
+<body>
+    <h1>Lo que dicen de nosotros</h1>
+    
+    <div class="opiniones-contenedor">
+        <div class="opinion-item">
+            <span class="cliente">Cliente Satisfecho</span>
+            <p class="texto">"La mejor experiencia en coctelería que hemos tenido en nuestros eventos. Profesionalismo total."</p>
+        </div>
+        <div class="opinion-item">
+            <span class="cliente">Evento Corporativo</span>
+            <p class="texto">"Willian y su equipo hicieron que nuestra fiesta fuera inolvidable. ¡Altamente recomendados!"</p>
+        </div>
+        <div class="opinion-item">
+            <span class="cliente">Fiesta Privada</span>
+            <p class="texto">"El servicio, la puntualidad y el sabor de los cócteles son de otro nivel. Gracias por todo."</p>
+        </div>
+    </div>
 
+    <!-- Menú Flotante -->
+    <nav class="menu-flotante">
+        <a href="index.html">Inicio</a>
+        <a href="cotizador.html">Cotizar</a>
+        <a href="fotos.html">Fotos</a>
+        <a href="videos.html">Videos</a>
+        <a href="opiniones.html">Opiniones</a>
+    </nav>
+</body>
+</html>
