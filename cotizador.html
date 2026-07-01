@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizador | Los Cócteles de Willian FP</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; padding-bottom: 120px; }
-        .contenedor { width: 100%; max-width: 600px; margin: auto; border: 2px solid #FFD700; padding: 20px; border-radius: 8px; background: #111; }
-        h1 { color: #FFD700; text-align: center; text-transform: uppercase; font-size: 1.6em; }
-        .campo { width: 100%; padding: 12px; margin: 8px 0; background: #000; color: #fff; border: 1px solid #FFD700; border-radius: 5px; box-sizing: border-box; }
-        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; font-size: 0.9em; }
-        .btn { width: 100%; padding: 15px; margin-top: 15px; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; background: #25d366; color: #fff; font-size: 1.1em; }
-        #presupuesto { color: #FFD700; font-size: 1.8em; text-align: center; margin: 20px 0; font-weight: bold; }
-        .menu-flotante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.95); padding: 10px 20px; border-radius: 30px; display: flex; gap: 15px; z-index: 1000; border: 1px solid #d4af37; }
-        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; font-size: 14px; }
+        body { background: #000; color: #fff; font-family: sans-serif; padding: 20px; padding-bottom: 120px; }
+        .contenedor { max-width: 500px; margin: auto; border: 2px solid #FFD700; padding: 20px; border-radius: 10px; background: #111; }
+        h1 { color: #FFD700; text-align: center; }
+        select, input, button { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #FFD700; background: #222; color: #fff; box-sizing: border-box; }
+        
+        .btn-verde { background: #25d366; color: #000; font-weight: bold; cursor: pointer; border: none; }
+        .btn-rojo { background: #cc0000; color: #fff; font-weight: bold; cursor: pointer; border: none; }
+        .btn-amarillo { background: #FFD700; color: #000; font-weight: bold; cursor: pointer; border: none; }
+        
+        #resumen-pedido { margin-top: 20px; border-top: 2px solid #FFD700; padding-top: 10px; }
     </style>
 </head>
 <body>
@@ -21,100 +22,84 @@
 <div class="contenedor">
     <h1>Cotizador</h1>
     
-    <label><b>1. Selecciona Producto:</b></label>
-    <select id="productoSelect" class="campo">
-        <option value="">-- Seleccionar --</option>
-        <optgroup label="Parrillas">
-            <option value="Parrilla de Solomo" data-precio="20">Solomo ($20)</option>
-            <option value="Parrilla de Lomito" data-precio="25">Lomito ($25)</option>
-            <option value="Parrilla Punta Nacional" data-precio="20">Punta Nacional ($20)</option>
-            <option value="Parrilla Angus" data-precio="30">Punta Angus ($30)</option>
-        </optgroup>
+    <label>Producto o Servicio:</label>
+    <select id="producto">
         <optgroup label="Cócteles">
-            <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option>
-            <option value="Daiquiri" data-precio="2">Daiquiri ($2)</option>
-            <option value="Ron Punch" data-precio="1.8">Ron Punch ($1.8)</option>
-            <option value="Cuba Libre" data-precio="1.8">Cuba Libre ($1.8)</option>
-            <option value="Caipiroska" data-precio="1.8">Caipiroska ($1.8)</option>
-            <option value="Destornillador" data-precio="1.8">Destornillador ($1.8)</option>
-            <option value="Sex on the Beach" data-precio="2.5">Sex on the Beach ($2.5)</option>
-            <option value="Mojito Cubano" data-precio="2">Mojito Cubano ($2)</option>
-            <option value="Polvo de media noche" data-precio="3">Polvo de media noche ($3)</option>
-            <option value="Arcoíris" data-precio="2.5">Arcoíris ($2.5)</option>
-            <option value="Tequila Sunrise" data-precio="3">Tequila Sunrise ($3)</option>
-            <option value="Canto de Sirena" data-precio="3.5">Canto de Sirena ($3.5)</option>
-            <option value="Cóctel Frutos Secos" data-precio="2.5">Cóctel Frutos Secos ($2.5)</option>
-            <option value="Coco Loco" data-precio="3">Coco Loco ($3)</option>
-            <option value="Orgasmo" data-precio="4">Orgasmo ($4)</option>
-            <option value="Orgasmo Múltiple" data-precio="5">Orgasmo Múltiple ($5)</option>
-            <option value="Margarita" data-precio="3">Margarita ($3)</option>
-            <option value="Magallanes Campeón" data-precio="3">Magallanes Campeón ($3)</option>
+            <option value="Piña Colada|2">Piña Colada ($2)</option>
+            <option value="Daiquiri|2">Daiquiri ($2)</option>
+            <option value="Ron Punch|1.8">Ron Punch ($1.8)</option>
+            <option value="Cuba Libre|1.8">Cuba Libre ($1.8)</option>
+            <option value="Caipiroska|1.8">Caipiroska ($1.8)</option>
+            <option value="Destornillador|1.8">Destornillador ($1.8)</option>
+            <option value="Sex on the Beach|2.5">Sex on the Beach ($2.5)</option>
+            <option value="Mojito Cubano|2">Mojito Cubano ($2)</option>
+            <option value="Polvo de media noche|3">Polvo de media noche ($3)</option>
+            <option value="Arcoíris|2.5">Arcoíris ($2.5)</option>
+            <option value="Tequila Sunrise|3">Tequila Sunrise ($3)</option>
+            <option value="Canto de Sirena|3.5">Canto de Sirena ($3.5)</option>
+            <option value="Cóctel Frutos Secos|2.5">Cóctel Frutos Secos ($2.5)</option>
+            <option value="Coco Loco|3">Coco Loco ($3)</option>
+            <option value="Orgasmo|4">Orgasmo ($4)</option>
+            <option value="Orgasmo Múltiple|5">Orgasmo Múltiple ($5)</option>
+            <option value="Margarita|3">Margarita ($3)</option>
+            <option value="Magallanes Campeón|3">Magallanes Campeón ($3)</option>
         </optgroup>
         <optgroup label="Servicios">
-            <option value="Bartender" data-precio="70">Bartender ($70)</option>
-            <option value="Mesonero" data-precio="65">Mesonero ($65)</option>
-            <option value="Parrillero" data-precio="65">Parrillero ($65)</option>
+            <option value="Bartender|70">Bartender ($70)</option>
+            <option value="Mesonero|65">Mesonero ($65)</option>
+            <option value="Parrillero|65">Parrillero ($65)</option>
         </optgroup>
     </select>
 
-    <label><b>2. Cantidad:</b></label>
-    <input type="number" id="cantidad" class="campo" value="1" min="1">
+    <label>Cantidad:</label>
+    <input type="number" id="cantidad" value="1" min="1">
 
-    <label><b>3. Acompañantes (Solo Parrillas):</b></label>
-    <div class="opciones-grid" id="acompanantes">
-        <label><input type="checkbox" value="Cochino"> Cochino</label>
-        <label><input type="checkbox" value="Pollo"> Pollo</label>
-        <label><input type="checkbox" value="Chorizo"> Chorizo</label>
-        <label><input type="checkbox" value="Morcilla"> Morcilla</label>
-        <label><input type="checkbox" value="Ensalada"> Ensalada</label>
-        <label><input type="checkbox" value="Yuca/Bollito"> Yuca/Bollito</label>
-        <label><input type="checkbox" value="Guasacaca"> Guasacaca</label>
+    <button class="btn-verde" onclick="agregar()">AÑADIR AL RESUMEN</button>
+    <button class="btn-rojo" onclick="reiniciar()">REINICIAR COTIZADOR</button>
+    <button class="btn-amarillo" onclick="enviarWhatsApp()">GENERAR FACTURA (WhatsApp)</button>
+
+    <div id="resumen-pedido">
+        <h3>Resumen:</h3>
+        <ul id="lista-items"></ul>
+        <h2 id="total-text">TOTAL: $0</h2>
     </div>
-
-    <button class="btn" onclick="agregar()">AÑADIR AL RESUMEN</button>
-
-    <div id="lista-pedido" style="margin-top:20px;"><b>Resumen de tu pedido:</b></div>
-    <div id="presupuesto">TOTAL: $0.00</div>
 </div>
 
-<nav class="menu-flotante">
-    <a href="index.html">Inicio</a>
-    <a href="cotizador.html">Cotizar</a>
-    <a href="fotos.html">Fotos</a>
-    <a href="videos.html">Videos</a>
-    <a href="opiniones.html">Opiniones</a>
-</nav>
-
 <script>
-    let total = 0; let items = [];
+    let pedido = [];
+    let total = 0;
+
     function agregar() {
-        let pSel = document.getElementById('productoSelect');
+        let select = document.getElementById('producto');
+        let parts = select.value.split('|');
+        let nombre = parts[0];
+        let precio = parseFloat(parts[1]);
         let cant = parseInt(document.getElementById('cantidad').value);
-        if (!pSel.value || cant < 1) { alert("Por favor selecciona un producto y la cantidad."); return; }
         
-        let extras = [];
-        document.querySelectorAll('#acompanantes input:checked').forEach(c => extras.push(c.value));
-        
-        let precioBase = parseFloat(pSel.options[pSel.selectedIndex].dataset.precio);
-        let subtotal = precioBase * cant;
-        let descripcion = cant + "x " + pSel.value + (extras.length > 0 ? " (" + extras.join(", ") + ")" : "");
-        
+        let subtotal = precio * cant;
+        pedido.push({nombre, cant, subtotal});
         total += subtotal;
-        items.push({desc: descripcion, precio: subtotal});
         
-        // Limpiar para el siguiente
-        pSel.value = "";
-        document.getElementById('cantidad').value = "1";
-        document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
-        
-        render();
+        actualizarUI();
     }
-    function render() {
-        let lista = document.getElementById('lista-pedido');
-        lista.innerHTML = "<b>Resumen:</b>";
-        items.forEach(i => lista.innerHTML += `<div>${i.desc} ($${i.precio})</div>`);
-        document.getElementById('presupuesto').innerText = "TOTAL: $" + total.toFixed(2);
+
+    function actualizarUI() {
+        let lista = document.getElementById('lista-items');
+        lista.innerHTML = pedido.map(i => `<li>${i.cant}x ${i.nombre} - $${i.subtotal.toFixed(2)}</li>`).join('');
+        document.getElementById('total-text').innerText = "TOTAL: $" + total.toFixed(2);
+    }
+
+    function reiniciar() {
+        pedido = []; total = 0;
+        actualizarUI();
+    }
+
+    function enviarWhatsApp() {
+        if(pedido.length === 0) { alert("¡El pedido está vacío!"); return; }
+        let msg = "Hola Willian, quiero cotizar: " + pedido.map(i => i.cant + "x " + i.nombre).join(", ");
+        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg + " | TOTAL: $" + total.toFixed(2)));
     }
 </script>
+
 </body>
-                </html>
+</html>
