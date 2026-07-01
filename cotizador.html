@@ -15,11 +15,8 @@
         .btn-rojo { background: #8B0000; color: white; }
         .btn-del { background: #ff0000; color: white; border: none; padding: 5px 10px; border-radius: 3px; }
         #presupuesto { color:#FFD700; font-size:1.3em; text-align:center; margin: 15px 0; font-weight: bold; border-top: 1px solid #333; padding-top: 10px; }
-        
-        /* Menú Flotante */
         .menu-flotante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.95); padding: 10px 15px; border-radius: 30px; display: flex; gap: 15px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); z-index: 1000; border: 1px solid #d4af37; font-size: 12px; }
         .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; }
-        .menu-flotante a:hover { color: #d4af37; }
     </style>
 </head>
 <body>
@@ -29,14 +26,15 @@
     <input type="tel" id="telefono" class="campo" placeholder="Teléfono">
     <input type="text" id="direccion" class="campo" placeholder="Dirección">
     <input type="date" id="fecha" class="campo">
+    <input type="number" id="cantidad" class="campo" placeholder="Cantidad" value="1">
 
-    <label style="color:#FFD700; font-size: 0.9em;"><b>Parrilla (Cortes y Acompañamientos):</b></label>
+    <label style="color:#FFD700; font-size: 0.9em;"><b>1. Gramaje / Acompañamiento:</b></label>
     <select id="parrillaDetalle" class="campo">
-        <option value="">-- Seleccionar corte / acompañamiento --</option>
+        <option value="">-- Seleccionar --</option>
         <option value="200g Solomo">200g Solomo</option>
         <option value="200g Lomito">200g Lomito</option>
-        <option value="200g Punta Nacional">200g Punta nacional</option>
-        <option value="200g Punta Angus">200g Punta angus</option>
+        <option value="200g Punta nacional">200g Punta nacional</option>
+        <option value="200g Punta angus">200g Punta angus</option>
         <option value="100g Pechuga de pollo">100g Pechuga de pollo</option>
         <option value="½ muslo de pollo">½ muslo de pollo</option>
         <option value="200g Cochino">200g Cochino</option>
@@ -50,8 +48,9 @@
         <option value="Guasacaca">Guasacaca</option>
     </select>
 
-    <label style="color:#FFD700; font-size: 0.9em;"><b>Menú Completo: Cócteles/Parrillas/Servicios:</b></label>
+    <label style="color:#FFD700; font-size: 0.9em;"><b>2. Producto Principal:</b></label>
     <select id="productoSelect" class="campo">
+        <option value="">-- Seleccionar --</option>
         <optgroup label="Parrillas">
             <option value="Parrilla de Solomo" data-precio="20">Parrilla de Solomo ($20)</option>
             <option value="Parrilla de Lomito" data-precio="25">Parrilla de Lomito ($25)</option>
@@ -84,7 +83,7 @@
             <option value="Parrillero" data-precio="70">Parrillero ($70)</option>
         </optgroup>
     </select>
-    <input type="number" id="cantidad" class="campo" placeholder="Cantidad">
+    
     <button class="btn btn-verde" onclick="agregar()">AÑADIR A LISTA</button>
 
     <div id="lista-pedido" style="margin-top:15px; font-size: 0.9em;"><b>Resumen:</b></div>
@@ -95,7 +94,6 @@
     <button class="btn btn-rojo" onclick="window.location.reload()">REINICIAR</button>
 </div>
 
-<!-- Menú Flotante -->
 <nav class="menu-flotante">
     <a href="index.html">Inicio</a>
     <a href="cotizador.html">Cotizar</a>
@@ -107,29 +105,27 @@
 <script>
     let total = 0; let items = [];
     function agregar() {
-        let pDet = document.getElementById('parrillaDetalle').value;
+        let pDet = document.getElementById('parrillaDetalle');
         let pSel = document.getElementById('productoSelect');
         let opt = pSel.options[pSel.selectedIndex];
-        let cant = document.getElementById('cantidad').value;
+        let cant = parseInt(document.getElementById('cantidad').value);
         
-        let nombreItem = "";
-        let precioItem = 0;
-
-        // Si seleccionó un producto del menú completo, tomamos el precio
-        if (pSel.value) {
-            nombreItem = (pDet ? pDet + " + " : "") + opt.value;
-            precioItem = parseFloat(opt.dataset.precio);
-        } else if (pDet) {
-            // Solo seleccionó un gramaje (sin precio)
-            nombreItem = pDet;
-            precioItem = 0;
+        if (!pSel.value || cant < 1) {
+            alert("Por favor selecciona un producto y cantidad.");
+            return;
         }
 
-        if (!nombreItem || cant < 1) return;
+        let nombreItem = pSel.value + (pDet.value ? " (" + pDet.value + ")" : "");
+        let precioItem = parseFloat(opt.dataset.precio);
         
         total += (precioItem * cant);
-        let id = Date.now();
-        items.push({id, desc: cant + "x " + nombreItem, precio: (precioItem * cant)});
+        items.push({id: Date.now(), desc: cant + "x " + nombreItem, precio: (precioItem * cant)});
+        
+        // Reset automático
+        pDet.value = "";
+        pSel.value = "";
+        document.getElementById('cantidad').value = "1";
+        
         render();
     }
     function render() {
@@ -146,7 +142,7 @@
         render();
     }
     function enviarWhatsApp() {
-        let msg = `SOLICITUD: ${document.getElementById('nombre').value}\nItems: ${items.map(i=>i.desc).join(", ")}\nTotal: $${total.toFixed(2)}`;
+        let msg = `SOLICITUD: ${document.getElementById('nombre').value}\nTotal: $${total.toFixed(2)}\nDetalle: ${items.map(i=>i.desc).join(", ")}`;
         window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
     }
 </script>
