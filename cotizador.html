@@ -3,59 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotizador | Los Cócteles de Willian</title>
+    <title>Cotizador | Los Cócteles de Willian FP</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; padding-bottom: 100px; }
-        .contenedor { width: 100%; max-width: 600px; margin: auto; border: 2px solid #FFD700; padding: 15px; border-radius: 8px; box-sizing: border-box; }
-        h1 { color: #FFD700; text-align: center; font-size: 1.5em; margin: 0 0 10px 0; text-transform: uppercase; }
-        .campo { width: 100%; padding: 12px; margin: 5px 0; background: #222; color: #fff; border: 1px solid #FFD700; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
-        .btn { width: 100%; padding: 12px; margin-top: 8px; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
-        .btn-verde { background: #25d366; color: white; }
-        .btn-oro { background: #FFD700; color: #000; }
-        .btn-rojo { background: #8B0000; color: white; }
-        .btn-del { background: #ff0000; color: white; border: none; padding: 5px 10px; border-radius: 3px; }
-        #presupuesto { color:#FFD700; font-size:1.3em; text-align:center; margin: 15px 0; font-weight: bold; border-top: 1px solid #333; padding-top: 10px; }
-        .menu-flotante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.95); padding: 10px 15px; border-radius: 30px; display: flex; gap: 15px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); z-index: 1000; border: 1px solid #d4af37; font-size: 12px; }
-        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; padding-bottom: 120px; }
+        .contenedor { width: 100%; max-width: 600px; margin: auto; border: 2px solid #FFD700; padding: 20px; border-radius: 8px; background: #111; }
+        h1 { color: #FFD700; text-align: center; text-transform: uppercase; font-size: 1.6em; }
+        .campo { width: 100%; padding: 12px; margin: 8px 0; background: #000; color: #fff; border: 1px solid #FFD700; border-radius: 5px; box-sizing: border-box; }
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; font-size: 0.9em; }
+        .btn { width: 100%; padding: 15px; margin-top: 15px; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; background: #25d366; color: #fff; font-size: 1.1em; }
+        #presupuesto { color: #FFD700; font-size: 1.8em; text-align: center; margin: 20px 0; font-weight: bold; }
+        .menu-flotante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.95); padding: 10px 20px; border-radius: 30px; display: flex; gap: 15px; z-index: 1000; border: 1px solid #d4af37; }
+        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; font-size: 14px; }
     </style>
 </head>
 <body>
+
 <div class="contenedor">
     <h1>Cotizador</h1>
-    <input type="text" id="nombre" class="campo" placeholder="Nombre del Cliente">
-    <input type="tel" id="telefono" class="campo" placeholder="Teléfono">
-    <input type="text" id="direccion" class="campo" placeholder="Dirección">
-    <input type="date" id="fecha" class="campo">
-    <input type="number" id="cantidad" class="campo" placeholder="Cantidad" value="1">
-
-    <label style="color:#FFD700; font-size: 0.9em;"><b>1. Gramaje / Acompañamiento:</b></label>
-    <select id="parrillaDetalle" class="campo">
-        <option value="">-- Seleccionar --</option>
-        <option value="200g Solomo">200g Solomo</option>
-        <option value="200g Lomito">200g Lomito</option>
-        <option value="200g Punta nacional">200g Punta nacional</option>
-        <option value="200g Punta angus">200g Punta angus</option>
-        <option value="100g Pechuga de pollo">100g Pechuga de pollo</option>
-        <option value="½ muslo de pollo">½ muslo de pollo</option>
-        <option value="200g Cochino">200g Cochino</option>
-        <option value="1 Chorizo">1 Chorizo</option>
-        <option value="1 Morcilla">1 Morcilla</option>
-        <option value="Ensalada rayada dulce">Ensalada rayada dulce</option>
-        <option value="Ensalada mixta">Ensalada mixta</option>
-        <option value="Yuca frita">Yuca frita</option>
-        <option value="Yuca sancochada">Yuca sancochada</option>
-        <option value="Bollito">Bollito</option>
-        <option value="Guasacaca">Guasacaca</option>
-    </select>
-
-    <label style="color:#FFD700; font-size: 0.9em;"><b>2. Producto Principal:</b></label>
+    
+    <label><b>1. Selecciona Producto:</b></label>
     <select id="productoSelect" class="campo">
         <option value="">-- Seleccionar --</option>
         <optgroup label="Parrillas">
-            <option value="Parrilla de Solomo" data-precio="20">Parrilla de Solomo ($20)</option>
-            <option value="Parrilla de Lomito" data-precio="25">Parrilla de Lomito ($25)</option>
-            <option value="Parrilla Punta Nacional" data-precio="20">Parrilla Punta Nacional ($20)</option>
-            <option value="Parrilla Angus" data-precio="30">Parrilla Angus ($30)</option>
+            <option value="Parrilla de Solomo" data-precio="20">Solomo ($20)</option>
+            <option value="Parrilla de Lomito" data-precio="25">Lomito ($25)</option>
+            <option value="Parrilla Punta Nacional" data-precio="20">Punta Nacional ($20)</option>
+            <option value="Parrilla Angus" data-precio="30">Punta Angus ($30)</option>
         </optgroup>
         <optgroup label="Cócteles">
             <option value="Piña Colada" data-precio="2">Piña Colada ($2)</option>
@@ -80,18 +53,28 @@
         <optgroup label="Servicios">
             <option value="Bartender" data-precio="70">Bartender ($70)</option>
             <option value="Mesonero" data-precio="65">Mesonero ($65)</option>
-            <option value="Parrillero" data-precio="70">Parrillero ($70)</option>
+            <option value="Parrillero" data-precio="65">Parrillero ($65)</option>
         </optgroup>
     </select>
-    
-    <button class="btn btn-verde" onclick="agregar()">AÑADIR A LISTA</button>
 
-    <div id="lista-pedido" style="margin-top:15px; font-size: 0.9em;"><b>Resumen:</b></div>
+    <label><b>2. Cantidad:</b></label>
+    <input type="number" id="cantidad" class="campo" value="1" min="1">
+
+    <label><b>3. Acompañantes (Solo Parrillas):</b></label>
+    <div class="opciones-grid" id="acompanantes">
+        <label><input type="checkbox" value="Cochino"> Cochino</label>
+        <label><input type="checkbox" value="Pollo"> Pollo</label>
+        <label><input type="checkbox" value="Chorizo"> Chorizo</label>
+        <label><input type="checkbox" value="Morcilla"> Morcilla</label>
+        <label><input type="checkbox" value="Ensalada"> Ensalada</label>
+        <label><input type="checkbox" value="Yuca/Bollito"> Yuca/Bollito</label>
+        <label><input type="checkbox" value="Guasacaca"> Guasacaca</label>
+    </div>
+
+    <button class="btn" onclick="agregar()">AÑADIR AL RESUMEN</button>
+
+    <div id="lista-pedido" style="margin-top:20px;"><b>Resumen de tu pedido:</b></div>
     <div id="presupuesto">TOTAL: $0.00</div>
-
-    <button class="btn btn-verde" onclick="enviarWhatsApp()">SOLICITAR PRESUPUESTO</button>
-    <button class="btn btn-oro" onclick="alert('Generando factura...')">GENERAR FACTURA</button>
-    <button class="btn btn-rojo" onclick="window.location.reload()">REINICIAR</button>
 </div>
 
 <nav class="menu-flotante">
@@ -105,46 +88,33 @@
 <script>
     let total = 0; let items = [];
     function agregar() {
-        let pDet = document.getElementById('parrillaDetalle');
         let pSel = document.getElementById('productoSelect');
-        let opt = pSel.options[pSel.selectedIndex];
         let cant = parseInt(document.getElementById('cantidad').value);
+        if (!pSel.value || cant < 1) { alert("Por favor selecciona un producto y la cantidad."); return; }
         
-        if (!pSel.value || cant < 1) {
-            alert("Por favor selecciona un producto y cantidad.");
-            return;
-        }
-
-        let nombreItem = pSel.value + (pDet.value ? " (" + pDet.value + ")" : "");
-        let precioItem = parseFloat(opt.dataset.precio);
+        let extras = [];
+        document.querySelectorAll('#acompanantes input:checked').forEach(c => extras.push(c.value));
         
-        total += (precioItem * cant);
-        items.push({id: Date.now(), desc: cant + "x " + nombreItem, precio: (precioItem * cant)});
+        let precioBase = parseFloat(pSel.options[pSel.selectedIndex].dataset.precio);
+        let subtotal = precioBase * cant;
+        let descripcion = cant + "x " + pSel.value + (extras.length > 0 ? " (" + extras.join(", ") + ")" : "");
         
-        // Reset automático
-        pDet.value = "";
+        total += subtotal;
+        items.push({desc: descripcion, precio: subtotal});
+        
+        // Limpiar para el siguiente
         pSel.value = "";
         document.getElementById('cantidad').value = "1";
+        document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
         
         render();
     }
     function render() {
         let lista = document.getElementById('lista-pedido');
         lista.innerHTML = "<b>Resumen:</b>";
-        items.forEach(i => {
-            lista.innerHTML += `<div style="margin-bottom:5px;">${i.desc} ($${i.precio.toFixed(2)}) <button class='btn-del' onclick='remover(${i.id}, ${i.precio})'>X</button></div>`;
-        });
+        items.forEach(i => lista.innerHTML += `<div>${i.desc} ($${i.precio})</div>`);
         document.getElementById('presupuesto').innerText = "TOTAL: $" + total.toFixed(2);
-    }
-    function remover(id, precio) {
-        items = items.filter(i => i.id !== id);
-        total -= precio;
-        render();
-    }
-    function enviarWhatsApp() {
-        let msg = `SOLICITUD: ${document.getElementById('nombre').value}\nTotal: $${total.toFixed(2)}\nDetalle: ${items.map(i=>i.desc).join(", ")}`;
-        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
     }
 </script>
 </body>
-</html>
+                </html>
