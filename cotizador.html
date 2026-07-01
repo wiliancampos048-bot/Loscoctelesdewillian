@@ -32,7 +32,7 @@
 
     <label style="color:#FFD700; font-size: 0.9em;"><b>Parrilla (Cortes y Acompañamientos):</b></label>
     <select id="parrillaDetalle" class="campo">
-        <option value="">-- Seleccionar corte / acompañamiento (Sin costo adicional) --</option>
+        <option value="">-- Seleccionar corte / acompañamiento --</option>
         <option value="200g Solomo">200g Solomo</option>
         <option value="200g Lomito">200g Lomito</option>
         <option value="200g Punta Nacional">200g Punta nacional</option>
@@ -112,18 +112,17 @@
         let opt = pSel.options[pSel.selectedIndex];
         let cant = document.getElementById('cantidad').value;
         
-        // Si el cliente selecciona un corte/acompañamiento, es un extra, no un precio
         let nombreItem = "";
         let precioItem = 0;
 
-        if (pDet && !pSel.value) {
-            // Caso solo selección de parrilla/acompañamiento
-            nombreItem = pDet;
-            precioItem = 0; 
-        } else if (pSel.value) {
-            // Caso producto con precio
+        // Si seleccionó un producto del menú completo, tomamos el precio
+        if (pSel.value) {
             nombreItem = (pDet ? pDet + " + " : "") + opt.value;
             precioItem = parseFloat(opt.dataset.precio);
+        } else if (pDet) {
+            // Solo seleccionó un gramaje (sin precio)
+            nombreItem = pDet;
+            precioItem = 0;
         }
 
         if (!nombreItem || cant < 1) return;
