@@ -2,15 +2,23 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Opiniones | Los Cócteles de Willian FP</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; padding: 20px; }
-        .contenedor { max-width: 600px; margin: auto; border: 2px solid #FFD700; padding: 20px; border-radius: 8px; }
-        h1 { color: #FFD700; text-align: center; }
-        input, textarea { width: 100%; background: #111; color: #fff; border: 1px solid #FFD700; padding: 10px; margin-bottom: 10px; }
-        .btn { width: 100%; padding: 15px; background: #25d366; border: none; color: #000; font-weight: bold; cursor: pointer; }
-        .opinion-card { background: #111; padding: 15px; margin: 10px 0; border-left: 4px solid #FFD700; display: flex; align-items: center; gap: 10px; }
-        .avatar { width: 40px; height: 40px; border-radius: 50%; background: #FFD700; color: #000; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        * { box-sizing: border-box; }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; padding-bottom: 120px; min-height: 100vh; }
+        .contenedor { width: 100%; max-width: 500px; margin: 0 auto; border: 2px solid #FFD700; padding: 15px; border-radius: 8px; background: #111; }
+        h1 { color: #FFD700; text-align: center; text-transform: uppercase; font-size: 1.4em; }
+        
+        input, textarea { width: 100%; background: #000; color: #fff; border: 1px solid #FFD700; padding: 12px; margin-bottom: 10px; border-radius: 5px; font-size: 16px; }
+        .btn { width: 100%; padding: 15px; background: #25d366; border: none; color: #000; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 1em; }
+        
+        .opinion-card { background: #222; padding: 12px; margin-top: 10px; border-radius: 5px; display: flex; align-items: center; gap: 10px; border-left: 4px solid #FFD700; word-wrap: break-word; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background: #FFD700; color: #000; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+        
+        /* Menú inferior fijo */
+        .menu-flotante { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; padding: 15px; display: flex; justify-content: space-around; z-index: 1000; border-top: 2px solid #d4af37; }
+        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; font-size: 12px; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -18,32 +26,43 @@
 <div class="contenedor">
     <h1>Opiniones</h1>
     <input type="text" id="nombre" placeholder="Tu Nombre">
-    <textarea id="texto" placeholder="¿Qué tal fue tu experiencia?"></textarea>
-    <button class="btn" onclick="gestionarOpinion()">PUBLICAR Y NOTIFICAR A WILLIAN</button>
+    <textarea id="texto" placeholder="¿Cómo fue tu experiencia?"></textarea>
+    <button class="btn" onclick="publicar()">PUBLICAR Y NOTIFICAR A WILLIAN</button>
 
     <div id="lista"></div>
 </div>
 
+<nav class="menu-flotante">
+    <a href="index.html">Inicio</a>
+    <a href="cotizador.html">Cotizar</a>
+    <a href="fotos.html">Fotos</a>
+    <a href="videos.html">Videos</a>
+    <a href="opiniones.html">Opiniones</a>
+</nav>
+
 <script>
+    // Al cargar la página, cargamos las opiniones guardadas
     window.onload = () => document.getElementById('lista').innerHTML = localStorage.getItem('opiniones') || "";
 
-    function gestionarOpinion() {
+    function publicar() {
         let n = document.getElementById('nombre').value;
         let t = document.getElementById('texto').value;
-        if (!n || !t) { alert("Llena los campos, Capitán"); return; }
+        if (!n || !t) { alert("Llena todos los campos, Capitán."); return; }
 
-        // 1. Guardar en la web
         let lista = document.getElementById('lista');
         let div = document.createElement('div');
         div.className = 'opinion-card';
+        // Avatar con inicial y comentario
         div.innerHTML = `<div class="avatar">${n[0].toUpperCase()}</div><div><b>${n}</b><br>${t}</div>`;
+        
         lista.prepend(div);
         localStorage.setItem('opiniones', lista.innerHTML);
 
-        // 2. Abrir WhatsApp para que el cliente te avise
-        let msg = `Hola Willian, acabo de dejar mi opinión en tu web:\n\nNombre: ${n}\nOpinión: ${t}`;
+        // Envío a tu WhatsApp
+        let msg = `¡Nueva opinión de ${n}! Dice: ${t}`;
         window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
 
+        // Limpieza de campos
         document.getElementById('nombre').value = "";
         document.getElementById('texto').value = "";
     }
