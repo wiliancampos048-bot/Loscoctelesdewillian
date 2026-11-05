@@ -102,7 +102,6 @@
 
 <script>
     let pedido = [];
-    let total = 0;
 
     function agregar() {
         let select = document.getElementById('producto');
@@ -111,7 +110,12 @@
         let parts = select.value.split('|');
         let nombre = parts[0];
         let precio = parseFloat(parts[1]);
-        let cant = parseInt(document.getElementById('cantidad').value);
+        
+        let cantInput = document.getElementById('cantidad').value;
+        let cant = parseInt(cantInput);
+        if (isNaN(cant) || cant < 1) {
+            cant = 1; // Valor por defecto seguro si el campo está vacío o alterado
+        }
         
         // Recoger acompañantes de la parrilla
         let extras = [];
@@ -124,7 +128,6 @@
 
         let subtotal = precio * cant;
         pedido.push({nombre: descripcionFinal, cant: cant, subtotal: subtotal});
-        total += subtotal;
         
         // Limpiar formulario para el siguiente item
         select.value = "";
@@ -137,12 +140,14 @@
     function actualizarUI() {
         let lista = document.getElementById('lista-items');
         lista.innerHTML = pedido.map(i => `<div class="item-resumen">${i.cant}x ${i.nombre} - $${i.subtotal.toFixed(2)}</div>`).join('');
+        
+        // Recálculo dinámico del total para evitar errores acumulativos o de precisión
+        let total = pedido.reduce((acc, item) => acc + item.subtotal, 0);
         document.getElementById('total-text').innerText = "TOTAL: $" + total.toFixed(2);
     }
 
     function reiniciar() {
         pedido = []; 
-        total = 0;
         document.getElementById('producto').value = "";
         document.getElementById('cantidad').value = "1";
         document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
@@ -151,10 +156,10 @@
 
     function enviarWhatsApp() {
         if(pedido.length === 0) { alert("¡El pedido está vacío, Capitán!"); return; }
+        let total = pedido.reduce((acc, item) => acc + item.subtotal, 0);
         let msg = "Hola Willian, quiero cotizar el siguiente pedido:\n\n" + pedido.map(i => i.cant + "x " + i.nombre + " - $" + i.subtotal.toFixed(2)).join("\n");
         msg += "\n\nTOTAL: $" + total.toFixed(2);
         
-        // Número de Willian Campos
         window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
     }
 </script>
