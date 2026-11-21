@@ -5,11 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Los Cócteles de Willian | Profesionales del Servicio</title> 
     <style> 
-        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #000; color: #fff; padding-bottom: 100px; } 
-        .seccion { padding: 40px 20px; max-width: 900px; margin: auto; text-align: center; } 
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #000; color: #fff; padding-bottom: 110px; } 
+        .seccion { padding: 30px 20px; max-width: 900px; margin: auto; text-align: center; } 
         .header { text-align: center; padding: 20px; background: #000; border-bottom: 2px solid #d4af37; } 
-        .logo { max-width: 150px; border-radius: 50%; } 
+        .logo { max-width: 160px; border-radius: 50%; border: 2px solid #d4af37; } 
         h1, h2 { color: #d4af37; } 
+        h3 { color: #d4af37; margin-top: 0; margin-bottom: 10px; font-size: 18px; }
+
+        .tarjeta { background: #111; border: 1px solid #d4af37; border-radius: 12px; padding: 18px; margin: 16px auto; max-width: 650px; text-align: left; }
+        .lista-puntos { list-style: none; padding: 0; margin: 0; line-height: 1.8; }
+        .lista-puntos li::before { content: "• "; color: #d4af37; font-weight: bold; }
+
+        .contacto-acciones { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 16px; }
+        .btn-accion { display: inline-block; padding: 12px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; }
+        .btn-ws { background: #25d366; color: #fff; }
+        .btn-tel { background: #d4af37; color: #000; }
         
         /* Menú Flotante */
         .menu-flotante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.95); padding: 10px 15px; border-radius: 30px; display: flex; gap: 15px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); z-index: 1000; border: 1px solid #d4af37; font-size: 12px; } 
@@ -21,18 +31,69 @@
 </head>
 <body> 
     <header class="header"> 
-        <img src="logo.png" alt="Logo Los Cócteles de Willian" class="logo"> 
+        <img src="logo-navidad.png" alt="Logo Oficial Navideño Los Cócteles de Willian" class="logo"> 
         <h1>Los Cócteles de Willian</h1> 
-        <p>33 años de excelencia | RIF: J-50833687-9</p> 
+        <p><strong>Emprendimiento Willian Campos</strong></p>
+        <p>34 años de excelencia | RIF: J-50833687-9</p> 
     </header> 
     
     <section class="seccion"> 
         <h2>Willian Antonio Campos</h2> 
-        <p>Bartender, Mixólogo y Parrillero Profesional. "Hospitólogo" con 33 años de trayectoria.</p>
-        <p>Formación certificada en servicio y mixología.</p>
+        <p>Bartender, Mixólogo y Parrillero Profesional. "Hospitólogo" con <strong>34 años de trayectoria</strong>.</p>
+        <p>En <strong>Los Cócteles de Willian</strong> nos encargamos de los detalles de tu fiesta o evento para que tú solo disfrutes con tus invitados.</p>
+
+        <div class="tarjeta">
+            <h3>Nuestros Servicios</h3>
+            <ul class="lista-puntos">
+                <li>Coctelería profesional</li>
+                <li>Bartender a todo costo</li>
+                <li>Mesoneros</li>
+                <li>Parrilleros</li>
+                <li>Servicio de parrillas a todo costo</li>
+            </ul>
+        </div>
+
+        <div class="tarjeta">
+            <h3>Para Todo Tipo de Celebraciones</h3>
+            <ul class="lista-puntos">
+                <li>Fiestas navideñas</li>
+                <li>Fiestas de fin de año</li>
+                <li>Bodas</li>
+                <li>Cumpleaños</li>
+                <li>15 años</li>
+                <li>Encuentros corporativos</li>
+            </ul>
+        </div>
+
+        <div class="tarjeta">
+            <h3>Formaciones Certificadas por el INCES</h3>
+            <p>Si buscas capacitarte o capacitar a tu personal, contamos con formaciones certificadas por el INCES como:</p>
+            <ul class="lista-puntos">
+                <li>Bartender</li>
+                <li>Mesonero</li>
+                <li>Servicio de atención al cliente</li>
+                <li>Técnicas de ventas</li>
+            </ul>
+        </div>
+
+        <div class="tarjeta">
+            <h3>Ubicación y Atención</h3>
+            <p>Estamos ubicados en <strong>El Tigre, Edo. Anzoátegui</strong> y en <strong>Santa Cruz, Edo. Aragua</strong>.</p>
+            <p>Solicita tu:</p>
+            <ul class="lista-puntos">
+                <li>✅ Presupuesto</li>
+                <li>✅ Asesorías totalmente gratis</li>
+                <li>✅ Apartado de fechas</li>
+            </ul>
+
+            <div class="contacto-acciones">
+                <a href="https://wa.me/584267746622" class="btn-accion btn-ws" target="_blank">WhatsApp: 0426-7746622</a>
+                <a href="tel:+584248237912" class="btn-accion btn-tel">Llamadas: 0424-8237912</a>
+            </div>
+        </div>
     </section> 
 
-    <a href="https://wa.me/584248237912" class="whatsapp-btn" target="_blank">WhatsApp</a> 
+    <a href="https://wa.me/584267746622" class="whatsapp-btn" target="_blank">WhatsApp</a> 
 
     <!-- Menú Flotante -->
     <nav class="menu-flotante"> 
@@ -44,7 +105,7 @@
     </nav> 
 
     <footer class="header"> 
-        <p>El Tigre, Anzoátegui.</p> 
+        <p>El Tigre, Edo. Anzoátegui | Santa Cruz, Edo. Aragua</p> 
         <p><em>"Los paracaidistas no mueren, solo van al infierno a reagruparse."</em></p> 
     </footer> 
 </body>
