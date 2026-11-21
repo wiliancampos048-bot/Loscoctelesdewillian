@@ -3,36 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotizador | Los Cócteles de Willian FP</title>
+    <meta name="theme-color" content="#000000">
+    <title>Cotizador | Los Cócteles de Willian</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; padding: 20px; padding-bottom: 120px; margin: 0; }
-        .contenedor { max-width: 500px; margin: auto; border: 2px solid #FFD700; padding: 20px; border-radius: 10px; background: #111; }
-        h1 { color: #FFD700; text-align: center; text-transform: uppercase; }
-        
-        label { font-weight: bold; margin-top: 10px; display: block; color: #FFD700; }
-        select, input[type="number"] { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #FFD700; background: #222; color: #fff; box-sizing: border-box; }
-        
-        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; font-size: 0.9em; background: #222; padding: 15px; border-radius: 5px; border: 1px solid #FFD700; }
-        
-        button { width: 100%; padding: 15px; margin: 8px 0; border-radius: 5px; font-size: 1.1em; box-sizing: border-box; }
-        .btn-verde { background: #25d366; color: #000; font-weight: bold; cursor: pointer; border: none; }
-        .btn-rojo { background: #cc0000; color: #fff; font-weight: bold; cursor: pointer; border: none; }
-        .btn-amarillo { background: #FFD700; color: #000; font-weight: bold; cursor: pointer; border: none; }
-        
-        #resumen-pedido { margin-top: 20px; border-top: 2px solid #FFD700; padding-top: 10px; }
-        .item-resumen { background: #000; padding: 10px; margin: 5px 0; border-radius: 4px; border-left: 3px solid #25d366; }
-        
-        .menu-flotante { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; padding: 15px 0; display: flex; justify-content: space-around; z-index: 1000; border-top: 2px solid #d4af37; }
-        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; font-size: 13px; }
+        body { background: #000; color: #fff; font-family: 'Arial', sans-serif; padding: 18px; padding-bottom: 110px; margin: 0; }
+        .contenedor { max-width: 520px; margin: auto; border: 2px solid #d4af37; padding: 20px; border-radius: 12px; background: #111; box-sizing: border-box; }
+        h1 { color: #d4af37; text-align: center; text-transform: uppercase; margin-top: 0; font-size: 24px; }
+        .subtitulo { text-align: center; color: #ddd; font-size: 14px; margin-bottom: 18px; line-height: 1.4; }
+
+        .bloque-presupuesto { background: #181818; border: 1px solid #d4af37; border-radius: 10px; padding: 14px; margin-bottom: 16px; }
+        .chips-presupuesto { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
+        .chip-btn { background: #262626; color: #d4af37; border: 1px solid #d4af37; border-radius: 6px; padding: 8px 4px; font-weight: bold; font-size: 13px; cursor: pointer; }
+        .chip-btn:hover { background: #d4af37; color: #000; }
+
+        .estado-presupuesto { margin-top: 12px; padding: 10px 12px; border-radius: 8px; font-size: 14px; font-weight: bold; background: #0b0b0b; border-left: 4px solid #d4af37; }
+        .estado-ok { color: #25d366; border-left-color: #25d366; }
+        .estado-alerta { color: #ffcc00; border-left-color: #ffcc00; }
+
+        label { font-weight: bold; margin-top: 12px; display: block; color: #d4af37; font-size: 14px; }
+        select, input[type="number"] { width: 100%; padding: 11px; margin: 6px 0 10px; border-radius: 6px; border: 1px solid #d4af37; background: #222; color: #fff; box-sizing: border-box; font-size: 15px; }
+
+        #bloque-acompanantes { display: none; margin-top: 6px; }
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0 12px; font-size: 13px; background: #1a1a1a; padding: 12px; border-radius: 8px; border: 1px solid #d4af37; }
+        .opciones-grid label { margin: 0; color: #fff; font-weight: normal; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+
+        button.accion-principal { width: 100%; padding: 14px; margin: 7px 0; border-radius: 7px; font-size: 15px; box-sizing: border-box; font-weight: bold; cursor: pointer; border: none; }
+        .btn-verde { background: #25d366; color: #000; }
+        .btn-amarillo { background: #d4af37; color: #000; }
+        .btn-rojo { background: #9e1b1b; color: #fff; }
+
+        #resumen-pedido { margin-top: 18px; border-top: 2px solid #d4af37; padding-top: 12px; }
+        .item-resumen { background: #000; padding: 10px 12px; margin: 7px 0; border-radius: 6px; border-left: 3px solid #25d366; display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 14px; }
+        .btn-quitar { background: transparent; color: #ff6b6b; border: 1px solid #ff6b6b; border-radius: 5px; padding: 4px 8px; font-size: 12px; cursor: pointer; flex-shrink: 0; }
+        .total-final { color: #d4af37; margin: 12px 0 4px; font-size: 21px; }
+
+        .menu-flotante { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.95); padding: 10px 15px; border-radius: 30px; display: flex; gap: 15px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); z-index: 1000; border: 1px solid #d4af37; font-size: 12px; }
+        .menu-flotante a { color: #fff; text-decoration: none; font-weight: bold; }
+        .menu-flotante a:hover { color: #d4af37; }
     </style>
 </head>
 <body>
 
 <div class="contenedor">
     <h1>Cotizador</h1>
-    
-    <label>1. Producto o Servicio:</label>
-    <select id="producto">
+    <p class="subtitulo">Arma tu propuesta según tu presupuesto y envíala directo por WhatsApp. <strong>Asesoría gratis</strong>.</p>
+
+    <div class="bloque-presupuesto">
+        <label style="margin-top: 0;">¿Cuál es tu presupuesto estimado? ($ USD)</label>
+        <input type="number" id="presupuesto" placeholder="Ej: 150" min="0" step="1" oninput="actualizarUI()">
+        <div class="chips-presupuesto">
+            <button type="button" class="chip-btn" onclick="setPresupuesto(50)">$50</button>
+            <button type="button" class="chip-btn" onclick="setPresupuesto(100)">$100</button>
+            <button type="button" class="chip-btn" onclick="setPresupuesto(200)">$200</button>
+            <button type="button" class="chip-btn" onclick="setPresupuesto(350)">$350</button>
+        </div>
+        <div id="estado-presupuesto" class="estado-presupuesto">
+            Indica tu presupuesto para ver cuánto te queda disponible mientras agregas opciones.
+        </div>
+    </div>
+
+    <label for="producto">1. Elige un servicio, parrilla o cóctel:</label>
+    <select id="producto" onchange="toggleAcompanantes()">
         <option value="">-- Seleccionar --</option>
         <optgroup label="Parrillas">
             <option value="Parrilla de Solomo|30">Solomo ($30)</option>
@@ -67,28 +98,30 @@
         </optgroup>
     </select>
 
-    <label>2. Cantidad:</label>
+    <label for="cantidad">2. Cantidad:</label>
     <input type="number" id="cantidad" value="1" min="1">
 
-    <label>3. Acompañantes (Solo Parrillas):</label>
-    <div class="opciones-grid" id="acompanantes">
-        <label><input type="checkbox" value="Cochino"> Cochino</label>
-        <label><input type="checkbox" value="Pollo"> Pollo</label>
-        <label><input type="checkbox" value="Chorizo"> Chorizo</label>
-        <label><input type="checkbox" value="Morcilla"> Morcilla</label>
-        <label><input type="checkbox" value="Ensalada"> Ensalada</label>
-        <label><input type="checkbox" value="Yuca/Bollito"> Yuca/Bollito</label>
-        <label><input type="checkbox" value="Guasacaca"> Guasacaca</label>
+    <div id="bloque-acompanantes">
+        <label>3. Acompañantes (Parrillas):</label>
+        <div class="opciones-grid" id="acompanantes">
+            <label><input type="checkbox" value="Cochino"> Cochino</label>
+            <label><input type="checkbox" value="Pollo"> Pollo</label>
+            <label><input type="checkbox" value="Chorizo"> Chorizo</label>
+            <label><input type="checkbox" value="Morcilla"> Morcilla</label>
+            <label><input type="checkbox" value="Ensalada"> Ensalada</label>
+            <label><input type="checkbox" value="Yuca/Bollito"> Yuca/Bollito</label>
+            <label><input type="checkbox" value="Guasacaca"> Guasacaca</label>
+        </div>
     </div>
 
-    <button class="btn-verde" onclick="agregar()">AÑADIR AL RESUMEN</button>
-    <button class="btn-rojo" onclick="reiniciar()">REINICIAR COTIZADOR</button>
-    <button class="btn-amarillo" onclick="enviarWhatsApp()">GENERAR FACTURA (WhatsApp)</button>
+    <button type="button" class="accion-principal btn-verde" onclick="agregar()">AÑADIR AL RESUMEN</button>
+    <button type="button" class="accion-principal btn-amarillo" onclick="enviarWhatsApp()">ENVIAR COTIZACIÓN POR WHATSAPP</button>
+    <button type="button" class="accion-principal btn-rojo" onclick="reiniciar()">REINICIAR COTIZADOR</button>
 
     <div id="resumen-pedido">
-        <h3 style="color: #FFD700;">Resumen:</h3>
-        <div id="lista-items"></div>
-        <h2 id="total-text" style="color: #FFD700;">TOTAL: $0.00</h2>
+        <h3 style="color: #d4af37; margin-bottom: 8px;">Resumen de tu cotización:</h3>
+        <div id="lista-items"><p style="color: #aaa; font-size: 14px;">Aún no has agregado opciones.</p></div>
+        <h2 id="total-text" class="total-final">TOTAL ESTIMADO: $0.00</h2>
     </div>
 </div>
 
@@ -103,65 +136,125 @@
 <script>
     let pedido = [];
 
+    function setPresupuesto(monto) {
+        document.getElementById('presupuesto').value = monto;
+        actualizarUI();
+    }
+
+    function toggleAcompanantes() {
+        let val = document.getElementById('producto').value;
+        let bloque = document.getElementById('bloque-acompanantes');
+        bloque.style.display = val.startsWith("Parrilla") ? "block" : "none";
+        if (!val.startsWith("Parrilla")) {
+            document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
+        }
+    }
+
     function agregar() {
         let select = document.getElementById('producto');
-        if (!select.value) { alert("Por favor, selecciona un producto primero."); return; }
-        
+        if (!select.value) {
+            alert("Por favor, selecciona un servicio, parrilla o cóctel primero.");
+            return;
+        }
+
         let parts = select.value.split('|');
         let nombre = parts[0];
         let precio = parseFloat(parts[1]);
-        
-        let cantInput = document.getElementById('cantidad').value;
-        let cant = parseInt(cantInput);
+
+        let cant = parseInt(document.getElementById('cantidad').value);
         if (isNaN(cant) || cant < 1) {
-            cant = 1; // Valor por defecto seguro si el campo está vacío o alterado
+            cant = 1;
         }
-        
-        // Recoger acompañantes de la parrilla
+
         let extras = [];
-        document.querySelectorAll('#acompanantes input:checked').forEach(c => extras.push(c.value));
-        
+        if (select.value.startsWith("Parrilla")) {
+            document.querySelectorAll('#acompanantes input:checked').forEach(c => extras.push(c.value));
+        }
+
         let descripcionFinal = nombre;
         if (extras.length > 0) {
             descripcionFinal += " (" + extras.join(", ") + ")";
         }
 
         let subtotal = precio * cant;
-        pedido.push({nombre: descripcionFinal, cant: cant, subtotal: subtotal});
-        
-        // Limpiar formulario para el siguiente item
+        pedido.push({ nombre: descripcionFinal, cant: cant, subtotal: subtotal });
+
         select.value = "";
         document.getElementById('cantidad').value = "1";
         document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
-        
+        toggleAcompanantes();
+        actualizarUI();
+    }
+
+    function quitarItem(index) {
+        pedido.splice(index, 1);
         actualizarUI();
     }
 
     function actualizarUI() {
         let lista = document.getElementById('lista-items');
-        lista.innerHTML = pedido.map(i => `<div class="item-resumen">${i.cant}x ${i.nombre} - $${i.subtotal.toFixed(2)}</div>`).join('');
-        
-        // Recálculo dinámico del total para evitar errores acumulativos o de precisión
+        if (pedido.length === 0) {
+            lista.innerHTML = '<p style="color: #aaa; font-size: 14px;">Aún no has agregado opciones.</p>';
+        } else {
+            lista.innerHTML = pedido.map((i, idx) => `
+                <div class="item-resumen">
+                    <span>${i.cant}x ${i.nombre} - <strong>$${i.subtotal.toFixed(2)}</strong></span>
+                    <button type="button" class="btn-quitar" onclick="quitarItem(${idx})">Quitar</button>
+                </div>
+            `).join('');
+        }
+
         let total = pedido.reduce((acc, item) => acc + item.subtotal, 0);
-        document.getElementById('total-text').innerText = "TOTAL: $" + total.toFixed(2);
+        document.getElementById('total-text').innerText = "TOTAL ESTIMADO: $" + total.toFixed(2);
+
+        let presRaw = parseFloat(document.getElementById('presupuesto').value);
+        let estadoBox = document.getElementById('estado-presupuesto');
+
+        if (!isNaN(presRaw) && presRaw > 0) {
+            let diferencia = presRaw - total;
+            if (diferencia >= 0) {
+                estadoBox.className = "estado-presupuesto estado-ok";
+                estadoBox.innerText = "Dentro de tu presupuesto ($" + presRaw.toFixed(2) + ") — Te quedan $" + diferencia.toFixed(2) + " disponibles.";
+            } else {
+                estadoBox.className = "estado-presupuesto estado-alerta";
+                estadoBox.innerText = "Supera tu presupuesto ($" + presRaw.toFixed(2) + ") por $" + Math.abs(diferencia).toFixed(2) + ". Puedes quitar algún ítem o pedir asesoría.";
+            }
+        } else {
+            estadoBox.className = "estado-presupuesto";
+            estadoBox.innerText = "Indica tu presupuesto para ver cuánto te queda disponible mientras agregas opciones.";
+        }
     }
 
     function reiniciar() {
-        pedido = []; 
+        pedido = [];
+        document.getElementById('presupuesto').value = "";
         document.getElementById('producto').value = "";
         document.getElementById('cantidad').value = "1";
         document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
+        toggleAcompanantes();
         actualizarUI();
     }
 
     function enviarWhatsApp() {
-        if(pedido.length === 0) { alert("¡El pedido está vacío, Capitán!"); return; }
+        if (pedido.length === 0) {
+            alert("Agrega al menos un servicio, parrilla o cóctel antes de enviar.");
+            return;
+        }
         let total = pedido.reduce((acc, item) => acc + item.subtotal, 0);
-        let msg = "Hola Willian, quiero cotizar el siguiente pedido:\n\n" + pedido.map(i => i.cant + "x " + i.nombre + " - $" + i.subtotal.toFixed(2)).join("\n");
-        msg += "\n\nTOTAL: $" + total.toFixed(2);
-        
-        window.open("https://wa.me/584248237912?text=" + encodeURIComponent(msg));
+        let presRaw = parseFloat(document.getElementById('presupuesto').value);
+
+        let msg = "Hola Willian, quiero cotizar lo siguiente con Los Cócteles de Willian:\n\n";
+        msg += pedido.map(i => "• " + i.cant + "x " + i.nombre + " — $" + i.subtotal.toFixed(2)).join("\n");
+        msg += "\n\nTotal estimado: $" + total.toFixed(2);
+        if (!isNaN(presRaw) && presRaw > 0) {
+            msg += "\nMi presupuesto estimado: $" + presRaw.toFixed(2);
+        }
+        msg += "\n\nAgradezco asesoría y disponibilidad de fecha.";
+
+        window.open("https://wa.me/584267746622?text=" + encodeURIComponent(msg), "_blank");
     }
+
+    actualizarUI();
 </script>
 
 </body>
