@@ -3,7 +3,11 @@
 <head> 
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="theme-color" content="#000000">
     <title>Los Cócteles de Willian | Profesionales del Servicio</title> 
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
     <style> 
         body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #000; color: #fff; padding-bottom: 120px; } 
         .seccion { padding: 30px 20px; max-width: 900px; margin: auto; text-align: center; } 
@@ -108,5 +112,15 @@
         <p>El Tigre, Edo. Anzoátegui | Santa Cruz, Edo. Aragua</p> 
         <p><em>"Los paracaidistas no mueren, solo van al infierno a reagruparse."</em></p> 
     </footer> 
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js').catch(function(err) {
+                    console.log('SW no registrado:', err);
+                });
+            });
+        }
+    </script>
 </body>
 </html>
