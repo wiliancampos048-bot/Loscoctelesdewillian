@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -146,12 +145,21 @@
         .btn-rojo { background: #991b1b; color: #fff; margin-top: 10px; }
         .btn-oscuro { background: #222; color: #d4af37; border: 1px solid #d4af37; margin-top: 8px; }
         .btn-pequeno {
-            padding: 6px 10px;
+            padding: 7px 12px;
             font-size: 12px;
             border-radius: 6px;
             border: none;
             cursor: pointer;
             font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-inicio {
+            background: #d4af37;
+            color: #000;
+        }
+        .btn-inicio:hover {
+            background: #e5c158;
         }
         .btn-eliminar { background: #b91c1c; color: #fff; }
         .btn-check { background: #15803d; color: #fff; margin-right: 4px; }
@@ -250,10 +258,16 @@
         .barra-superior {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-end;
             gap: 10px;
             flex-wrap: wrap;
             margin-bottom: 14px;
+        }
+        .acciones-barra-sup {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         .oculto { display: none !important; }
 
@@ -291,7 +305,8 @@
                     <option value="Bs.">Bolívares (Bs.)</option>
                 </select>
             </div>
-            <div style="text-align:right;">
+            <div class="acciones-barra-sup">
+                <a href="index.html" class="btn-pequeno btn-inicio">Inicio</a>
                 <button class="btn-pequeno btn-eliminar" onclick="cerrarSesion()">Bloquear Oficina</button>
             </div>
         </div>
@@ -512,6 +527,7 @@
     <script>
         // CAMBIA AQUÍ TU CLAVE PRIVADA DE 4 DÍGITOS
         const PIN_SECRETO = "1973";
+        const CLAVE_STORAGE = "mi_oficina_los_cocteles_de_willian_v1";
 
         let estado = {
             moneda: "$",
@@ -524,39 +540,70 @@
             inventario: []
         };
 
+        function cargarEstado() {
+            try {
+                const guardado = localStorage.getItem(CLAVE_STORAGE);
+                if (guardado) {
+                    const parsed = JSON.parse(guardado);
+                    estado = Object.assign({}, estado, parsed);
+                }
+            } catch (e) {
+                console.log("Error cargando datos locales:", e);
+            }
+            aplicarEstadoAInterfaz();
+        }
+
+        function guardarTodo() {
+            estado.moneda = document.getElementById("moneda").value || "$";
+            estado.proyecto = document.getElementById("nombre-proyecto").value || "";
+            estado.porcentaje = parseFloat(document.getElementById("porcentaje-ganancia").value) || 0;
+            estado.invitados = Math.max(1, parseInt(document.getElementById("cantidad-invitados").value, 10) || 1);
+            try {
+                localStorage.setItem(CLAVE_STORAGE, JSON.stringify(estado));
+            } catch (e) {
+                console.log("Error guardando datos locales:", e);
+            }
+            actualizarResumen();
+        }
+
+        function aplicarEstadoAInterfaz() {
+            document.getElementById("moneda").value = estado.moneda || "$";
+            document.getElementById("nombre-proyecto").value = estado.proyecto || "";
+            document.getElementById("porcentaje-ganancia").value = estado.porcentaje ?? 30;
+            document.getElementById("cantidad-invitados").value = estado.invitados ?? 1;
+            renderProductos();
+            renderEventos();
+            renderAgenda();
+            renderInventario();
+            actualizarResumen();
+        }
+
         function verificarPin() {
             const val = document.getElementById("input-pin").value.trim();
             const err = document.getElementById("error-pin");
             if (val === PIN_SECRETO) {
-                sessionStorage.setItem("mi_oficina_willian_ok", "1");
+                sessionStorage.setItem("oficina_desbloqueada_willian", "1");
+                err.classList.add("oculto");
                 document.getElementById("pantalla-pin").classList.add("oculto");
                 document.getElementById("contenido-privado").classList.remove("oculto");
-                cargarTodo();
+                cargarEstado();
             } else {
                 err.classList.remove("oculto");
-                document.getElementById("input-pin").value = "";
             }
         }
 
         function cerrarSesion() {
-            sessionStorage.removeItem("mi_oficina_willian_ok");
+            sessionStorage.removeItem("oficina_desbloqueada_willian");
+            document.getElementById("input-pin").value = "";
             document.getElementById("contenido-privado").classList.add("oculto");
             document.getElementById("pantalla-pin").classList.remove("oculto");
-            document.getElementById("input-pin").value = "";
-            document.getElementById("error-pin").classList.add("oculto");
         }
 
-        document.getElementById("input-pin").addEventListener("keypress", function(e) {
-            if (e.key === "Enter") verificarPin();
-        });
-
-        window.addEventListener("load", function() {
-            if (sessionStorage.getItem("mi_oficina_willian_ok") === "1") {
-                document.getElementById("pantalla-pin").classList.add("oculto");
-                document.getElementById("contenido-privado").classList.remove("oculto");
-                cargarTodo();
-            }
-        });
+        function cambiarMoneda() {
+            guardarTodo();
+            renderEventos();
+            actualizarResumen();
+        }
 
         function mostrarSeccion(nombre) {
             const secciones = ["costos", "eventos", "agenda", "inventario", "enlaces"];
@@ -566,52 +613,15 @@
             });
         }
 
-        function fmt(num) {
-            return Number(num || 0).toLocaleString("es-VE", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
+        function formatoMoneda(monto) {
+            const sim = estado.moneda || "$";
+            const num = Number(monto) || 0;
+            return sim + " " + num.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        function cambiarMoneda() {
-            estado.moneda = document.getElementById("moneda").value;
-            guardarTodo();
-            renderizarTodo();
-        }
-
-        function guardarTodo() {
-            estado.proyecto = document.getElementById("nombre-proyecto").value;
-            estado.porcentaje = parseFloat(document.getElementById("porcentaje-ganancia").value) || 0;
-            estado.invitados = parseInt(document.getElementById("cantidad-invitados").value, 10) || 1;
-            localStorage.setItem("mi_oficina_willian_v1", JSON.stringify(estado));
-        }
-
-        function cargarTodo() {
-            const raw = localStorage.getItem("mi_oficina_willian_v1");
-            if (raw) {
-                try {
-                    const parsed = JSON.parse(raw);
-                    estado = Object.assign(estado, parsed);
-                } catch (e) {}
-            }
-            document.getElementById("moneda").value = estado.moneda || "$";
-            document.getElementById("nombre-proyecto").value = estado.proyecto || "";
-            document.getElementById("porcentaje-ganancia").value = estado.porcentaje !== undefined ? estado.porcentaje : 30;
-            document.getElementById("cantidad-invitados").value = estado.invitados || 1;
-            renderizarTodo();
-        }
-
-        function renderizarTodo() {
-            renderizarProductos();
-            renderizarEventos();
-            renderizarAgenda();
-            renderizarInventario();
-        }
-
-        /* --- COSTOS --- */
         function agregarProducto() {
             const nombre = document.getElementById("prod-nombre").value.trim();
-            const marca = document.getElementById("prod-marca").value.trim() || "Sin marca";
+            const marca = document.getElementById("prod-marca").value.trim();
             const cantidad = parseFloat(document.getElementById("prod-cantidad").value);
             const unidad = document.getElementById("prod-unidad").value.trim();
             const precio = parseFloat(document.getElementById("prod-precio").value);
@@ -622,12 +632,12 @@
             }
 
             estado.productos.push({
+                id: Date.now(),
                 nombre,
-                marca,
+                marca: marca || "-",
                 cantidad,
-                unidad,
-                precio,
-                total: cantidad * precio
+                unidad: unidad || "",
+                precio
             });
 
             document.getElementById("prod-nombre").value = "";
@@ -635,246 +645,275 @@
             document.getElementById("prod-cantidad").value = "";
             document.getElementById("prod-unidad").value = "";
             document.getElementById("prod-precio").value = "";
-            document.getElementById("prod-nombre").focus();
 
             guardarTodo();
-            renderizarProductos();
-        }
-
-        function eliminarProducto(idx) {
-            estado.productos.splice(idx, 1);
-            guardarTodo();
-            renderizarProductos();
-        }
-
-        function renderizarProductos() {
-            const tbody = document.getElementById("lista-productos");
-            const vacio = document.getElementById("mensaje-vacio");
-            const cont = document.getElementById("contenedor-tabla");
-            const m = estado.moneda;
-
-            tbody.innerHTML = "";
-            if (!estado.productos.length) {
-                vacio.classList.remove("oculto");
-                cont.classList.add("oculto");
-            } else {
-                vacio.classList.add("oculto");
-                cont.classList.remove("oculto");
-                estado.productos.forEach((p, i) => {
-                    const cantTxt = p.unidad ? `${p.cantidad} ${p.unidad}` : `${p.cantidad}`;
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `
-                        <td class="num-col">${i + 1}</td>
-                        <td><strong>${p.nombre}</strong></td>
-                        <td>${p.marca}</td>
-                        <td>${cantTxt}</td>
-                        <td class="precio-col">${m} ${fmt(p.precio)}</td>
-                        <td class="precio-col" style="color:#d4af37;">${m} ${fmt(p.total)}</td>
-                        <td style="text-align:center;">
-                            <button class="btn-pequeno btn-eliminar" onclick="eliminarProducto(${i})">X</button>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            }
+            renderProductos();
             actualizarResumen();
         }
 
+        function eliminarProducto(id) {
+            estado.productos = estado.productos.filter(p => p.id !== id);
+            guardarTodo();
+            renderProductos();
+            actualizarResumen();
+        }
+
+        function renderProductos() {
+            const tbody = document.getElementById("lista-productos");
+            const msgVacio = document.getElementById("mensaje-vacio");
+            const contTabla = document.getElementById("contenedor-tabla");
+
+            if (!estado.productos.length) {
+                tbody.innerHTML = "";
+                msgVacio.classList.remove("oculto");
+                contTabla.classList.add("oculto");
+                return;
+            }
+
+            msgVacio.classList.add("oculto");
+            contTabla.classList.remove("oculto");
+
+            tbody.innerHTML = estado.productos.map((p, idx) => {
+                const totalItem = p.cantidad * p.precio;
+                const cantTexto = p.unidad ? `${p.cantidad} ${p.unidad}` : `${p.cantidad}`;
+                return `
+                    <tr>
+                        <td class="num-col">${idx + 1}</td>
+                        <td>${p.nombre}</td>
+                        <td>${p.marca}</td>
+                        <td>${cantTexto}</td>
+                        <td class="precio-col">${formatoMoneda(p.precio)}</td>
+                        <td class="precio-col">${formatoMoneda(totalItem)}</td>
+                        <td style="text-align:center;">
+                            <button class="btn-pequeno btn-eliminar" onclick="eliminarProducto(${p.id})">X</button>
+                        </td>
+                    </tr>
+                `;
+            }).join("");
+        }
+
         function actualizarResumen() {
-            const m = estado.moneda;
-            const costo = estado.productos.reduce((s, x) => s + x.total, 0);
+            const costoTotal = estado.productos.reduce((acc, p) => acc + (p.cantidad * p.precio), 0);
             const pct = parseFloat(document.getElementById("porcentaje-ganancia").value) || 0;
-            const inv = parseInt(document.getElementById("cantidad-invitados").value, 10) || 1;
-            const gan = costo * (pct / 100);
-            const totalFinal = costo + gan;
-            const porPers = totalFinal / (inv > 0 ? inv : 1);
+            const invitados = Math.max(1, parseInt(document.getElementById("cantidad-invitados").value, 10) || 1);
+            const ganancia = costoTotal * (pct / 100);
+            const totalFinal = costoTotal + ganancia;
+            const porPersona = totalFinal / invitados;
 
             document.getElementById("resumen-items").textContent = estado.productos.length;
-            document.getElementById("resumen-costo").textContent = `${m} ${fmt(costo)}`;
-            document.getElementById("resumen-ganancia").textContent = `${m} ${fmt(gan)}`;
-            document.getElementById("resumen-persona").textContent = `${m} ${fmt(porPers)}`;
-            document.getElementById("resumen-total-final").textContent = `${m} ${fmt(totalFinal)}`;
-            guardarTodo();
+            document.getElementById("resumen-costo").textContent = formatoMoneda(costoTotal);
+            document.getElementById("resumen-ganancia").textContent = formatoMoneda(ganancia);
+            document.getElementById("resumen-persona").textContent = formatoMoneda(porPersona);
+            document.getElementById("resumen-total-final").textContent = formatoMoneda(totalFinal);
         }
 
         function limpiarCostos() {
-            if (confirm("¿Borrar todos los ítems de esta estructura de costos?")) {
-                estado.productos = [];
-                estado.proyecto = "";
-                document.getElementById("nombre-proyecto").value = "";
-                guardarTodo();
-                renderizarProductos();
-            }
+            if (!confirm("¿Deseas limpiar todos los ítems de la estructura actual?")) return;
+            estado.productos = [];
+            estado.proyecto = "";
+            document.getElementById("nombre-proyecto").value = "";
+            guardarTodo();
+            renderProductos();
+            actualizarResumen();
         }
 
         function enviarCostosWhatsApp() {
-            if (!estado.productos.length) {
-                alert("Agrega al menos un producto primero.");
-                return;
-            }
-            const m = estado.moneda;
-            const proy = document.getElementById("nombre-proyecto").value.trim() || "Estructura de Costos";
-            const costo = estado.productos.reduce((s, x) => s + x.total, 0);
+            const costoTotal = estado.productos.reduce((acc, p) => acc + (p.cantidad * p.precio), 0);
             const pct = parseFloat(document.getElementById("porcentaje-ganancia").value) || 0;
-            const inv = parseInt(document.getElementById("cantidad-invitados").value, 10) || 1;
-            const gan = costo * (pct / 100);
-            const totalFinal = costo + gan;
-            const porPers = totalFinal / (inv > 0 ? inv : 1);
+            const invitados = Math.max(1, parseInt(document.getElementById("cantidad-invitados").value, 10) || 1);
+            const ganancia = costoTotal * (pct / 100);
+            const totalFinal = costoTotal + ganancia;
+            const porPersona = totalFinal / invitados;
 
-            let msg = `*LOS CÓCTELES DE WILLIAN — MI OFICINA*\n*${proy}*\n\n`;
-            estado.productos.forEach((p, idx) => {
-                const cantTxt = p.unidad ? `${p.cantidad} ${p.unidad}` : `${p.cantidad}`;
-                msg += `${idx + 1}. *${p.nombre}* (${p.marca}) - ${cantTxt} x ${m} ${fmt(p.precio)} = *${m} ${fmt(p.total)}*\n`;
+            let texto = `*MI OFICINA - Los Cócteles de Willian*\n`;
+            if (estado.proyecto) texto += `Proyecto: *${estado.proyecto}*\n`;
+            texto += `Ítems: ${estado.productos.length}\n`;
+            estado.productos.forEach((p, i) => {
+                const cant = p.unidad ? `${p.cantidad} ${p.unidad}` : `${p.cantidad}`;
+                texto += `${i + 1}. ${p.nombre} (${cant}) - ${formatoMoneda(p.cantidad * p.precio)}\n`;
             });
-            msg += `\n*Ítems:* ${estado.productos.length}`;
-            msg += `\n*Costo Insumos:* ${m} ${fmt(costo)}`;
-            msg += `\n*Ganancia (${pct}%):* ${m} ${fmt(gan)}`;
-            msg += `\n*Total Sugerido:* ${m} ${fmt(totalFinal)}`;
-            if (inv > 1) msg += `\n*Por Persona (${inv}):* ${m} ${fmt(porPers)}`;
+            texto += `\nCosto Insumos: *${formatoMoneda(costoTotal)}*\n`;
+            texto += `Ganancia (${pct}%): *${formatoMoneda(ganancia)}*\n`;
+            texto += `Precio por persona (${invitados}): *${formatoMoneda(porPersona)}*\n`;
+            texto += `Total Sugerido: *${formatoMoneda(totalFinal)}*`;
 
-            window.open(`https://wa.me/584267746622?text=${encodeURIComponent(msg)}`, "_blank");
+            window.open(`https://wa.me/584267746622?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
         }
 
-        /* --- EVENTOS --- */
         function agregarEvento() {
             const cliente = document.getElementById("ev-cliente").value.trim();
             const fecha = document.getElementById("ev-fecha").value;
-            const total = parseFloat(document.getElementById("ev-total").value) || 0;
+            const total = parseFloat(document.getElementById("ev-total").value);
             const abono = parseFloat(document.getElementById("ev-abono").value) || 0;
             const notas = document.getElementById("ev-notas").value.trim();
 
-            if (!cliente || !fecha || total <= 0) {
-                alert("Indica cliente, fecha y monto total del evento.");
+            if (!cliente || !fecha || isNaN(total) || total < 0) {
+                alert("Completa cliente, fecha y monto total del evento.");
                 return;
             }
 
-            estado.eventos.push({ cliente, fecha, total, abono, notas });
+            estado.eventos.unshift({
+                id: Date.now(),
+                cliente,
+                fecha,
+                total,
+                abono,
+                notas
+            });
+
             document.getElementById("ev-cliente").value = "";
             document.getElementById("ev-fecha").value = "";
             document.getElementById("ev-total").value = "";
             document.getElementById("ev-abono").value = "";
             document.getElementById("ev-notas").value = "";
+
             guardarTodo();
-            renderizarEventos();
+            renderEventos();
         }
 
-        function eliminarEvento(idx) {
-            estado.eventos.splice(idx, 1);
+        function eliminarEvento(id) {
+            estado.eventos = estado.eventos.filter(e => e.id !== id);
             guardarTodo();
-            renderizarEventos();
+            renderEventos();
         }
 
-        function renderizarEventos() {
+        function renderEventos() {
             const cont = document.getElementById("lista-eventos");
-            const m = estado.moneda;
             if (!estado.eventos.length) {
                 cont.innerHTML = `<p style="color:#aaa; font-size:13px;">No hay eventos registrados todavía.</p>`;
                 return;
             }
-            cont.innerHTML = estado.eventos.map((ev, i) => {
-                const saldo = Math.max(0, ev.total - ev.abono);
+
+            cont.innerHTML = estado.eventos.map(ev => {
+                const restante = Math.max(0, ev.total - ev.abono);
                 return `
                     <div class="item-lista">
                         <div class="item-titulo">${ev.cliente} — ${ev.fecha}</div>
                         <div class="item-meta">
-                            Total: <strong>${m} ${fmt(ev.total)}</strong> |
-                            Abonado: <strong style="color:#25d366;">${m} ${fmt(ev.abono)}</strong> |
-                            Resta: <strong style="color:#facc15;">${m} ${fmt(saldo)}</strong>
+                            Total: <strong>${formatoMoneda(ev.total)}</strong> |
+                            Abono: <strong>${formatoMoneda(ev.abono)}</strong> |
+                            Restante: <strong>${formatoMoneda(restante)}</strong>
                             ${ev.notas ? `<br>Notas: ${ev.notas}` : ""}
                         </div>
                         <div class="acciones-item">
-                            <button class="btn-pequeno btn-eliminar" onclick="eliminarEvento(${i})">Eliminar</button>
+                            <button class="btn-pequeno btn-eliminar" onclick="eliminarEvento(${ev.id})">Eliminar</button>
                         </div>
                     </div>
                 `;
             }).join("");
         }
 
-        /* --- AGENDA --- */
         function agregarTarea() {
             const tarea = document.getElementById("ag-tarea").value.trim();
-            const fecha = document.getElementById("ag-fecha").value || "Sin fecha";
+            const fecha = document.getElementById("ag-fecha").value;
             if (!tarea) {
                 alert("Escribe la tarea o pendiente.");
                 return;
             }
-            estado.agenda.push({ tarea, fecha, hecha: false });
+
+            estado.agenda.unshift({
+                id: Date.now(),
+                tarea,
+                fecha: fecha || "Sin fecha",
+                completada: false
+            });
+
             document.getElementById("ag-tarea").value = "";
             document.getElementById("ag-fecha").value = "";
             guardarTodo();
-            renderizarAgenda();
+            renderAgenda();
         }
 
-        function toggleTarea(idx) {
-            estado.agenda[idx].hecha = !estado.agenda[idx].hecha;
+        function toggleTarea(id) {
+            estado.agenda = estado.agenda.map(t => t.id === id ? Object.assign({}, t, { completada: !t.completada }) : t);
             guardarTodo();
-            renderizarAgenda();
+            renderAgenda();
         }
 
-        function eliminarTarea(idx) {
-            estado.agenda.splice(idx, 1);
+        function eliminarTarea(id) {
+            estado.agenda = estado.agenda.filter(t => t.id !== id);
             guardarTodo();
-            renderizarAgenda();
+            renderAgenda();
         }
 
-        function renderizarAgenda() {
+        function renderAgenda() {
             const cont = document.getElementById("lista-agenda");
             if (!estado.agenda.length) {
-                cont.innerHTML = `<p style="color:#aaa; font-size:13px;">Sin tareas pendientes.</p>`;
+                cont.innerHTML = `<p style="color:#aaa; font-size:13px;">No hay tareas registradas en la agenda.</p>`;
                 return;
             }
-            cont.innerHTML = estado.agenda.map((t, i) => `
-                <div class="item-lista ${t.hecha ? "completado" : ""}">
-                    <div class="item-titulo">${t.hecha ? "✔ " : ""}${t.tarea}</div>
-                    <div class="item-meta">Fecha: ${t.fecha}</div>
+
+            cont.innerHTML = estado.agenda.map(t => `
+                <div class="item-lista ${t.completada ? "completado" : ""}">
+                    <div class="item-titulo">${t.tarea}</div>
+                    <div class="item-meta">Fecha: ${t.fecha} | Estado: ${t.completada ? "Completada" : "Pendiente"}</div>
                     <div class="acciones-item">
-                        <button class="btn-pequeno btn-check" onclick="toggleTarea(${i})">${t.hecha ? "Reabrir" : "Listo"}</button>
-                        <button class="btn-pequeno btn-eliminar" onclick="eliminarTarea(${i})">Borrar</button>
+                        <button class="btn-pequeno btn-check" onclick="toggleTarea(${t.id})">${t.completada ? "Reabrir" : "Listo"}</button>
+                        <button class="btn-pequeno btn-eliminar" onclick="eliminarTarea(${t.id})">Eliminar</button>
                     </div>
                 </div>
             `).join("");
         }
 
-        /* --- INVENTARIO --- */
         function agregarEquipo() {
             const nombre = document.getElementById("eq-nombre").value.trim();
             const cantidad = parseInt(document.getElementById("eq-cantidad").value, 10);
-            const estadoEq = document.getElementById("eq-estado").value.trim() || "Operativo";
+            const estadoEq = document.getElementById("eq-estado").value.trim();
 
             if (!nombre || isNaN(cantidad) || cantidad < 0) {
-                alert("Indica el nombre del equipo y su cantidad.");
+                alert("Completa el nombre del equipo y su cantidad.");
                 return;
             }
-            estado.inventario.push({ nombre, cantidad, estado: estadoEq });
+
+            estado.inventario.unshift({
+                id: Date.now(),
+                nombre,
+                cantidad,
+                estado: estadoEq || "Operativo"
+            });
+
             document.getElementById("eq-nombre").value = "";
             document.getElementById("eq-cantidad").value = "";
             document.getElementById("eq-estado").value = "";
             guardarTodo();
-            renderizarInventario();
+            renderInventario();
         }
 
-        function eliminarEquipo(idx) {
-            estado.inventario.splice(idx, 1);
+        function eliminarEquipo(id) {
+            estado.inventario = estado.inventario.filter(eq => eq.id !== id);
             guardarTodo();
-            renderizarInventario();
+            renderInventario();
         }
 
-        function renderizarInventario() {
+        function renderInventario() {
             const cont = document.getElementById("lista-inventario");
             if (!estado.inventario.length) {
-                cont.innerHTML = `<p style="color:#aaa; font-size:13px;">Aún no has cargado equipos.</p>`;
+                cont.innerHTML = `<p style="color:#aaa; font-size:13px;">Aún no has cargado equipos al inventario.</p>`;
                 return;
             }
-            cont.innerHTML = estado.inventario.map((eq, i) => `
+
+            cont.innerHTML = estado.inventario.map(eq => `
                 <div class="item-lista">
-                    <div class="item-titulo">${eq.nombre} — Cant: ${eq.cantidad}</div>
+                    <div class="item-titulo">${eq.nombre} — Cant.: ${eq.cantidad}</div>
                     <div class="item-meta">Estado: ${eq.estado}</div>
                     <div class="acciones-item">
-                        <button class="btn-pequeno btn-eliminar" onclick="eliminarEquipo(${i})">Eliminar</button>
+                        <button class="btn-pequeno btn-eliminar" onclick="eliminarEquipo(${eq.id})">Eliminar</button>
                     </div>
                 </div>
             `).join("");
         }
+
+        document.getElementById("input-pin").addEventListener("keydown", function(e) {
+            if (e.key === "Enter") verificarPin();
+        });
+
+        window.addEventListener("DOMContentLoaded", function() {
+            if (sessionStorage.getItem("oficina_desbloqueada_willian") === "1") {
+                document.getElementById("pantalla-pin").classList.add("oculto");
+                document.getElementById("contenido-privado").classList.remove("oculto");
+                cargarEstado();
+            }
+        });
     </script>
 </body>
 </html>
