@@ -21,7 +21,18 @@
         .estado-alerta { color: #ffcc00; border-left-color: #ffcc00; }
 
         label { font-weight: bold; margin-top: 12px; display: block; color: #d4af37; font-size: 14px; }
-        select, input[type="number"] { width: 100%; padding: 11px; margin: 6px 0 10px; border-radius: 6px; border: 1px solid #d4af37; background: #222; color: #fff; box-sizing: border-box; font-size: 15px; }
+        select, input[type="number"], input[type="date"], input[type="text"] {
+            width: 100%;
+            padding: 11px;
+            margin: 6px 0 10px;
+            border-radius: 6px;
+            border: 1px solid #d4af37;
+            background: #222;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        .ayuda-campo { font-size: 12px; color: #bbb; margin-top: -6px; margin-bottom: 10px; }
 
         #bloque-acompanantes, #bloque-cocteleria { display: none; margin-top: 6px; }
         .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0 12px; font-size: 13px; background: #1a1a1a; padding: 12px; border-radius: 8px; border: 1px solid #d4af37; }
@@ -32,6 +43,9 @@
         .caja-info-coctel ul { margin: 6px 0 8px 18px; padding: 0; }
         .caja-info-coctel li { margin-bottom: 3px; }
         .nota-reglas { background: #0d0d0d; border-left: 3px solid #d4af37; padding: 8px 10px; border-radius: 5px; font-size: 12px; color: #ddd; margin-top: 8px; }
+
+        .bloque-extra-evento { background: #181818; border: 1px solid #333; border-radius: 10px; padding: 12px; margin-top: 10px; margin-bottom: 12px; }
+        .bloque-extra-evento label { margin-top: 4px; }
 
         button.accion-principal { width: 100%; padding: 14px; margin: 7px 0; border-radius: 7px; font-size: 15px; box-sizing: border-box; font-weight: bold; cursor: pointer; border: none; }
         .btn-verde { background: #25d366; color: #000; }
@@ -92,7 +106,7 @@
 
     <div id="bloque-cocteleria">
         <label for="version-coctel">Versión del paquete:</label>
-        <select id="version-coctel" onchange="actualizarVistaVersion()">
+        <select id="version-coctel">
             <option value="tradicional">Tradicional — Vaso plástico transparente de 12 oz ($2.30 c/u)</option>
             <option value="cristaleria">Cristalería — Copas de cristal ($2.80 c/u)</option>
         </select>
@@ -114,8 +128,9 @@
         </div>
     </div>
 
-    <label for="cantidad">2. Cantidad:</label>
-    <input type="number" id="cantidad" value="1" min="1">
+    <label for="cantidad">2. Cantidad (paquetes o unidades):</label>
+    <input type="number" id="cantidad" value="1" min="1" step="1">
+    <div id="ayuda-cantidad" class="ayuda-campo">Indica cuántos paquetes o unidades deseas añadir de la opción elegida.</div>
 
     <div id="bloque-acompanantes">
         <label>3. Acompañantes (Parrillas):</label>
@@ -131,6 +146,18 @@
     </div>
 
     <button type="button" class="accion-principal btn-verde" onclick="agregar()">AÑADIR AL RESUMEN</button>
+
+    <div class="bloque-extra-evento">
+        <label for="fecha-evento">Fecha estimada del evento (opcional):</label>
+        <input type="date" id="fecha-evento">
+
+        <label for="detalle-evento">Lugar, hotel o tipo de evento (opcional):</label>
+        <input type="text" id="detalle-evento" placeholder="Ej: Hotel, cumpleaños, boda, empresa...">
+
+        <label for="notas-cliente">Preferencias o notas adicionales (opcional):</label>
+        <input type="text" id="notas-cliente" placeholder="Ej: Sabores preferidos, horario, etc.">
+    </div>
+
     <button type="button" class="accion-principal btn-amarillo" onclick="enviarWhatsApp()">ENVIAR COTIZACIÓN POR WHATSAPP</button>
     <button type="button" class="accion-principal btn-rojo" onclick="reiniciar()">REINICIAR COTIZADOR</button>
 
@@ -152,6 +179,10 @@
 <script>
     let pedido = [];
 
+    function redondearCentavos(valor) {
+        return Math.round((Number(valor) + Number.EPSILON) * 100) / 100;
+    }
+
     function setPresupuesto(monto) {
         document.getElementById('presupuesto').value = monto;
         actualizarUI();
@@ -164,6 +195,7 @@
 
         let bloqueParrilla = document.getElementById('bloque-acompanantes');
         let bloqueCoctel = document.getElementById('bloque-cocteleria');
+        let ayudaCant = document.getElementById('ayuda-cantidad');
 
         bloqueParrilla.style.display = (tipo === "parrilla") ? "block" : "none";
         if (tipo !== "parrilla") {
@@ -174,10 +206,12 @@
         if (tipo !== "coctel") {
             document.getElementById('version-coctel').value = "tradicional";
         }
-    }
 
-    function actualizarVistaVersion() {
-        // Mantiene la selección activa de versión (tradicional / cristaleria)
+        if (tipo === "coctel") {
+            ayudaCant.innerText = "Cantidad de paquetes a cotizar (ej: 1 = un paquete completo).";
+        } else {
+            ayudaCant.innerText = "Indica cuántos paquetes o unidades deseas añadir de la opción elegida.";
+        }
     }
 
     function agregar() {
@@ -195,11 +229,13 @@
 
         let precio = precioTradicional;
         let descripcionFinal = nombre;
+        let esCristaleria = false;
 
         if (tipo === "coctel") {
             let version = document.getElementById('version-coctel').value;
             if (version === "cristaleria") {
                 precio = precioCristal;
+                esCristaleria = true;
                 descripcionFinal += " - Versión Cristalería (copas de cristal, $2.80 c/u)";
             } else {
                 precio = precioTradicional;
@@ -207,7 +243,7 @@
             }
         }
 
-        let cant = parseInt(document.getElementById('cantidad').value);
+        let cant = parseInt(document.getElementById('cantidad').value, 10);
         if (isNaN(cant) || cant < 1) {
             cant = 1;
         }
@@ -221,8 +257,14 @@
             descripcionFinal += " (" + extras.join(", ") + ")";
         }
 
-        let subtotal = precio * cant;
-        pedido.push({ nombre: descripcionFinal, cant: cant, subtotal: subtotal, esCoctel: (tipo === "coctel") });
+        let subtotal = redondearCentavos(precio * cant);
+        pedido.push({
+            nombre: descripcionFinal,
+            cant: cant,
+            subtotal: subtotal,
+            esCoctel: (tipo === "coctel"),
+            esCristaleria: esCristaleria
+        });
 
         select.value = "";
         document.getElementById('cantidad').value = "1";
@@ -250,14 +292,14 @@
             `).join('');
         }
 
-        let total = pedido.reduce((acc, item) => acc + item.subtotal, 0);
+        let total = redondearCentavos(pedido.reduce((acc, item) => acc + item.subtotal, 0));
         document.getElementById('total-text').innerText = "TOTAL ESTIMADO: $" + total.toFixed(2);
 
         let presRaw = parseFloat(document.getElementById('presupuesto').value);
         let estadoBox = document.getElementById('estado-presupuesto');
 
         if (!isNaN(presRaw) && presRaw > 0) {
-            let diferencia = presRaw - total;
+            let diferencia = redondearCentavos(presRaw - total);
             if (diferencia >= 0) {
                 estadoBox.className = "estado-presupuesto estado-ok";
                 estadoBox.innerText = "Dentro de tu presupuesto ($" + presRaw.toFixed(2) + ") — Te quedan $" + diferencia.toFixed(2) + " disponibles.";
@@ -277,6 +319,9 @@
         document.getElementById('producto').value = "";
         document.getElementById('cantidad').value = "1";
         document.getElementById('version-coctel').value = "tradicional";
+        document.getElementById('fecha-evento').value = "";
+        document.getElementById('detalle-evento').value = "";
+        document.getElementById('notas-cliente').value = "";
         document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
         toggleDetallesProducto();
         actualizarUI();
@@ -287,19 +332,38 @@
             alert("Agrega al menos un paquete, parrilla o servicio antes de enviar.");
             return;
         }
-        let total = pedido.reduce((acc, item) => acc + item.subtotal, 0);
+        let total = redondearCentavos(pedido.reduce((acc, item) => acc + item.subtotal, 0));
         let presRaw = parseFloat(document.getElementById('presupuesto').value);
         let incluyeCocteles = pedido.some(i => i.esCoctel);
+        let incluyeCristaleria = pedido.some(i => i.esCristaleria);
+
+        let fechaEvento = document.getElementById('fecha-evento').value.trim();
+        let detalleEvento = document.getElementById('detalle-evento').value.trim();
+        let notasCliente = document.getElementById('notas-cliente').value.trim();
 
         let msg = "Hola Willian, quiero cotizar lo siguiente con Los Cócteles de Willian:\n\n";
         msg += pedido.map(i => "• " + i.cant + "x " + i.nombre + " — $" + i.subtotal.toFixed(2)).join("\n");
         msg += "\n\nTotal estimado: $" + total.toFixed(2);
+
         if (!isNaN(presRaw) && presRaw > 0) {
-            msg += "\nMi presupuesto estimado: $" + presRaw.toFixed(2);
+            msg += "\nPresupuesto estimado del cliente: $" + presRaw.toFixed(2);
         }
+        if (fechaEvento) {
+            msg += "\nFecha estimada: " + fechaEvento;
+        }
+        if (detalleEvento) {
+            msg += "\nLugar / Evento: " + detalleEvento;
+        }
+        if (notasCliente) {
+            msg += "\nNotas / Preferencias: " + notasCliente;
+        }
+
         if (incluyeCocteles) {
             msg += "\n\nIncluye 10 familias de cócteles con sus variantes (Piña Colada en colores, Daiquirí, Mojito Cubano, Caipiroska, Destornillador, Cuba Libre, Sexo en la playa, Tren de Medianoche, Cocoloco y Arcoíris).";
-            msg += "\nCondiciones: 50% para apartar la fecha y 50% en la mañana del evento para ingredientes perecederos. En cristalería, a partir de 5 copas partidas o extraviadas se cobran a $3.00 c/u.";
+        }
+        msg += "\nCondiciones de reserva: 50% para apartar la fecha y 50% en la mañana del evento para compras perecederas.";
+        if (incluyeCristaleria) {
+            msg += "\nCristalería: a partir de 5 copas partidas o extraviadas se cobrará la reposición a $3.00 cada una.";
         }
         msg += "\n\nAgradezco asesoría y disponibilidad de fecha.";
 
