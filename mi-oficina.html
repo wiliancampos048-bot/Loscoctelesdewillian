@@ -1,1 +1,880 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>MI OFICINA | Los Cócteles de Willian</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="Mi logo navideño.png">
+    <link rel="apple-touch-icon" href="Mi logo navideño.png">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            padding-bottom: 65px;
+        }
+        .header {
+            text-align: center;
+            padding: 18px 15px;
+            background: #000;
+            border-bottom: 2px solid #d4af37;
+        }
+        .logo {
+            width: 88px;
+            height: 88px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #d4af37;
+        }
+        h1, h2, h3 { color: #d4af37; margin: 8px 0; }
+        h1 { font-size: 22px; }
+        h2 { font-size: 18px; }
+        h3 { font-size: 15px; }
+
+        .contenedor {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 14px;
+        }
+
+        /* Bloqueo PIN */
+        #pantalla-pin {
+            max-width: 380px;
+            margin: 50px auto;
+            background: #111;
+            border: 1px solid #d4af37;
+            border-radius: 14px;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        .input-pin {
+            width: 100%;
+            padding: 14px;
+            font-size: 22px;
+            text-align: center;
+            letter-spacing: 8px;
+            background: #000;
+            border: 1px solid #d4af37;
+            border-radius: 8px;
+            color: #d4af37;
+            margin: 14px 0;
+        }
+
+        /* Navegación por Pestañas */
+        .tabs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .tab-btn {
+            background: #111;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            border-radius: 8px;
+            padding: 10px 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+        }
+        .tab-btn.activa {
+            background: #d4af37;
+            color: #000;
+        }
+
+        /* Tarjetas y Formularios */
+        .tarjeta {
+            background: #111;
+            border: 1px solid #d4af37;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .fila-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .fila-completa {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            font-size: 12px;
+            color: #d4af37;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #000;
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            padding: 11px 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+            text-decoration: none;
+        }
+        .btn-dorado { background: #d4af37; color: #000; }
+        .btn-dorado:hover { background: #e5c158; }
+        .btn-ws { background: #25d366; color: #fff; margin-top: 10px; }
+        .btn-rojo { background: #991b1b; color: #fff; margin-top: 10px; }
+        .btn-oscuro { background: #222; color: #d4af37; border: 1px solid #d4af37; margin-top: 8px; }
+        .btn-pequeno {
+            padding: 6px 10px;
+            font-size: 12px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-eliminar { background: #b91c1c; color: #fff; }
+        .btn-check { background: #15803d; color: #fff; margin-right: 4px; }
+
+        /* Tabla */
+        .tabla-contenedor {
+            overflow-x: auto;
+            margin-top: 12px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 620px;
+            font-size: 13px;
+        }
+        th {
+            background: #1f1a0a;
+            color: #d4af37;
+            border-bottom: 2px solid #d4af37;
+            padding: 10px 8px;
+            text-align: left;
+        }
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #2a2a2a;
+            vertical-align: middle;
+        }
+        tr:hover { background: #181818; }
+        .num-col { font-weight: bold; color: #d4af37; width: 45px; }
+        .precio-col { font-weight: bold; text-align: right; white-space: nowrap; }
+
+        /* Resumen y Tarjetas de Lista */
+        .resumen-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .caja-dato {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        .caja-dato span {
+            display: block;
+            font-size: 12px;
+            color: #bbb;
+        }
+        .caja-dato strong {
+            display: block;
+            font-size: 19px;
+            color: #d4af37;
+            margin-top: 4px;
+        }
+        .caja-destacada {
+            border-color: #d4af37;
+            background: #171306;
+            grid-column: span 2;
+        }
+        .caja-destacada strong {
+            font-size: 23px;
+            color: #25d366;
+        }
+
+        .item-lista {
+            background: #000;
+            border: 1px solid #2f2f2f;
+            border-left: 4px solid #d4af37;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        .item-lista.completado {
+            opacity: 0.65;
+            border-left-color: #22c55e;
+        }
+        .item-titulo {
+            font-weight: bold;
+            color: #d4af37;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+        .item-meta {
+            font-size: 13px;
+            color: #ddd;
+            margin-bottom: 8px;
+        }
+        .acciones-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .barra-superior {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+        .oculto { display: none !important; }
+
+        @media (max-width: 650px) {
+            .tabs { grid-template-columns: repeat(2, 1fr); }
+            .fila-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <img src="Mi logo navideño.png" alt="Logo Los Cócteles de Willian" class="logo" onerror="this.style.display='none'">
+        <h1>MI OFICINA</h1>
+        <p style="margin:4px 0; font-size:13px; color:#ccc;">Los Cócteles de Willian | Emprendimiento Willian Campos (RIF: J-50833687-9)</p>
+    </header>
+
+    <!-- BLOQUEO PIN -->
+    <div id="pantalla-pin">
+        <h2>Acceso a MI OFICINA</h2>
+        <p style="font-size:13px; color:#ccc;">Ingresa tu clave de 4 dígitos para entrar.</p>
+        <input type="password" id="input-pin" class="input-pin" maxlength="4" inputmode="numeric" placeholder="••••">
+        <button class="btn btn-dorado" onclick="verificarPin()">Entrar a MI OFICINA</button>
+        <p id="error-pin" style="color:#f87171; font-size:13px; margin-top:10px;" class="oculto">Clave incorrecta. Intenta de nuevo.</p>
+    </div>
+
+    <!-- PANEL PRIVADO -->
+    <div id="contenido-privado" class="contenedor oculto">
+
+        <div class="barra-superior">
+            <div style="min-width: 150px;">
+                <label for="moneda">Moneda General</label>
+                <select id="moneda" onchange="cambiarMoneda()">
+                    <option value="$">Dólares ($)</option>
+                    <option value="Bs.">Bolívares (Bs.)</option>
+                </select>
+            </div>
+            <div style="text-align:right;">
+                <button class="btn-pequeno btn-eliminar" onclick="cerrarSesion()">Bloquear Oficina</button>
+            </div>
+        </div>
+
+        <!-- PESTAÑAS -->
+        <div class="tabs">
+            <button class="tab-btn activa" id="tab-costos" onclick="mostrarSeccion('costos')">Costos</button>
+            <button class="tab-btn" id="tab-eventos" onclick="mostrarSeccion('eventos')">Eventos</button>
+            <button class="tab-btn" id="tab-agenda" onclick="mostrarSeccion('agenda')">Agenda</button>
+            <button class="tab-btn" id="tab-inventario" onclick="mostrarSeccion('inventario')">Equipos</button>
+            <button class="tab-btn" id="tab-enlaces" onclick="mostrarSeccion('enlaces')">Enlaces</button>
+        </div>
+
+        <!-- 1. ESTRUCTURA DE PRECIOS E INSUMOS -->
+        <section id="sec-costos">
+            <div class="tarjeta">
+                <h2>Estructura de Insumos y Precios</h2>
+                <div class="fila-completa">
+                    <label for="nombre-proyecto">Nombre del Evento / Receta / Presupuesto</label>
+                    <input type="text" id="nombre-proyecto" placeholder="Ej: Evento 80 personas / Barra y Parrilla" oninput="guardarTodo()">
+                </div>
+
+                <div class="fila-grid">
+                    <div>
+                        <label for="prod-nombre">Producto / Ingrediente *</label>
+                        <input type="text" id="prod-nombre" placeholder="Ej: Ron Carta Roja, Limón, Carne">
+                    </div>
+                    <div>
+                        <label for="prod-marca">Marca del Producto</label>
+                        <input type="text" id="prod-marca" placeholder="Ej: Santa Teresa, Genérico">
+                    </div>
+                </div>
+
+                <div class="fila-grid">
+                    <div>
+                        <label for="prod-cantidad">Cantidad o Peso *</label>
+                        <input type="number" id="prod-cantidad" step="any" min="0" placeholder="Ej: 4">
+                    </div>
+                    <div>
+                        <label for="prod-unidad">Unidad (Opcional)</label>
+                        <input type="text" id="prod-unidad" placeholder="Ej: bot, kg, oz, saco">
+                    </div>
+                </div>
+
+                <div class="fila-completa">
+                    <label for="prod-precio">Precio Unitario del Producto *</label>
+                    <input type="number" id="prod-precio" step="any" min="0" placeholder="Ej: 12.00">
+                </div>
+
+                <button class="btn btn-dorado" onclick="agregarProducto()">+ Agregar Ítem a la Lista</button>
+            </div>
+
+            <div class="tarjeta">
+                <h2>Detalle de Ítems Cargados</h2>
+                <p id="mensaje-vacio" style="color:#aaa; font-size:13px; text-align:center; padding:12px 0;">
+                    Aún no has agregado productos a la estructura.
+                </p>
+                <div class="tabla-contenedor" id="contenedor-tabla">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>N.º</th>
+                                <th>Producto</th>
+                                <th>Marca</th>
+                                <th>Cant. / Peso</th>
+                                <th style="text-align:right;">Precio Unit.</th>
+                                <th style="text-align:right;">Total Ítem</th>
+                                <th style="text-align:center;">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-productos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tarjeta">
+                <h2>Cálculo Final y Ganancia</h2>
+                <div class="fila-grid">
+                    <div>
+                        <label for="porcentaje-ganancia">% Ganancia / Mano de Obra</label>
+                        <input type="number" id="porcentaje-ganancia" value="30" min="0" step="any" oninput="actualizarResumen()">
+                    </div>
+                    <div>
+                        <label for="cantidad-invitados">Invitados / Raciones</label>
+                        <input type="number" id="cantidad-invitados" value="1" min="1" step="1" oninput="actualizarResumen()">
+                    </div>
+                </div>
+
+                <div class="resumen-grid">
+                    <div class="caja-dato">
+                        <span>Total de Ítems</span>
+                        <strong id="resumen-items">0</strong>
+                    </div>
+                    <div class="caja-dato">
+                        <span>Costo Total Insumos</span>
+                        <strong id="resumen-costo">$ 0.00</strong>
+                    </div>
+                    <div class="caja-dato">
+                        <span>Ganancia / Servicio</span>
+                        <strong id="resumen-ganancia">$ 0.00</strong>
+                    </div>
+                    <div class="caja-dato">
+                        <span>Precio por Persona</span>
+                        <strong id="resumen-persona">$ 0.00</strong>
+                    </div>
+                    <div class="caja-dato caja-destacada">
+                        <span>PRECIO TOTAL SUGERIDO</span>
+                        <strong id="resumen-total-final">$ 0.00</strong>
+                    </div>
+                </div>
+
+                <button class="btn btn-ws" onclick="enviarCostosWhatsApp()">Enviar Estructura a mi WhatsApp</button>
+                <button class="btn btn-rojo" onclick="limpiarCostos()">Limpiar Estructura Actual</button>
+            </div>
+        </section>
+
+        <!-- 2. EVENTOS Y COTIZACIONES -->
+        <section id="sec-eventos" class="oculto">
+            <div class="tarjeta">
+                <h2>Registro de Eventos y Abonos</h2>
+                <div class="fila-grid">
+                    <div>
+                        <label for="ev-cliente">Cliente / Empresa *</label>
+                        <input type="text" id="ev-cliente" placeholder="Ej: Fiesta de cumpleaños / Empresa">
+                    </div>
+                    <div>
+                        <label for="ev-fecha">Fecha del Evento *</label>
+                        <input type="date" id="ev-fecha">
+                    </div>
+                </div>
+                <div class="fila-grid">
+                    <div>
+                        <label for="ev-total">Monto Total Acordado *</label>
+                        <input type="number" id="ev-total" step="any" min="0" placeholder="Ej: 360">
+                    </div>
+                    <div>
+                        <label for="ev-abono">Abono Recibido (Ej: 50%)</label>
+                        <input type="number" id="ev-abono" step="any" min="0" placeholder="Ej: 180">
+                    </div>
+                </div>
+                <div class="fila-completa">
+                    <label for="ev-notas">Detalles del Servicio</label>
+                    <input type="text" id="ev-notas" placeholder="Ej: Barra de cócteles + parrilla, El Tigre">
+                </div>
+                <button class="btn btn-dorado" onclick="agregarEvento()">+ Guardar Evento</button>
+            </div>
+
+            <div class="tarjeta">
+                <h2>Eventos Registrados</h2>
+                <div id="lista-eventos"></div>
+            </div>
+        </section>
+
+        <!-- 3. AGENDA Y TAREAS -->
+        <section id="sec-agenda" class="oculto">
+            <div class="tarjeta">
+                <h2>Agenda y Tareas Pendientes</h2>
+                <div class="fila-grid">
+                    <div>
+                        <label for="ag-tarea">Tarea / Pendiente / Personal *</label>
+                        <input type="text" id="ag-tarea" placeholder="Ej: Comprar hielo y carbón / Asignar mesoneros">
+                    </div>
+                    <div>
+                        <label for="ag-fecha">Fecha Límite / Día</label>
+                        <input type="date" id="ag-fecha">
+                    </div>
+                </div>
+                <button class="btn btn-dorado" onclick="agregarTarea()">+ Agregar a la Agenda</button>
+            </div>
+
+            <div class="tarjeta">
+                <h2>Lista de Tareas y Pendientes</h2>
+                <div id="lista-agenda"></div>
+            </div>
+        </section>
+
+        <!-- 4. INVENTARIO DE EQUIPOS -->
+        <section id="sec-inventario" class="oculto">
+            <div class="tarjeta">
+                <h2>Control de Equipos y Utensilios</h2>
+                <div class="fila-grid">
+                    <div>
+                        <label for="eq-nombre">Equipo o Utensilio *</label>
+                        <input type="text" id="eq-nombre" placeholder="Ej: Licuadora Oster, Hielera, Shaker">
+                    </div>
+                    <div>
+                        <label for="eq-cantidad">Cantidad Disponible *</label>
+                        <input type="number" id="eq-cantidad" min="0" step="1" placeholder="Ej: 3">
+                    </div>
+                </div>
+                <div class="fila-completa">
+                    <label for="eq-estado">Estado / Observación</label>
+                    <input type="text" id="eq-estado" placeholder="Ej: Operativa / En mantenimiento">
+                </div>
+                <button class="btn btn-dorado" onclick="agregarEquipo()">+ Guardar Equipo</button>
+            </div>
+
+            <div class="tarjeta">
+                <h2>Inventario de Equipos</h2>
+                <div id="lista-inventario"></div>
+            </div>
+        </section>
+
+        <!-- 5. ENLACES RÁPIDOS -->
+        <section id="sec-enlaces" class="oculto">
+            <div class="tarjeta">
+                <h2>Accesos Rápidos de Los Cócteles de Willian</h2>
+                <p style="font-size:13px; color:#ccc;">Atajos directos a tus canales oficiales y contactos.</p>
+                <a class="btn btn-dorado" href="index.html">Ver Página Web Pública</a>
+                <a class="btn btn-oscuro" href="https://loscoctelesdewillianfp.my.canva.site/tarjeta-digital" target="_blank" rel="noopener">Abrir Tarjeta Digital (Canva)</a>
+                <a class="btn btn-ws" href="https://wa.me/584267746622" target="_blank" rel="noopener">WhatsApp Negocio (0426-7746622)</a>
+                <a class="btn btn-oscuro" href="tel:04248237912">Llamar Contacto (0424-8237912)</a>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // CAMBIA AQUÍ TU CLAVE PRIVADA DE 4 DÍGITOS
+        const PIN_SECRETO = "1973";
+
+        let estado = {
+            moneda: "$",
+            proyecto: "",
+            productos: [],
+            porcentaje: 30,
+            invitados: 1,
+            eventos: [],
+            agenda: [],
+            inventario: []
+        };
+
+        function verificarPin() {
+            const val = document.getElementById("input-pin").value.trim();
+            const err = document.getElementById("error-pin");
+            if (val === PIN_SECRETO) {
+                sessionStorage.setItem("mi_oficina_willian_ok", "1");
+                document.getElementById("pantalla-pin").classList.add("oculto");
+                document.getElementById("contenido-privado").classList.remove("oculto");
+                cargarTodo();
+            } else {
+                err.classList.remove("oculto");
+                document.getElementById("input-pin").value = "";
+            }
+        }
+
+        function cerrarSesion() {
+            sessionStorage.removeItem("mi_oficina_willian_ok");
+            document.getElementById("contenido-privado").classList.add("oculto");
+            document.getElementById("pantalla-pin").classList.remove("oculto");
+            document.getElementById("input-pin").value = "";
+            document.getElementById("error-pin").classList.add("oculto");
+        }
+
+        document.getElementById("input-pin").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") verificarPin();
+        });
+
+        window.addEventListener("load", function() {
+            if (sessionStorage.getItem("mi_oficina_willian_ok") === "1") {
+                document.getElementById("pantalla-pin").classList.add("oculto");
+                document.getElementById("contenido-privado").classList.remove("oculto");
+                cargarTodo();
+            }
+        });
+
+        function mostrarSeccion(nombre) {
+            const secciones = ["costos", "eventos", "agenda", "inventario", "enlaces"];
+            secciones.forEach(sec => {
+                document.getElementById("sec-" + sec).classList.toggle("oculto", sec !== nombre);
+                document.getElementById("tab-" + sec).classList.toggle("activa", sec === nombre);
+            });
+        }
+
+        function fmt(num) {
+            return Number(num || 0).toLocaleString("es-VE", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        function cambiarMoneda() {
+            estado.moneda = document.getElementById("moneda").value;
+            guardarTodo();
+            renderizarTodo();
+        }
+
+        function guardarTodo() {
+            estado.proyecto = document.getElementById("nombre-proyecto").value;
+            estado.porcentaje = parseFloat(document.getElementById("porcentaje-ganancia").value) || 0;
+            estado.invitados = parseInt(document.getElementById("cantidad-invitados").value, 10) || 1;
+            localStorage.setItem("mi_oficina_willian_v1", JSON.stringify(estado));
+        }
+
+        function cargarTodo() {
+            const raw = localStorage.getItem("mi_oficina_willian_v1");
+            if (raw) {
+                try {
+                    const parsed = JSON.parse(raw);
+                    estado = Object.assign(estado, parsed);
+                } catch (e) {}
+            }
+            document.getElementById("moneda").value = estado.moneda || "$";
+            document.getElementById("nombre-proyecto").value = estado.proyecto || "";
+            document.getElementById("porcentaje-ganancia").value = estado.porcentaje !== undefined ? estado.porcentaje : 30;
+            document.getElementById("cantidad-invitados").value = estado.invitados || 1;
+            renderizarTodo();
+        }
+
+        function renderizarTodo() {
+            renderizarProductos();
+            renderizarEventos();
+            renderizarAgenda();
+            renderizarInventario();
+        }
+
+        /* --- COSTOS --- */
+        function agregarProducto() {
+            const nombre = document.getElementById("prod-nombre").value.trim();
+            const marca = document.getElementById("prod-marca").value.trim() || "Sin marca";
+            const cantidad = parseFloat(document.getElementById("prod-cantidad").value);
+            const unidad = document.getElementById("prod-unidad").value.trim();
+            const precio = parseFloat(document.getElementById("prod-precio").value);
+
+            if (!nombre || isNaN(cantidad) || cantidad <= 0 || isNaN(precio) || precio < 0) {
+                alert("Completa producto, cantidad válida y precio unitario.");
+                return;
+            }
+
+            estado.productos.push({
+                nombre,
+                marca,
+                cantidad,
+                unidad,
+                precio,
+                total: cantidad * precio
+            });
+
+            document.getElementById("prod-nombre").value = "";
+            document.getElementById("prod-marca").value = "";
+            document.getElementById("prod-cantidad").value = "";
+            document.getElementById("prod-unidad").value = "";
+            document.getElementById("prod-precio").value = "";
+            document.getElementById("prod-nombre").focus();
+
+            guardarTodo();
+            renderizarProductos();
+        }
+
+        function eliminarProducto(idx) {
+            estado.productos.splice(idx, 1);
+            guardarTodo();
+            renderizarProductos();
+        }
+
+        function renderizarProductos() {
+            const tbody = document.getElementById("lista-productos");
+            const vacio = document.getElementById("mensaje-vacio");
+            const cont = document.getElementById("contenedor-tabla");
+            const m = estado.moneda;
+
+            tbody.innerHTML = "";
+            if (!estado.productos.length) {
+                vacio.classList.remove("oculto");
+                cont.classList.add("oculto");
+            } else {
+                vacio.classList.add("oculto");
+                cont.classList.remove("oculto");
+                estado.productos.forEach((p, i) => {
+                    const cantTxt = p.unidad ? `${p.cantidad} ${p.unidad}` : `${p.cantidad}`;
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td class="num-col">${i + 1}</td>
+                        <td><strong>${p.nombre}</strong></td>
+                        <td>${p.marca}</td>
+                        <td>${cantTxt}</td>
+                        <td class="precio-col">${m} ${fmt(p.precio)}</td>
+                        <td class="precio-col" style="color:#d4af37;">${m} ${fmt(p.total)}</td>
+                        <td style="text-align:center;">
+                            <button class="btn-pequeno btn-eliminar" onclick="eliminarProducto(${i})">X</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+            actualizarResumen();
+        }
+
+        function actualizarResumen() {
+            const m = estado.moneda;
+            const costo = estado.productos.reduce((s, x) => s + x.total, 0);
+            const pct = parseFloat(document.getElementById("porcentaje-ganancia").value) || 0;
+            const inv = parseInt(document.getElementById("cantidad-invitados").value, 10) || 1;
+            const gan = costo * (pct / 100);
+            const totalFinal = costo + gan;
+            const porPers = totalFinal / (inv > 0 ? inv : 1);
+
+            document.getElementById("resumen-items").textContent = estado.productos.length;
+            document.getElementById("resumen-costo").textContent = `${m} ${fmt(costo)}`;
+            document.getElementById("resumen-ganancia").textContent = `${m} ${fmt(gan)}`;
+            document.getElementById("resumen-persona").textContent = `${m} ${fmt(porPers)}`;
+            document.getElementById("resumen-total-final").textContent = `${m} ${fmt(totalFinal)}`;
+            guardarTodo();
+        }
+
+        function limpiarCostos() {
+            if (confirm("¿Borrar todos los ítems de esta estructura de costos?")) {
+                estado.productos = [];
+                estado.proyecto = "";
+                document.getElementById("nombre-proyecto").value = "";
+                guardarTodo();
+                renderizarProductos();
+            }
+        }
+
+        function enviarCostosWhatsApp() {
+            if (!estado.productos.length) {
+                alert("Agrega al menos un producto primero.");
+                return;
+            }
+            const m = estado.moneda;
+            const proy = document.getElementById("nombre-proyecto").value.trim() || "Estructura de Costos";
+            const costo = estado.productos.reduce((s, x) => s + x.total, 0);
+            const pct = parseFloat(document.getElementById("porcentaje-ganancia").value) || 0;
+            const inv = parseInt(document.getElementById("cantidad-invitados").value, 10) || 1;
+            const gan = costo * (pct / 100);
+            const totalFinal = costo + gan;
+            const porPers = totalFinal / (inv > 0 ? inv : 1);
+
+            let msg = `*LOS CÓCTELES DE WILLIAN — MI OFICINA*\n*${proy}*\n\n`;
+            estado.productos.forEach((p, idx) => {
+                const cantTxt = p.unidad ? `${p.cantidad} ${p.unidad}` : `${p.cantidad}`;
+                msg += `${idx + 1}. *${p.nombre}* (${p.marca}) - ${cantTxt} x ${m} ${fmt(p.precio)} = *${m} ${fmt(p.total)}*\n`;
+            });
+            msg += `\n*Ítems:* ${estado.productos.length}`;
+            msg += `\n*Costo Insumos:* ${m} ${fmt(costo)}`;
+            msg += `\n*Ganancia (${pct}%):* ${m} ${fmt(gan)}`;
+            msg += `\n*Total Sugerido:* ${m} ${fmt(totalFinal)}`;
+            if (inv > 1) msg += `\n*Por Persona (${inv}):* ${m} ${fmt(porPers)}`;
+
+            window.open(`https://wa.me/584267746622?text=${encodeURIComponent(msg)}`, "_blank");
+        }
+
+        /* --- EVENTOS --- */
+        function agregarEvento() {
+            const cliente = document.getElementById("ev-cliente").value.trim();
+            const fecha = document.getElementById("ev-fecha").value;
+            const total = parseFloat(document.getElementById("ev-total").value) || 0;
+            const abono = parseFloat(document.getElementById("ev-abono").value) || 0;
+            const notas = document.getElementById("ev-notas").value.trim();
+
+            if (!cliente || !fecha || total <= 0) {
+                alert("Indica cliente, fecha y monto total del evento.");
+                return;
+            }
+
+            estado.eventos.push({ cliente, fecha, total, abono, notas });
+            document.getElementById("ev-cliente").value = "";
+            document.getElementById("ev-fecha").value = "";
+            document.getElementById("ev-total").value = "";
+            document.getElementById("ev-abono").value = "";
+            document.getElementById("ev-notas").value = "";
+            guardarTodo();
+            renderizarEventos();
+        }
+
+        function eliminarEvento(idx) {
+            estado.eventos.splice(idx, 1);
+            guardarTodo();
+            renderizarEventos();
+        }
+
+        function renderizarEventos() {
+            const cont = document.getElementById("lista-eventos");
+            const m = estado.moneda;
+            if (!estado.eventos.length) {
+                cont.innerHTML = `<p style="color:#aaa; font-size:13px;">No hay eventos registrados todavía.</p>`;
+                return;
+            }
+            cont.innerHTML = estado.eventos.map((ev, i) => {
+                const saldo = Math.max(0, ev.total - ev.abono);
+                return `
+                    <div class="item-lista">
+                        <div class="item-titulo">${ev.cliente} — ${ev.fecha}</div>
+                        <div class="item-meta">
+                            Total: <strong>${m} ${fmt(ev.total)}</strong> |
+                            Abonado: <strong style="color:#25d366;">${m} ${fmt(ev.abono)}</strong> |
+                            Resta: <strong style="color:#facc15;">${m} ${fmt(saldo)}</strong>
+                            ${ev.notas ? `<br>Notas: ${ev.notas}` : ""}
+                        </div>
+                        <div class="acciones-item">
+                            <button class="btn-pequeno btn-eliminar" onclick="eliminarEvento(${i})">Eliminar</button>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        /* --- AGENDA --- */
+        function agregarTarea() {
+            const tarea = document.getElementById("ag-tarea").value.trim();
+            const fecha = document.getElementById("ag-fecha").value || "Sin fecha";
+            if (!tarea) {
+                alert("Escribe la tarea o pendiente.");
+                return;
+            }
+            estado.agenda.push({ tarea, fecha, hecha: false });
+            document.getElementById("ag-tarea").value = "";
+            document.getElementById("ag-fecha").value = "";
+            guardarTodo();
+            renderizarAgenda();
+        }
+
+        function toggleTarea(idx) {
+            estado.agenda[idx].hecha = !estado.agenda[idx].hecha;
+            guardarTodo();
+            renderizarAgenda();
+        }
+
+        function eliminarTarea(idx) {
+            estado.agenda.splice(idx, 1);
+            guardarTodo();
+            renderizarAgenda();
+        }
+
+        function renderizarAgenda() {
+            const cont = document.getElementById("lista-agenda");
+            if (!estado.agenda.length) {
+                cont.innerHTML = `<p style="color:#aaa; font-size:13px;">Sin tareas pendientes.</p>`;
+                return;
+            }
+            cont.innerHTML = estado.agenda.map((t, i) => `
+                <div class="item-lista ${t.hecha ? "completado" : ""}">
+                    <div class="item-titulo">${t.hecha ? "✔ " : ""}${t.tarea}</div>
+                    <div class="item-meta">Fecha: ${t.fecha}</div>
+                    <div class="acciones-item">
+                        <button class="btn-pequeno btn-check" onclick="toggleTarea(${i})">${t.hecha ? "Reabrir" : "Listo"}</button>
+                        <button class="btn-pequeno btn-eliminar" onclick="eliminarTarea(${i})">Borrar</button>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        /* --- INVENTARIO --- */
+        function agregarEquipo() {
+            const nombre = document.getElementById("eq-nombre").value.trim();
+            const cantidad = parseInt(document.getElementById("eq-cantidad").value, 10);
+            const estadoEq = document.getElementById("eq-estado").value.trim() || "Operativo";
+
+            if (!nombre || isNaN(cantidad) || cantidad < 0) {
+                alert("Indica el nombre del equipo y su cantidad.");
+                return;
+            }
+            estado.inventario.push({ nombre, cantidad, estado: estadoEq });
+            document.getElementById("eq-nombre").value = "";
+            document.getElementById("eq-cantidad").value = "";
+            document.getElementById("eq-estado").value = "";
+            guardarTodo();
+            renderizarInventario();
+        }
+
+        function eliminarEquipo(idx) {
+            estado.inventario.splice(idx, 1);
+            guardarTodo();
+            renderizarInventario();
+        }
+
+        function renderizarInventario() {
+            const cont = document.getElementById("lista-inventario");
+            if (!estado.inventario.length) {
+                cont.innerHTML = `<p style="color:#aaa; font-size:13px;">Aún no has cargado equipos.</p>`;
+                return;
+            }
+            cont.innerHTML = estado.inventario.map((eq, i) => `
+                <div class="item-lista">
+                    <div class="item-titulo">${eq.nombre} — Cant: ${eq.cantidad}</div>
+                    <div class="item-meta">Estado: ${eq.estado}</div>
+                    <div class="acciones-item">
+                        <button class="btn-pequeno btn-eliminar" onclick="eliminarEquipo(${i})">Eliminar</button>
+                    </div>
+                </div>
+            `).join("");
+        }
+    </script>
+</body>
+</html>
