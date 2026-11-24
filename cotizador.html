@@ -23,9 +23,15 @@
         label { font-weight: bold; margin-top: 12px; display: block; color: #d4af37; font-size: 14px; }
         select, input[type="number"] { width: 100%; padding: 11px; margin: 6px 0 10px; border-radius: 6px; border: 1px solid #d4af37; background: #222; color: #fff; box-sizing: border-box; font-size: 15px; }
 
-        #bloque-acompanantes { display: none; margin-top: 6px; }
+        #bloque-acompanantes, #bloque-cocteleria { display: none; margin-top: 6px; }
         .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0 12px; font-size: 13px; background: #1a1a1a; padding: 12px; border-radius: 8px; border: 1px solid #d4af37; }
         .opciones-grid label { margin: 0; color: #fff; font-weight: normal; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+
+        .caja-info-coctel { background: #181818; border: 1px solid #d4af37; border-radius: 8px; padding: 12px; margin: 8px 0 12px; font-size: 12.5px; line-height: 1.45; color: #eee; }
+        .caja-info-coctel strong { color: #d4af37; }
+        .caja-info-coctel ul { margin: 6px 0 8px 18px; padding: 0; }
+        .caja-info-coctel li { margin-bottom: 3px; }
+        .nota-reglas { background: #0d0d0d; border-left: 3px solid #d4af37; padding: 8px 10px; border-radius: 5px; font-size: 12px; color: #ddd; margin-top: 8px; }
 
         button.accion-principal { width: 100%; padding: 14px; margin: 7px 0; border-radius: 7px; font-size: 15px; box-sizing: border-box; font-weight: bold; cursor: pointer; border: none; }
         .btn-verde { background: #25d366; color: #000; }
@@ -62,41 +68,51 @@
         </div>
     </div>
 
-    <label for="producto">1. Elige un servicio, parrilla o cóctel:</label>
-    <select id="producto" onchange="toggleAcompanantes()">
+    <label for="producto">1. Elige un paquete de coctelería, parrilla o servicio:</label>
+    <select id="producto" onchange="toggleDetallesProducto()">
         <option value="">-- Seleccionar --</option>
-        <optgroup label="Parrillas">
-            <option value="Parrilla de Solomo|30">Solomo ($30)</option>
-            <option value="Parrilla de Lomito|35">Lomito ($35)</option>
-            <option value="Parrilla Punta Nacional|30">Punta Nacional ($30)</option>
-            <option value="Parrilla Angus|45">Punta Angus ($45)</option>
+        <optgroup label="Paquetes de Coctelería (10 tipos con variantes)">
+            <option value="Paquete Ágata (50 cócteles)|115|140|coctel">Paquete Ágata — 50 cócteles ($115 Tradicional / $140 Cristalería)</option>
+            <option value="Paquete Esmeralda (100 cócteles)|230|280|coctel">Paquete Esmeralda — 100 cócteles ($230 Tradicional / $280 Cristalería)</option>
+            <option value="Paquete Rubí (150 cócteles)|345|420|coctel">Paquete Rubí — 150 cócteles ($345 Tradicional / $420 Cristalería)</option>
+            <option value="Paquete Diamante (200 cócteles)|460|560|coctel">Paquete Diamante — 200 cócteles ($460 Tradicional / $560 Cristalería)</option>
         </optgroup>
-        <optgroup label="Cócteles">
-            <option value="Piña Colada|3">Piña Colada ($3)</option>
-            <option value="Daiquiri|3">Daiquiri ($3)</option>
-            <option value="Ron Punch|2.5">Ron Punch ($2.5)</option>
-            <option value="Cuba Libre|2.5">Cuba Libre ($2.5)</option>
-            <option value="Caipiroska|3">Caipiroska ($3)</option>
-            <option value="Destornillador|3">Destornillador ($3)</option>
-            <option value="Sex on the Beach|3.5">Sex on the Beach ($3.5)</option>
-            <option value="Mojito Cubano|3">Mojito Cubano ($3)</option>
-            <option value="Polvo de media noche|5">Polvo de media noche ($5)</option>
-            <option value="Arcoíris|4">Arcoíris ($4)</option>
-            <option value="Tequila Sunrise|4">Tequila Sunrise ($4)</option>
-            <option value="Canto de Sirena|4.5">Canto de Sirena ($4.5)</option>
-            <option value="Cóctel Frutos Secos|3.5">Cóctel Frutos Secos ($3.5)</option>
-            <option value="Coco Loco|5">Coco Loco ($5)</option>
-            <option value="Orgasmo|6">Orgasmo ($6)</option>
-            <option value="Orgasmo Múltiple|7">Orgasmo Múltiple ($7)</option>
-            <option value="Margarita|4">Margarita ($4)</option>
-            <option value="Magallanes Campeón|4">Magallanes Campeón ($4)</option>
+        <optgroup label="Parrillas">
+            <option value="Parrilla de Solomo|30|30|parrilla">Solomo ($30)</option>
+            <option value="Parrilla de Lomito|35|35|parrilla">Lomito ($35)</option>
+            <option value="Parrilla Punta Nacional|30|30|parrilla">Punta Nacional ($30)</option>
+            <option value="Parrilla Angus|45|45|parrilla">Punta Angus ($45)</option>
         </optgroup>
         <optgroup label="Servicios">
-            <option value="Bartender|70">Bartender ($70)</option>
-            <option value="Mesonero|65">Mesonero ($65)</option>
-            <option value="Parrillero|65">Parrillero ($65)</option>
+            <option value="Bartender|70|70|servicio">Bartender ($70)</option>
+            <option value="Mesonero|65|65|servicio">Mesonero ($65)</option>
+            <option value="Parrillero|65|65|servicio">Parrillero ($65)</option>
         </optgroup>
     </select>
+
+    <div id="bloque-cocteleria">
+        <label for="version-coctel">Versión del paquete:</label>
+        <select id="version-coctel" onchange="actualizarVistaVersion()">
+            <option value="tradicional">Tradicional — Vaso plástico transparente de 12 oz ($2.30 c/u)</option>
+            <option value="cristaleria">Cristalería — Copas de cristal ($2.80 c/u)</option>
+        </select>
+
+        <div class="caja-info-coctel">
+            <div><strong>Incluye 10 familias de cócteles con sus variantes:</strong></div>
+            <ul>
+                <li><strong>Piña Colada:</strong> Tradicional y variantes de color (roja, verde, azul, rosada).</li>
+                <li><strong>Daiquirí:</strong> Fresa, parchita, fruit punch y rum punch.</li>
+                <li><strong>Mojito Cubano:</strong> Tradicional (limón), fresa, parchita y patilla.</li>
+                <li><strong>Caipiroska:</strong> Tradicional (limón), fresa, parchita y patilla.</li>
+                <li><strong>Clásicos y especiales:</strong> Destornillador, Cuba Libre, Sexo en la playa (Sex on the Beach), Tren de Medianoche, Cocoloco y Arcoíris.</li>
+            </ul>
+            <div class="nota-reglas">
+                <strong>Reglas del servicio:</strong><br>
+                • <strong>Cristalería:</strong> si se parte o extravía alguna copa <strong>a partir de 5 copas</strong>, se cobrará la reposición en <strong>$3.00 cada una</strong>.<br>
+                • <strong>Reserva:</strong> <strong>50 %</strong> para apartar la fecha y <strong>50 %</strong> en la mañana del evento para comprar los ingredientes perecederos.
+            </div>
+        </div>
+    </div>
 
     <label for="cantidad">2. Cantidad:</label>
     <input type="number" id="cantidad" value="1" min="1">
@@ -141,25 +157,55 @@
         actualizarUI();
     }
 
-    function toggleAcompanantes() {
+    function toggleDetallesProducto() {
         let val = document.getElementById('producto').value;
-        let bloque = document.getElementById('bloque-acompanantes');
-        bloque.style.display = val.startsWith("Parrilla") ? "block" : "none";
-        if (!val.startsWith("Parrilla")) {
+        let parts = val ? val.split('|') : [];
+        let tipo = parts[3] || "";
+
+        let bloqueParrilla = document.getElementById('bloque-acompanantes');
+        let bloqueCoctel = document.getElementById('bloque-cocteleria');
+
+        bloqueParrilla.style.display = (tipo === "parrilla") ? "block" : "none";
+        if (tipo !== "parrilla") {
             document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
         }
+
+        bloqueCoctel.style.display = (tipo === "coctel") ? "block" : "none";
+        if (tipo !== "coctel") {
+            document.getElementById('version-coctel').value = "tradicional";
+        }
+    }
+
+    function actualizarVistaVersion() {
+        // Mantiene la selección activa de versión (tradicional / cristaleria)
     }
 
     function agregar() {
         let select = document.getElementById('producto');
         if (!select.value) {
-            alert("Por favor, selecciona un servicio, parrilla o cóctel primero.");
+            alert("Por favor, selecciona un paquete, parrilla o servicio primero.");
             return;
         }
 
         let parts = select.value.split('|');
         let nombre = parts[0];
-        let precio = parseFloat(parts[1]);
+        let precioTradicional = parseFloat(parts[1]);
+        let precioCristal = parseFloat(parts[2]);
+        let tipo = parts[3];
+
+        let precio = precioTradicional;
+        let descripcionFinal = nombre;
+
+        if (tipo === "coctel") {
+            let version = document.getElementById('version-coctel').value;
+            if (version === "cristaleria") {
+                precio = precioCristal;
+                descripcionFinal += " - Versión Cristalería (copas de cristal, $2.80 c/u)";
+            } else {
+                precio = precioTradicional;
+                descripcionFinal += " - Versión Tradicional (vaso plástico 12 oz, $2.30 c/u)";
+            }
+        }
 
         let cant = parseInt(document.getElementById('cantidad').value);
         if (isNaN(cant) || cant < 1) {
@@ -167,22 +213,22 @@
         }
 
         let extras = [];
-        if (select.value.startsWith("Parrilla")) {
+        if (tipo === "parrilla") {
             document.querySelectorAll('#acompanantes input:checked').forEach(c => extras.push(c.value));
         }
 
-        let descripcionFinal = nombre;
         if (extras.length > 0) {
             descripcionFinal += " (" + extras.join(", ") + ")";
         }
 
         let subtotal = precio * cant;
-        pedido.push({ nombre: descripcionFinal, cant: cant, subtotal: subtotal });
+        pedido.push({ nombre: descripcionFinal, cant: cant, subtotal: subtotal, esCoctel: (tipo === "coctel") });
 
         select.value = "";
         document.getElementById('cantidad').value = "1";
+        document.getElementById('version-coctel').value = "tradicional";
         document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
-        toggleAcompanantes();
+        toggleDetallesProducto();
         actualizarUI();
     }
 
@@ -230,24 +276,30 @@
         document.getElementById('presupuesto').value = "";
         document.getElementById('producto').value = "";
         document.getElementById('cantidad').value = "1";
+        document.getElementById('version-coctel').value = "tradicional";
         document.querySelectorAll('#acompanantes input').forEach(c => c.checked = false);
-        toggleAcompanantes();
+        toggleDetallesProducto();
         actualizarUI();
     }
 
     function enviarWhatsApp() {
         if (pedido.length === 0) {
-            alert("Agrega al menos un servicio, parrilla o cóctel antes de enviar.");
+            alert("Agrega al menos un paquete, parrilla o servicio antes de enviar.");
             return;
         }
         let total = pedido.reduce((acc, item) => acc + item.subtotal, 0);
         let presRaw = parseFloat(document.getElementById('presupuesto').value);
+        let incluyeCocteles = pedido.some(i => i.esCoctel);
 
         let msg = "Hola Willian, quiero cotizar lo siguiente con Los Cócteles de Willian:\n\n";
         msg += pedido.map(i => "• " + i.cant + "x " + i.nombre + " — $" + i.subtotal.toFixed(2)).join("\n");
         msg += "\n\nTotal estimado: $" + total.toFixed(2);
         if (!isNaN(presRaw) && presRaw > 0) {
             msg += "\nMi presupuesto estimado: $" + presRaw.toFixed(2);
+        }
+        if (incluyeCocteles) {
+            msg += "\n\nIncluye 10 familias de cócteles con sus variantes (Piña Colada en colores, Daiquirí, Mojito Cubano, Caipiroska, Destornillador, Cuba Libre, Sexo en la playa, Tren de Medianoche, Cocoloco y Arcoíris).";
+            msg += "\nCondiciones: 50% para apartar la fecha y 50% en la mañana del evento para ingredientes perecederos. En cristalería, a partir de 5 copas partidas o extraviadas se cobran a $3.00 c/u.";
         }
         msg += "\n\nAgradezco asesoría y disponibilidad de fecha.";
 
